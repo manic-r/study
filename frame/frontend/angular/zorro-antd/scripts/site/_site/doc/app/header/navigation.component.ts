@@ -9,21 +9,18 @@ const CNMirrorSite = 'ng-zorro.gitee.io';
   template: `
     <li nz-menu-item [nzSelected]="page === 'docs'">
       <a [routerLink]="['docs', 'introduce', language]">
-        <span>{{ language == 'zh' ? '文档' : 'Docs' }}</span>
+        <span>文档</span>
       </a>
     </li>
     <li nz-menu-item [nzSelected]="page === 'components'">
       <a [routerLink]="['components', 'overview', language]">
-        <span>{{ language == 'zh' ? '组件' : 'Components' }}</span>
+        <span>组件</span>
       </a>
     </li>
     <li nz-menu-item [nzSelected]="page === 'experimental'">
       <a [routerLink]="['experimental', 'pipes', language]">
-        <span>{{ language == 'zh' ? '实验性功能' : 'Experimental' }}</span>
+        <span>实验性功能</span>
       </a>
-    </li>
-    <li *ngIf="showCNMirror && language == 'zh'" nz-menu-item [nzSelected]="false">
-      <a href="https://ng-zorro.gitee.io/">国内镜像</a>
     </li>
     <ng-container *ngIf="!isMobile && responsive === 'crowded'">
       <li nz-submenu [nzTitle]="additionalTitle" nzMenuClassName="top-menu-additional">
@@ -39,9 +36,6 @@ const CNMirrorSite = 'ng-zorro.gitee.io';
     <ng-template #additionalItems>
       <li nz-menu-item>
         <a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" rel="noopener noreferrer">Github</a>
-      </li>
-      <li nz-menu-item>
-        <a (click)="changeLanguage(language === 'zh' ? 'en' : 'zh', $event)">{{ language == 'zh' ? 'English' : '中文' }}</a>
       </li>
     </ng-template>
   `,
@@ -73,10 +67,5 @@ export class NavigationComponent implements OnInit {
     if (this.platform.isBrowser) {
       this.showCNMirror = location.hostname !== CNMirrorSite;
     }
-  }
-
-  changeLanguage(language: 'zh' | 'en', e: MouseEvent): void {
-    e.preventDefault();
-    this.languageChange.emit(language);
   }
 }
