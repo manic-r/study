@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
-import { VERSION } from 'ng-zorro-antd/version';
 
 const RESPONSIVE_XS = 1120;
 const RESPONSIVE_SM = 1200;
@@ -60,16 +59,6 @@ const RESPONSIVE_SM = 1200;
             [(language)]="language"
             (languageChange)="onChangeLanguage($event)"
           ></ul>
-          <nz-select
-            nzSize="small"
-            class="version"
-            style="max-width: 126px;"
-            [ngModel]="currentVersion"
-            (ngModelChange)="onChangeVersion($event)"
-          >
-            <nz-option [nzLabel]="currentVersion" [nzValue]="currentVersion"></nz-option>
-            <nz-option *ngFor="let version of oldVersionList" [nzLabel]="version" [nzValue]="version"></nz-option>
-          </nz-select>
           <button
             nz-button
             nzSize="small"
@@ -81,7 +70,6 @@ const RESPONSIVE_SM = 1200;
           <button nz-button nzGhost nzSize="small" class="header-button header-direction-button" (click)="toggleDirection()">
             {{ nextDirection | uppercase }}
           </button>
-          <app-github-btn [responsive]="responsive"></app-github-btn>
         </ng-template>
       </ng-container>
     </ng-template>
@@ -90,7 +78,7 @@ const RESPONSIVE_SM = 1200;
 export class HeaderComponent implements OnChanges {
   @Input() language: 'zh' | 'en' = 'zh';
   @Input() windowWidth = 1400;
-  @Input() page: 'docs' | 'components' | 'experimental' | string = 'docs';
+  @Input() page: 'docs' | 'components' | string = 'components';
   @Output() versionChange = new EventEmitter<string>();
   @Output() languageChange = new EventEmitter<'zh' | 'en'>();
   @Output() directionChange = new EventEmitter<'ltr' | 'rtl'>();
@@ -99,11 +87,9 @@ export class HeaderComponent implements OnChanges {
   isMobile = false;
   mode = 'horizontal';
   responsive: null | 'narrow' | 'crowded' = null;
-  oldVersionList = ['10.2.x', '9.3.x', '8.5.x', '7.5.x', '1.8.x', '0.7.x', '0.5.x'];
-  currentVersion = VERSION.full;
   nextDirection: 'ltr' | 'rtl' = 'rtl';
 
-  constructor(private nzConfigService: NzConfigService) {}
+  constructor(private nzConfigService: NzConfigService) { }
   onChangeVersion(version: string): void {
     this.versionChange.emit(version);
   }

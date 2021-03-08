@@ -29,7 +29,7 @@ function generate(target) {
   }
   const showCaseTargetPath = `${showCasePath}/doc/app/`;
   const iframeTargetPath = `${showCasePath}/iframe/app/`;
-// read components folder
+  // read components folder
   const rootPath = path.resolve(__dirname, '../../components');
   const rootDir = fs.readdirSync(rootPath);
   const componentsDocMap = {};
@@ -48,7 +48,11 @@ function generate(target) {
       // create site/doc/app->${component} folder
       const showCaseComponentPath = path.join(showCaseTargetPath, componentName);
       fs.mkdirSync(showCaseComponentPath);
-
+      // TODO: 自己添加的过滤 ↓
+      if (!componentDirPath.endsWith('table')) {
+        return;
+      }
+      // TODO: 自己添加的过滤 ↑
       // handle components->${component}->demo folder
       const demoDirPath = path.join(componentDirPath, 'demo');
       const demoMap = {};
@@ -56,26 +60,25 @@ function generate(target) {
         const demoDir = fs.readdirSync(demoDirPath);
         demoDir.forEach(demo => {
 
-        if (/.md$/.test(demo)) {
-          const nameKey = nameWithoutSuffixUtil(demo);
-          const demoMarkDownFile = fs.readFileSync(path.join(demoDirPath, demo));
-          demoMap[nameKey] = parseDemoMdUtil(demoMarkDownFile);
-          demoMap[nameKey]['name'] = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
-          demoMap[nameKey]['enCode'] = generateCodeBox(componentName, demoMap[nameKey]['name'], nameKey, demoMap[nameKey].meta.title['en-US'], demoMap[nameKey].en, demoMap[nameKey].meta.iframe);
-          demoMap[nameKey]['zhCode'] = generateCodeBox(componentName, demoMap[nameKey]['name'], nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
-        }
-        if (/.ts$/.test(demo)) {
-          const nameKey = nameWithoutSuffixUtil(demo);
-          demoMap[nameKey].ts = String(fs.readFileSync(path.join(demoDirPath, demo)));
-          // copy ts file to site->${component} folder
-          fs.writeFileSync(path.join(showCaseComponentPath, demo), demoMap[nameKey].ts);
-        }
-        if (demo === 'module') {
-          const data = String(fs.readFileSync(path.join(demoDirPath, demo)));
-          fs.writeFileSync(path.join(showCaseComponentPath, 'module.ts'), data);
-        }
-      });
-    }
+          if (/.md$/.test(demo)) {
+            const nameKey = nameWithoutSuffixUtil(demo);
+            const demoMarkDownFile = fs.readFileSync(path.join(demoDirPath, demo));
+            demoMap[nameKey] = parseDemoMdUtil(demoMarkDownFile);
+            demoMap[nameKey]['name'] = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
+            demoMap[nameKey]['zhCode'] = generateCodeBox(componentName, demoMap[nameKey]['name'], nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
+          }
+          if (/.ts$/.test(demo)) {
+            const nameKey = nameWithoutSuffixUtil(demo);
+            demoMap[nameKey].ts = String(fs.readFileSync(path.join(demoDirPath, demo)));
+            // copy ts file to site->${component} folder
+            fs.writeFileSync(path.join(showCaseComponentPath, demo), demoMap[nameKey].ts);
+          }
+          if (demo === 'module') {
+            const data = String(fs.readFileSync(path.join(demoDirPath, demo)));
+            fs.writeFileSync(path.join(showCaseComponentPath, 'module.ts'), data);
+          }
+        });
+      }
 
       // handle components->${component}->page folder, parent component of demo page
       let pageDemo = '';
@@ -83,7 +86,6 @@ function generate(target) {
       if (fs.existsSync(pageDirPath)) {
         const pageDir = fs.readdirSync(pageDirPath);
         let zhLocale = '';
-        let enLocale = '';
         pageDemo = {};
         pageDir.forEach(file => {
           if (/.ts$/.test(file)) {
@@ -92,30 +94,23 @@ function generate(target) {
           if (/^zh-CN.txt$/.test(file)) {
             zhLocale = String(fs.readFileSync(path.join(pageDirPath, file)));
           }
-          if (/^en-US.txt$/.test(file)) {
-            enLocale = String(fs.readFileSync(path.join(pageDirPath, file)));
-          }
         });
-        pageDemo.enCode = pageDemo.raw.replace(/locale;/g, enLocale);
         pageDemo.zhCode = pageDemo.raw.replace(/locale;/g, zhLocale);
       }
-
-    // handle components->${component}->doc folder
-    const result = {
-      name: componentName,
-      docZh: parseDocMdUtil(fs.readFileSync(path.join(componentDirPath, 'doc/index.zh-CN.md')), `components/${componentName}/doc/index.zh-CN.md`),
-      docEn: parseDocMdUtil(fs.readFileSync(path.join(componentDirPath, 'doc/index.en-US.md')), `components/${componentName}/doc/index.en-US.md`),
-      demoMap,
-      pageDemo
-    };
-    componentsDocMap[componentName] = { zh: result.docZh.meta, en: result.docEn.meta };
-    componentsMap[componentName] = demoMap;
-    generateDemo(showCaseComponentPath, result);
-    generateDemoCodeFiles(result, showCasePath)
+      const result = {
+        name: componentName,
+        docZh: parseDocMdUtil(fs.readFileSync(path.join(componentDirPath, 'doc/index.zh-CN.md')), `components/${componentName}/doc/index.zh-CN.md`),
+        demoMap,
+        pageDemo
+      };
+      componentsDocMap[componentName] = { zh: result.docZh.meta };
+      componentsMap[componentName] = demoMap;
+      generateDemo(showCaseComponentPath, result);
+      generateDemoCodeFiles(result, showCasePath)
     }
   });
 
-// handle iframe folder
+  // handle iframe folder
   generateIframe(iframeTargetPath, componentsMap);
 
   if (!isSyncSpecific) {
@@ -127,12 +122,10 @@ function generate(target) {
     docsDir.forEach(doc => {
       const name = nameWithoutSuffixUtil(doc);
       docsMap[name] = {
-        zh: fs.readFileSync(path.join(docsPath, `${name}.zh-CN.md`)),
-        en: fs.readFileSync(path.join(docsPath, `${name}.en-US.md`))
+        zh: fs.readFileSync(path.join(docsPath, `${name}.zh-CN.md`))
       };
       docsMeta[name] = {
-        zh: getMeta(docsMap[name].zh),
-        en: getMeta(docsMap[name].en)
+        zh: getMeta(docsMap[name].zh)
       };
     });
 

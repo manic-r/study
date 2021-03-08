@@ -7,14 +7,11 @@ module.exports = function (showCaseComponentPath, result) {
   if (result.pageDemo) {
     const pageDemoComponent = generatePageDemoComponent(result);
     fs.writeFileSync(path.join(showCaseComponentPath, `zh.page.component.ts`), pageDemoComponent.zh);
-    fs.writeFileSync(path.join(showCaseComponentPath, `en.page.component.ts`), pageDemoComponent.en);
   }
   const demoTemplate = generateTemplate(result);
   fs.writeFileSync(path.join(showCaseComponentPath, `zh.html`), demoTemplate.zh);
-  fs.writeFileSync(path.join(showCaseComponentPath, `en.html`), demoTemplate.en);
   const demoComponent = generateDemoComponent(result);
   fs.writeFileSync(path.join(showCaseComponentPath, `zh.component.ts`), demoComponent.zh);
-  fs.writeFileSync(path.join(showCaseComponentPath, `en.component.ts`), demoComponent.en);
   const demoModule = generateDemoModule(result);
   fs.writeFileSync(path.join(showCaseComponentPath, `index.module.ts`), demoModule);
 };
@@ -35,14 +32,10 @@ function generateDemoModule(content) {
     declarations += `\t\t${declareComponents.join(',\n\t')},\n`;
   }
   imports += `import { NzDemo${componentName(component)}ZhComponent } from './zh.component';\n`;
-  imports += `import { NzDemo${componentName(component)}EnComponent } from './en.component';\n`;
   declarations += `\t\tNzDemo${componentName(component)}ZhComponent,\n`;
-  declarations += `\t\tNzDemo${componentName(component)}EnComponent,\n`;
   if (content.pageDemo) {
     imports += `import { NzPageDemo${componentName(component)}ZhComponent } from './zh.page.component';\n`;
-    imports += `import { NzPageDemo${componentName(component)}EnComponent } from './en.page.component';\n`;
     declarations += `\t\tNzPageDemo${componentName(component)}ZhComponent,\n`;
-    declarations += `\t\tNzPageDemo${componentName(component)}EnComponent,\n`;
   }
   return demoModuleTemplate
     .replace(/{{imports}}/g, imports)
@@ -62,15 +55,10 @@ function generateComponentName(component, language) {
 function generatePageDemoComponent(content) {
   const component = content.name;
   let zhOutput = content.pageDemo.zhCode;
-  let enOutput = content.pageDemo.enCode;
   zhOutput = zhOutput
     .replace(`NzPageDemo${componentName(component)}Component`, `NzPageDemo${componentName(component)}ZhComponent`)
     .replace(`nz-page-demo-${component}`, `nz-page-demo-${component}-zh`);
-  enOutput = enOutput
-    .replace(`NzPageDemo${componentName(component)}Component`, `NzPageDemo${componentName(component)}EnComponent`)
-    .replace(`nz-page-demo-${component}`, `nz-page-demo-${component}-en`);
   return {
-    en: enOutput,
     zh: zhOutput
   };
 }
@@ -83,15 +71,11 @@ function generateDemoComponent(content) {
   output = output.replace(/{{component}}/g, component);
 
   let zhOutput = output;
-  let enOutput = output;
 
-  enOutput = enOutput.replace(/{{componentName}}/g, generateComponentName(component, 'en'));
-  enOutput = enOutput.replace(/{{language}}/g, 'en');
   zhOutput = zhOutput.replace(/{{componentName}}/g, generateComponentName(component, 'zh'));
   zhOutput = zhOutput.replace(/{{language}}/g, 'zh');
 
   return {
-    en: enOutput,
     zh: zhOutput
   };
 }
@@ -100,8 +84,7 @@ function generateTemplate(result) {
   const generateTitle = require('./generate.title');
   const innerMap = generateExample(result);
   const titleMap = {
-    zh: generateTitle(result.docZh.meta, result.docZh.path),
-    en: generateTitle(result.docEn.meta, result.docEn.path)
+    zh: generateTitle(result.docZh.meta, result.docZh.path)
   };
   const name = result.name;
   const hasPageDemo = !!result.pageDemo;
@@ -109,10 +92,6 @@ function generateTemplate(result) {
     zh: wrapperAll(
       generateToc('zh-CN', result.name, result.demoMap),
       wrapperHeader(titleMap.zh, result.docZh.whenToUse, 'zh', innerMap.zh, hasPageDemo, name) + wrapperAPI(result.docZh.api)
-    ),
-    en: wrapperAll(
-      generateToc('en-US', result.name, result.demoMap),
-      wrapperHeader(titleMap.en, result.docEn.whenToUse, 'en', innerMap.en, hasPageDemo, name) + wrapperAPI(result.docEn.api)
     )
   };
 }
@@ -131,9 +110,8 @@ function wrapperHeader(title, whenToUse, language, example, hasPageDemo, name) {
 	${hasPageDemo ? `<section class="page-demo"><nz-page-demo-${name}-${language}></nz-page-demo-${name}-${language}></section>` : ''}
 	<h2>
 		<span>${language === 'zh' ? '代码演示' : 'Examples'}</span>
-		<i nz-icon nzType="appstore" class="code-box-expand-trigger" nz-tooltip nzTooltipTitle="${
-      language === 'zh' ? '展开全部代码' : 'Expand All Code'
-    }" (click)="expandAllCode()"></i>
+		<i nz-icon nzType="appstore" class="code-box-expand-trigger" nz-tooltip nzTooltipTitle="${language === 'zh' ? '展开全部代码' : 'Expand All Code'
+      }" (click)="expandAllCode()"></i>
 	</h2>
 </section>${example}`;
   } else {
@@ -171,7 +149,6 @@ function generateToc(language, name, demoMap) {
 function generateExample(result) {
   const demoMap = result.demoMap;
   const isZhUnion = result.docZh.meta.cols;
-  const isEnUnion = result.docEn.meta.cols;
   const templateSplit = String(fs.readFileSync(path.resolve(__dirname, '../template/example-split.template.html')));
   const templateUnion = String(fs.readFileSync(path.resolve(__dirname, '../template/example-union.template.html')));
   let demoList = [];
@@ -181,28 +158,19 @@ function generateExample(result) {
   demoList.sort((pre, next) => pre.meta.order - next.meta.order);
   let firstZhPart = '';
   let secondZhPart = '';
-  let firstEnPart = '';
-  let secondEnPart = '';
-  let enPart = '';
   let zhPart = '';
   demoList.forEach((item, index) => {
-    enPart += item.enCode;
     zhPart += item.zhCode;
     if (index % 2 === 0) {
       firstZhPart += item.zhCode;
-      firstEnPart += item.enCode;
     } else {
       secondZhPart += item.zhCode;
-      secondEnPart += item.enCode;
     }
   });
   return {
     zh: isZhUnion
       ? templateUnion.replace(/{{content}}/g, zhPart)
       : templateSplit.replace(/{{first}}/g, firstZhPart).replace(/{{second}}/g, secondZhPart),
-    en: isEnUnion
-      ? templateUnion.replace(/{{content}}/g, enPart)
-      : templateSplit.replace(/{{first}}/g, firstEnPart).replace(/{{second}}/g, secondEnPart)
   };
 }
 

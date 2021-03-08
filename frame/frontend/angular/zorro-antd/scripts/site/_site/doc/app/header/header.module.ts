@@ -14,9 +14,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
-import { GithubButtonComponent } from './github-button.component';
 import { HeaderComponent } from './header.component';
-import { JoinTipComponent } from './join-tip.components';
 import { LogoComponent } from './logo.component';
 import { NavigationComponent } from './navigation.component';
 import { SearchbarComponent } from './searchbar.component';
@@ -41,9 +39,7 @@ import { SearchbarComponent } from './searchbar.component';
     HeaderComponent,
     LogoComponent,
     SearchbarComponent,
-    NavigationComponent,
-    GithubButtonComponent,
-    JoinTipComponent
+    NavigationComponent
   ],
   exports: [HeaderComponent]
 })

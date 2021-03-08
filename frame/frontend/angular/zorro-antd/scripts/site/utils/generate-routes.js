@@ -33,12 +33,10 @@ function generateNav(componentsDocMap) {
   let routes = '';
   for (const key in componentsDocMap) {
     generateLanguageData(componentsDocMap[key], 'zh', reverseMap, key);
-    generateLanguageData(componentsDocMap[key], 'en', reverseMap, key);
     const moduleName = capitalizeFirstLetter(camelCase(key));
-    const experimental = componentsDocMap[key]['zh'].experimental || componentsDocMap[key]['en'].experimental;
-    routes += `  {'path': '${
-      experimental ? 'experimental' : 'components'
-    }/${key}', 'loadChildren': () => import('./${key}/index.module').then(m => m.NzDemo${moduleName}Module)},\n`;
+    const experimental = componentsDocMap[key]['zh'].experimental;
+    routes += `  {'path': '${experimental ? 'experimental' : 'components'
+      }/${key}', 'loadChildren': () => import('./${key}/index.module').then(m => m.NzDemo${moduleName}Module)},\n`;
   }
   return { reverseMap, routes };
 }
@@ -47,17 +45,7 @@ module.exports = function generateRoutes(showCaseTargetPath, componentsDocMap, d
   let intro = [];
   let components = [];
   for (const key in docsMeta) {
-    const enMeta = docsMeta[key].en;
     const zhMeta = docsMeta[key].zh;
-    intro.push({
-      path: `docs/${key}/en`,
-      label: enMeta.title,
-      language: 'en',
-      order: enMeta.order,
-      hidden: !!enMeta.hidden,
-      description: enMeta.description,
-      experimental: !!enMeta.experimental
-    });
     intro.push({
       path: `docs/${key}/zh`,
       label: zhMeta.title,

@@ -8,18 +8,13 @@ const CNMirrorSite = 'ng-zorro.gitee.io';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <li nz-menu-item [nzSelected]="page === 'docs'">
-      <a [routerLink]="['docs', 'introduce', language]">
+      <a [routerLink]="['docs', 'introduce', language]" disabled>
         <span>文档</span>
       </a>
     </li>
     <li nz-menu-item [nzSelected]="page === 'components'">
       <a [routerLink]="['components', 'overview', language]">
         <span>组件</span>
-      </a>
-    </li>
-    <li nz-menu-item [nzSelected]="page === 'experimental'">
-      <a [routerLink]="['experimental', 'pipes', language]">
-        <span>实验性功能</span>
       </a>
     </li>
     <ng-container *ngIf="!isMobile && responsive === 'crowded'">
@@ -57,11 +52,11 @@ export class NavigationComponent implements OnInit {
   @Input() language: 'zh' | 'en' = 'zh';
   @Output() languageChange = new EventEmitter<'zh' | 'en'>();
   @Input() responsive: null | 'narrow' | 'crowded' = null;
-  @Input() page: 'docs' | 'components' | 'experimental' | string = 'docs';
+  @Input() page: 'docs' | 'components' | string = 'docs';
   @Input() isMobile = false;
   showCNMirror = false;
 
-  constructor(private platform: Platform) {}
+  constructor(private platform: Platform) { }
 
   ngOnInit(): void {
     if (this.platform.isBrowser) {
