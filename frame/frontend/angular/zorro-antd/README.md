@@ -8,15 +8,16 @@
 NG-ZORRO
 </h1>
 
+> 申明：根据`ng-zorro-antd`版本`11.2.0`
+
 <div align="center">
 
-An enterprise-class Angular UI component library based on Ant Design.
+`ng-zorro-antd` 是 Ant Design 的 Angular 实现，主要用于研发企业级中后台产品。全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。
 
 [![Azure branch](https://img.shields.io/azure-devops/build/ng-zorro/0d271b73-3774-4dbc-a081-088df0b28bf8/2/master?style=flat-square)](https://dev.azure.com/ng-zorro/NG-ZORRO/_build)
-[![CodeFactor](https://www.codefactor.io/repository/github/ng-zorro/ng-zorro-antd/badge?style=flat-square)](https://www.codefactor.io/repository/github/ng-zorro/ng-zorro-antd)
 [![Codecov](https://img.shields.io/codecov/c/github/NG-ZORRO/ng-zorro-antd.svg?style=flat-square)](https://codecov.io/gh/NG-ZORRO/ng-zorro-antd)
 [![GitHub Release Date](https://img.shields.io/github/release-date/NG-ZORRO/ng-zorro-antd.svg?style=flat-square)](https://github.com/NG-ZORRO/ng-zorro-antd/releases)
-[![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-antd)
+[![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-atnd)
 [![NPM downloads](http://img.shields.io/npm/dm/ng-zorro-antd.svg?style=flat-square)](https://npmjs.org/package/ng-zorro-antd)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/748677963142135818?label=Discord&style=flat-square)](https://discord.com/channels/748677963142135818/764322550712893451)
@@ -28,46 +29,43 @@ An enterprise-class Angular UI component library based on Ant Design.
 
 [![](https://img.alicdn.com/tfs/TB1t6QPylr0gK0jSZFnXXbRRXXa-4000-1378.png)](http://ng.ant.design)
 
-English | [简体中文](README-zh_CN.md)
+[English](README.md) | 简体中文
 
+## ✨ 特性
 
-## ✨ Features
+- 提炼自企业级中后台产品的交互语言和视觉风格。
+- 开箱即用的高质量 Angular 组件，与 Angular 保持同步升级。
+- 使用 TypeScript 构建，提供完整的类型定义文件。
+- 支持 OnPush 模式，性能卓越。
+- 数十个国际化语言支持。
+- 深入每个细节的主题定制能力。
 
-- An enterprise-class UI design system for Angular applications.
-- 60+ high-quality Angular components out of the box.
-- Written in TypeScript with predictable static types.
-- The whole package of development and design resources and tools.
-- Support OnPush mode, high performance.
-- Powerful theme customization in every detail.
-- Internationalization support for dozens of languages.
-
-
-## ☀️ License
+## ☀️ 授权协议
 
 [MIT](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE)
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FNG-ZORRO%2Fng-zorro-antd.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FNG-ZORRO%2Fng-zorro-antd?ref=badge_shield)
 
-## 🖥 Environment Support
 
-* Angular `^11.0.0` [![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-antd)
-* Server-side Rendering
-* Modern browsers and Internet Explorer 11+ (with [polyfills](https://angular.io/guide/browser-support))
-* [Electron](http://electron.atom.io/)
+## 🖥 支持环境
+
+- Angular `^11.0.0` [![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-antd)
+- 支持服务端渲染
+- 现代浏览器，以及 Internet Explorer 11+ （使用 [polyfills](https://angular.io/guide/browser-support)）
+- [Electron](http://electron.atom.io/)
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Electron |
 | --------- | --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last 2 versions
+| IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 
-## 🎨 Design Specification
+## 🎨 设计规范
 
-`ng-zorro-antd` synchronizes design specification with [Ant Design](https://ant.design/docs/spec/introduce) on a regular basis, you can check the [log](https://nz-styles-syncer.now.sh/) online.
+`ng-zorro-antd` 与 Ant Design 设计规范定期同步，你可以在线查看[同步日志](https://nz-styles-syncer.now.sh/)。
 
+## 📦 安装
 
-## 📦 Installation
-
-**We recommend using `@angular/cli` to install**. It not only makes development easier, but also allows you to take advantage of the rich ecosystem of angular packages and tooling.
+我们强烈推荐官方的 `@angular/cli` 工具链辅助进行开发，在实际项目开发中，它可以很好的满足对 TypeScript 代码的构建、调试、代理、打包部署等一系列工程化的需求。
 
 ```bash
 $ ng new PROJECT_NAME
@@ -75,17 +73,12 @@ $ cd PROJECT_NAME
 $ ng add ng-zorro-antd
 ```
 
-> More information about `@angular/cli` [here](https://github.com/angular/angular-cli).
+> 如果你想了解更多CLI工具链的功能和命令，建议访问 [Angular CLI](https://github.com/angular/angular-cli) 了解更多
 
-You can also install `ng-zorro-antd` with npm or yarn
 
-```bash
-$ npm install ng-zorro-antd
-```
+## 🔨 使用
 
-## 🔨 Usage
-
-Import the component modules you want to use into your `app.module.ts` file and [feature modules](https://angular.io/guide/feature-modules).
+将想要使用的组件模块引入到你的 `app.module.ts` 文件和其它的[特性模块](https://angular.cn/guide/feature-modules)中。
 
 ```ts
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -97,9 +90,9 @@ export class AppModule {
 }
 ```
 
-> `@angular/cli` users won't have to worry about the things below but it's good to know.
+> `@angular/cli` 的用户不需要担心下面这项设置，但知道也挺有好处。
 
-And import style and SVG icon assets file link in `angular.json`.
+然后在 `angular.json` 文件中引入样式和 SVG icon 资源。
 
 ```diff
 {
@@ -116,15 +109,15 @@ And import style and SVG icon assets file link in `angular.json`.
 }
 ```
 
-See [Getting Started](https://ng.ant.design/docs/getting-started/en) for more details.
+参考[快速上手](https://ng.ant.design/docs/getting-started/zh)以了解更多。
 
-## 🔗 Links
+## 🔗 链接
 
 * [ng-zorro-antd-mobile](https://github.com/NG-ZORRO/ng-zorro-antd-mobile)
 * [ng-alain](https://github.com/ng-alain/ng-alain)
-* [Snippet extension for VSCode](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode)
+* [VSCode 的 snippet 扩展](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode)
 
-## ⌨️ Development
+## ⌨️ 开发
 
 ```bash
 $ git clone git@github.com:NG-ZORRO/ng-zorro-antd.git
@@ -133,48 +126,53 @@ $ npm install
 $ npm run start
 ```
 
-Browser would open automatically.
+浏览器会自动打开。
 
-## 🤝 Contributing
+## 🤝 如何贡献
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/NG-ZORRO/ng-zorro-antd/pulls)
 
-We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/NG-ZORRO/ng-zorro-antd/pulls) or as [GitHub issues](https://github.com/NG-ZORRO/ng-zorro-antd/issues).
+在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/CONTRIBUTING.md)。如果你希望参与贡献，欢迎 [Pull Request](https://github.com/NG-ZORRO/ng-zorro-antd/pulls)，或给我们 [报告 Bug](http://ng.ant.design/issue-helper/#/new-issue)。
 
+> 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)(**本指南不提供此项目的实际支持服务！**)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
-> If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) (**This guide does not provide actual support services for this project!**), [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
-
-Thanks to [JetBrains](https://www.jetbrains.com/?from=ng-zorro-antd) for supporting us free open source licenses.
+感谢 [JetBrains](https://www.jetbrains.com/?from=ng-zorro-antd) 提供的免费开源 License 赞助
 
 [![JetBrains](https://img.alicdn.com/tfs/TB1sSomo.z1gK0jSZLeXXb9kVXa-120-130.svg)](https://www.jetbrains.com/?from=ng-zorro-antd)
 
-## ❓ Help from the Community
+## ❓ 社区互助
 
-For questions on how to use ng-zorro-antd, please post questions to [<img alt="Stack Overflow" src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=2bb144720a66" width="140" />](http://stackoverflow.com/questions/tagged/ng-zorro-antd) using the `ng-zorro-antd` tag. If you're not finding what you need on stackoverflow, you can find us on [![Discord](https://img.shields.io/discord/748677963142135818?label=Discord&style=flat-square)](https://discord.com/channels/748677963142135818/764322550712893451) as well.
+如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助，同时我们也鼓励资深用户通过下面的途径给新人提供帮助。
 
-As always, we encourage experienced users to help those who are not familiar with `ng-zorro-antd`!
+通过 Stack Overflow 或者 Segment Fault 提问时，建议加上 `ng-zorro-antd` 标签。
 
-## 🎉 Users
+1. [Stack Overflow](https://stackoverflow.com/questions/tagged/ng-zorro-antd)（English）
+2. [Segment Fault](https://segmentfault.com/t/ng-zorro)（中文）
+3. [![Discord](https://img.shields.io/discord/748677963142135818?label=Discord&style=flat-square)](https://discord.com/channels/748677963142135818/764322550712893451)
+4. 加入钉钉 NG-ZORRO 自助服务群（中文）
 
-- [Alibaba](https://www.alibaba.com/)
-- [Aliyun](https://www.aliyun.com/)
-- [ThoughtWorks](https://www.thoughtworks.com/)
-- [China Merchants Bank](http://english.cmbchina.com/)
+<img src="https://img.alicdn.com/tfs/TB1aRk.clCw3KVjSZFlXXcJkFXa-750-990.jpg" width="300">
+
+## 🎉 谁在使用
+
+- [阿里巴巴](https://www.alibaba.com/)
+- [阿里云](https://www.aliyun.com/)
+- [思特沃克](https://www.thoughtworks.com/)
+- [招商银行](http://www.cmbchina.com/)
+- [共道科技](https://www.gongdao.com/)
+- [优速快递](http://www.uce.cn/)
+- [轻流](https://qingflow.com/)
+- [航天信息股份有限公司](http://www.aisino.com/)
+- [达观数据](http://datagrand.com/)
 - [Ververica](https://www.ververica.com/)
 - [Apache Flink](https://flink.apache.org/)
 - [Apache Zeppelin](https://zeppelin.apache.org/)
 - [Apache Submarine](https://submarine.apache.org/)
 - [Apache Metron](https://metron.apache.org/)
 - [Process Automation Group](http://pag.company/)
-- [AISINOCO](http://www.aisino.com/)
-- [GongDao](https://www.gongdao.com/)
-- [UC Express](http://www.uce.cn/)
-- [Qingflow](https://qingflow.com/)
-- [DataGrand](http://datagrand.com/)
 - [ScentBird](https://www.scentbird.com/)
 - [Southern Institute of Technology](https://www.sit.ac.nz/)
 - [Hapify (Dynamic boilerplates tool)](https://hub.hapify.io/)
 
-> We list some users here, if your company or product uses NG-ZORRO, let us know [here](https://github.com/NG-ZORRO/ng-zorro-antd/issues/1142)!
+> 我们在这里列出了部分使用者，如果你的公司和产品使用了 NG-ZORRO，欢迎到 [这里](https://github.com/NG-ZORRO/ng-zorro-antd/issues/1142) 留言。
 
-**Love ng-zorro-antd? Give our repo a star :star: :arrow_up:.**

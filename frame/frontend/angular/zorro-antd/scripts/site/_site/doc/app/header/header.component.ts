@@ -25,7 +25,7 @@ const RESPONSIVE_SM = 1200;
           <app-logo></app-logo>
         </div>
         <div nz-col [nzXs]="0" [nzSm]="0" [nzMd]="18" [nzLg]="18" [nzXl]="19" [nzXXl]="20" class="menu-row">
-          <div app-searchbar [language]="language" [responsive]="responsive" (focusChange)="onFocusChange($event)"></div>
+          <div app-searchbar [responsive]="responsive" (focusChange)="onFocusChange($event)"></div>
           <ng-container *ngIf="!isMobile" [ngTemplateOutlet]="menu"></ng-container>
         </div>
       </div>

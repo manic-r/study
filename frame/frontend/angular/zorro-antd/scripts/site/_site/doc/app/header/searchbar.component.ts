@@ -28,7 +28,7 @@ declare const docsearch: any;
       #searchInput
       (focus)="triggerFocus(true)"
       (blur)="triggerFocus(false)"
-      [placeholder]="language == 'zh' ? '在 ng.ant.design 中搜索' : 'Search in ng.ant.design'"
+      placeholder="在 ng.ant.design 中搜索"
     />
   `,
   host: {
@@ -40,7 +40,6 @@ declare const docsearch: any;
 })
 export class SearchbarComponent implements OnChanges {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-  @Input() language: 'zh' | 'en' = 'zh';
   @Input() responsive: null | 'narrow' | 'crowded' = null;
   @Output() focusChange = new EventEmitter<boolean>();
 
@@ -55,7 +54,7 @@ export class SearchbarComponent implements OnChanges {
     return window && window.location.href.indexOf('/version') === -1;
   }
 
-  constructor(private cdr: ChangeDetectorRef, private platform: Platform) {}
+  constructor(private cdr: ChangeDetectorRef, private platform: Platform) { }
 
   triggerFocus(focus: boolean): void {
     if (this.docsearch) {
@@ -83,7 +82,7 @@ export class SearchbarComponent implements OnChanges {
         apiKey: '9f7d9d6527ff52ec484e90bb1f256971',
         indexName: 'ng_zorro',
         inputSelector: '#search-box input',
-        algoliaOptions: { hitsPerPage: 5, facetFilters: [`tags:${this.language}`] },
+        algoliaOptions: { hitsPerPage: 5, facetFilters: [`tags:zh`] },
         // tslint:disable-next-line:no-any
         transformData(hits: any): void {
           // tslint:disable-next-line:no-any
@@ -103,7 +102,7 @@ export class SearchbarComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const { language } = changes;
     if (language && this.docsearch) {
-      this.docsearch!.algoliaOptions = { hitsPerPage: 5, facetFilters: [`tags:${this.language}`] };
+      this.docsearch!.algoliaOptions = { hitsPerPage: 5, facetFilters: [`tags:zh`] };
     }
   }
 }
