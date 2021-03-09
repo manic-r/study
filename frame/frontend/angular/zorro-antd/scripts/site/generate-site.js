@@ -47,12 +47,12 @@ function generate(target) {
     if (fs.statSync(componentDirPath).isDirectory()) {
       // create site/doc/app->${component} folder
       const showCaseComponentPath = path.join(showCaseTargetPath, componentName);
-      fs.mkdirSync(showCaseComponentPath);
       // TODO: 自己添加的过滤 ↓
       if (!componentDirPath.endsWith('table')) {
         return;
       }
       // TODO: 自己添加的过滤 ↑
+      fs.mkdirSync(showCaseComponentPath);
       // handle components->${component}->demo folder
       const demoDirPath = path.join(componentDirPath, 'demo');
       const demoMap = {};

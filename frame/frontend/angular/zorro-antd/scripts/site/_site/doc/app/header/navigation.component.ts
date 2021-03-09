@@ -52,7 +52,7 @@ export class NavigationComponent implements OnInit {
   @Input() language: 'zh' | 'en' = 'zh';
   @Output() languageChange = new EventEmitter<'zh' | 'en'>();
   @Input() responsive: null | 'narrow' | 'crowded' = null;
-  @Input() page: 'docs' | 'components' | string = 'docs';
+  @Input() page: 'docs' | 'components' | string = 'components';
   @Input() isMobile = false;
   showCNMirror = false;
 

@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
    **/
   showDrawer = false;
   isDrawerOpen = false;
-  page: 'docs' | 'components' | 'experimental' | string = 'docs';
+  page: 'docs' | 'components' | string = 'components';
   windowWidth = 1400;
   routerList = ROUTER_LIST;
   componentList: DocPageMeta[] = [];
@@ -138,7 +138,7 @@ export class AppComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     // tslint:disable-next-line:no-any
     @Inject(DOCUMENT) private document: any
-  ) {}
+  ) { }
 
   navigateToPage(url: string): void {
     if (url) {

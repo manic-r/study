@@ -4,7 +4,7 @@ import { DEMO_ROUTES } from './router';
 import { DEMOComponent } from './_demo/demo.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/docs/introduce/en' },
+  { path: '', pathMatch: 'full', redirectTo: '/components/overview/zh' },
   ...DEMO_ROUTES,
   { path: 'docs', loadChildren: () => import('./docs/index.module').then(m => m.NzDocsModule) },
   { path: 'demo', component: DEMOComponent },
@@ -12,5 +12,5 @@ export const routes: Routes = [
     path: 'components/overview',
     loadChildren: () => import('./components-overview/components-overview.module').then(m => m.ComponentsOverviewModule)
   },
-  { path: '**', redirectTo: '/docs/introduce/en', pathMatch: 'full' }
+  { path: '**', redirectTo: '/components/overview/zh', pathMatch: 'full' }
 ];

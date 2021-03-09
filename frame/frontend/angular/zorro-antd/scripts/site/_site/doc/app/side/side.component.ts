@@ -58,7 +58,7 @@ import { RouterList } from '../router';
 })
 export class SideComponent {
   @Input() direction: 'ltr' | 'rtl' = 'ltr';
-  @Input() page: 'docs' | 'components' | 'experimental' | string = 'docs';
+  @Input() page: 'docs' | 'components' | string = 'components';
   @Input() routerList: RouterList = {} as RouterList;
   @Input() language: 'zh' | 'en' = 'en';
 }
