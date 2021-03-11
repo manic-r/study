@@ -5,6 +5,7 @@ const moduleTemplate = String(fs.readFileSync(path.resolve(__dirname, '../templa
 const zorroModule = String(fs.readFileSync(path.resolve(__dirname, '../template/ng-zorro-antd.module.template.ts')));
 
 module.exports = function (iframeTargetPath, componentsMap) {
+  console.log('----------------------------------------!!!!!!!!!!!!!!!!!!!!!')
   let routing = routingTemplate;
   let module = moduleTemplate;
   let importPart = '';

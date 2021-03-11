@@ -3,33 +3,23 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 @Component({
   selector: 'app-fixed-widgets',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="fixed-widgets">
-      <div
-        class="ant-avatar ant-avatar-circle ant-avatar-icon fixed-widgets-avatar"
-        style="width: 44px; height: 44px; line-height: 44px; font-size: 22px;"
-        nz-dropdown
-        nzPlacement="topCenter"
-        [nzDropdownMenu]="menu"
-      >
-        <theming-icon></theming-icon>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu nzSelectable>
-            <li nz-menu-item (click)="onThemeChange('default')">默认主题</li>
-            <li nz-menu-item (click)="onThemeChange('dark')">暗黑主题</li>
-            <li nz-menu-item (click)="onThemeChange('compact')">紧凑主题</li>
-            <li nz-menu-item (click)="onThemeChange('aliyun')">阿里云主题</li>
-          </ul>
-        </nz-dropdown-menu>
-      </div>
-    </div>
-  `
+  templateUrl: './fixed-widgets.component.html',
+  styleUrls: ['./fixed-widgets.component.less']
 })
 export class FixedWidgetsComponent {
   compact = false;
   @Input() theme: string = 'default';
   @Input() language: string = 'zh';
   @Output() readonly themeChange = new EventEmitter<string>();
+
+  @Input() colorHex: string = '#1890ff';
+  // tslint:disable-next-line:no-any
+  @Output() colorChange = new EventEmitter<any>();
+
+  // tslint:disable-next-line:no-any
+  changeColor(res: any): void {
+    this.colorChange.emit(res);
+  }
 
   onThemeChange(theme: string): void {
     this.theme = theme;

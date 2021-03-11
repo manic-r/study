@@ -27,9 +27,7 @@ import { environment } from '../environments/environment';
 import { DEMOComponent } from './_demo/demo.component';
 import { AppComponent } from './app.component';
 import { routes } from './app.routing.module';
-import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
-import { NzContributorsListModule } from './share/contributors-list/contributors-list.module';
 import { FixedWidgetsModule } from './share/fixed-widgets/fixed-widgets.module';
 import { NzNavBottomModule } from './share/nav-bottom/nav-bottom.module';
 import { SideComponent } from './side/side.component';
@@ -59,8 +57,6 @@ const icons: IconDefinition[] = [LeftOutline, RightOutline, EditOutline];
     NzBadgeModule,
     HttpClientJsonpModule,
     HeaderModule,
-    FooterModule,
-    NzContributorsListModule,
     FixedWidgetsModule,
     HoverPreloadModule,
     RouterModule.forRoot(
@@ -74,4 +70,4 @@ const icons: IconDefinition[] = [LeftOutline, RightOutline, EditOutline];
   providers: [Title, { provide: NZ_CONFIG, useValue: { icon: { nzTwotoneColor: '#1890ff' }, global: { nzDirection: 'ltr' } } }],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

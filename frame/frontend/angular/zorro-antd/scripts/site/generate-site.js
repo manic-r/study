@@ -8,7 +8,6 @@ const generateDemo = require('./utils/generate-demo');
 const generateDemoCodeFiles = require('./utils/generate-demo-code-files');
 const generateDocs = require('./utils/generate-docs');
 const generateRoutes = require('./utils/generate-routes');
-const generateIframe = require('./utils/generate-iframe');
 const capitalizeFirstLetter = require('./utils/capitalize-first-letter');
 const camelCase = require('./utils/camelcase');
 const getMeta = require('./utils/get-meta');
@@ -111,7 +110,7 @@ function generate(target) {
   });
 
   // handle iframe folder
-  generateIframe(iframeTargetPath, componentsMap);
+  // generateIframe(iframeTargetPath, componentsMap);
 
   if (!isSyncSpecific) {
     // read docs folder

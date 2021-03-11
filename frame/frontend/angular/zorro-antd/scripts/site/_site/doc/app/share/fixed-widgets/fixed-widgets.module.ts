@@ -5,6 +5,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { FixedWidgetsComponent } from './fixed-widgets.component';
 import { ThemingIcon } from './theme-icons'
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ThemingIcon } from './theme-icons'
   imports: [
     CommonModule,
     NzAvatarModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzPopoverModule,
+    ColorSketchModule
   ],
   exports: [FixedWidgetsComponent]
 })
