@@ -7,20 +7,19 @@ import { RouterList } from '../router';
   template: `
     <ul nz-menu [nzMode]="'inline'" class="aside-container menu-site" [nzInlineIndent]="40" [class.ant-menu-rtl]="direction === 'rtl'">
       <ng-container *ngIf="page === 'docs'">
-        <li *ngFor="let intro of routerList.intro" nz-menu-item nzMatchRouter [hidden]="intro.language !== language || intro.hidden">
+        <li *ngFor="let intro of routerList.intro" nz-menu-item nzMatchRouter [hidden]="intro.hidden">
           <a routerLink="{{ intro.path }}">{{ intro.label }}</a>
         </li>
       </ng-container>
 
       <ng-container *ngIf="page === 'components'">
         <li nz-menu-item nzMatchRouter>
-          <a routerLink="components/overview/{{ language }}">
-            <span *ngIf="language === 'en'">Components Overview</span>
-            <span *ngIf="language === 'zh'">组件总览</span>
+          <a routerLink="components/overview/zh">
+            <span>组件总览</span>
           </a>
         </li>
 
-        <li nz-menu-group *ngFor="let group of routerList.components" [hidden]="group.language !== language" [nzTitle]="group.name">
+        <li nz-menu-group *ngFor="let group of routerList.components" [nzTitle]="group.name">
           <ul>
             <ng-container>
               <li nz-menu-item nzMatchRouter *ngFor="let component of group.children">
@@ -38,7 +37,7 @@ import { RouterList } from '../router';
         <li
           nz-menu-group
           *ngFor="let group of routerList.components"
-          [hidden]="group.language !== language || group.experimentalChildren.length === 0"
+          [hidden]="group.experimentalChildren.length === 0"
           [nzTitle]="group.name"
         >
           <ul>
@@ -60,5 +59,4 @@ export class SideComponent {
   @Input() direction: 'ltr' | 'rtl' = 'ltr';
   @Input() page: 'docs' | 'components' | string = 'components';
   @Input() routerList: RouterList = {} as RouterList;
-  @Input() language: 'zh' | 'en' = 'en';
 }

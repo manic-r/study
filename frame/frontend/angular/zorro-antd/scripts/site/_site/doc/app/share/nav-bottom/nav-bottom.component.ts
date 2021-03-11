@@ -25,7 +25,7 @@ export class NzNavBottomComponent implements OnInit {
   index = 0;
   language = 'en';
 
-  constructor(private router: Router, private platform: Platform, private cdr: ChangeDetectorRef) {}
+  constructor(private router: Router, private platform: Platform, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     if (!this.platform.isBrowser) {

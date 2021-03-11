@@ -7,7 +7,6 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -22,18 +21,12 @@ import { ROUTER_LIST } from '../router';
 })
 export class ComponentsOverviewComponent implements OnInit {
   routerList = ROUTER_LIST;
-  language = 'en';
   searchChange$ = new BehaviorSubject('');
   @ViewChild('searchBox', { static: true }) searchBox!: ElementRef<HTMLInputElement>;
 
-  constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.route.url.subscribe(url => {
-      this.language = url[0].path;
-      this.cdr.detectChanges();
-    });
-
     this.searchChange$
       .asObservable()
       .pipe(debounceTime(20))

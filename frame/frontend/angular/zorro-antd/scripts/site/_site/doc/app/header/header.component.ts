@@ -7,80 +7,12 @@ const RESPONSIVE_SM = 1200;
 @Component({
   selector: 'app-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <header id="header" class="clearfix">
-      <i
-        nz-icon
-        class="nav-phone-icon"
-        nzType="unordered-list"
-        *ngIf="isMobile"
-        nzPopoverOverlayClassName="popover-menu"
-        nzPopoverPlacement="bottomLeft"
-        nz-popover
-        [nzPopoverContent]="menu"
-      ></i>
-
-      <div nz-row style="flex-flow: nowrap">
-        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="6" [nzLg]="6" [nzXl]="5" [nzXXl]="4">
-          <app-logo></app-logo>
-        </div>
-        <div nz-col [nzXs]="0" [nzSm]="0" [nzMd]="18" [nzLg]="18" [nzXl]="19" [nzXXl]="20" class="menu-row">
-          <div app-searchbar [responsive]="responsive" (focusChange)="onFocusChange($event)"></div>
-          <ng-container *ngIf="!isMobile" [ngTemplateOutlet]="menu"></ng-container>
-        </div>
-      </div>
-    </header>
-    <ng-template #menu>
-      <ng-container *ngIf="!searching || windowWidth > 1200">
-        <ng-container *ngIf="windowWidth < 1120; else narrowNavigation">
-          <ul
-            nz-menu
-            app-navagation
-            class="menu-site"
-            [responsive]="responsive"
-            [page]="page"
-            [isMobile]="isMobile"
-            [nzMode]="isMobile ? 'inline' : 'horizontal'"
-            [nzSelectable]="false"
-            [(language)]="language"
-            (languageChange)="onChangeLanguage($event)"
-          ></ul>
-        </ng-container>
-        <ng-template #narrowNavigation>
-          <ul
-            nz-menu
-            app-navagation
-            class="menu-site"
-            [responsive]="responsive"
-            [page]="page"
-            [isMobile]="isMobile"
-            [nzMode]="isMobile ? 'inline' : 'horizontal'"
-            [nzSelectable]="false"
-            [(language)]="language"
-            (languageChange)="onChangeLanguage($event)"
-          ></ul>
-          <button
-            nz-button
-            nzSize="small"
-            class="header-button header-lang-butto"
-            (click)="onChangeLanguage(language === 'zh' ? 'en' : 'zh')"
-          >
-            {{ language == 'zh' ? 'English' : '中文' }}
-          </button>
-          <button nz-button nzGhost nzSize="small" class="header-button header-direction-button" (click)="toggleDirection()">
-            {{ nextDirection | uppercase }}
-          </button>
-        </ng-template>
-      </ng-container>
-    </ng-template>
-  `
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnChanges {
-  @Input() language: 'zh' | 'en' = 'zh';
+  language = 'zh';
   @Input() windowWidth = 1400;
   @Input() page: 'docs' | 'components' | string = 'components';
-  @Output() versionChange = new EventEmitter<string>();
-  @Output() languageChange = new EventEmitter<'zh' | 'en'>();
   @Output() directionChange = new EventEmitter<'ltr' | 'rtl'>();
 
   searching = false;
@@ -90,17 +22,11 @@ export class HeaderComponent implements OnChanges {
   nextDirection: 'ltr' | 'rtl' = 'rtl';
 
   constructor(private nzConfigService: NzConfigService) { }
-  onChangeVersion(version: string): void {
-    this.versionChange.emit(version);
-  }
 
   onFocusChange(focus: boolean): void {
     this.searching = focus;
   }
 
-  onChangeLanguage(language: 'en' | 'zh'): void {
-    this.languageChange.emit(language);
-  }
 
   toggleDirection(): void {
     this.directionChange.emit(this.nextDirection);

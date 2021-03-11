@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class FixedWidgetsComponent {
   compact = false;
   @Input() theme: string = 'default';
-  @Input() language: string = 'zh';
   @Output() readonly themeChange = new EventEmitter<string>();
 
   @Input() colorHex: string = '#1890ff';

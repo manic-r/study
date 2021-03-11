@@ -17,6 +17,9 @@ module.exports = function parseDemoMd(file) {
 
   for (let i = 0; i < ast.children.length; i++) {
     const child = ast.children[i];
+    if (child.type === 'heading' && child.depth === 2 && child.children[0].value === 'en-US') {
+      isAfterENHeading = true;
+    }
     if (!(child.type === 'heading' && child.depth === 2)) {
       if (!isAfterENHeading) {
         zhPart += MD(remark.stringify(child));

@@ -109,9 +109,6 @@ function generate(target) {
     }
   });
 
-  // handle iframe folder
-  // generateIframe(iframeTargetPath, componentsMap);
-
   if (!isSyncSpecific) {
     // read docs folder
     const docsPath = path.resolve(__dirname, '../../docs');

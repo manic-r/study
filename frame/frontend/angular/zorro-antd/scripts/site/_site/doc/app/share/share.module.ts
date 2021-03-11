@@ -10,7 +10,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzCodeBoxModule } from './codebox/codebox.module';
-import { NzGithubBtnModule } from './github-btn/github-btn.module';
 import { NzHighlightModule } from './highlight/highlight.module';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { NzHighlightModule } from './highlight/highlight.module';
     ReactiveFormsModule,
     NzCodeBoxModule,
     NzHighlightModule,
-    NzGithubBtnModule,
     NzToolTipModule,
     NzAnchorModule,
     NzAffixModule,
@@ -39,7 +37,6 @@ import { NzHighlightModule } from './highlight/highlight.module';
     NzHighlightModule,
     NzAnchorModule,
     NzAffixModule,
-    NzGithubBtnModule,
     NzGridModule,
     NzToolTipModule,
     NzIconModule,
@@ -48,4 +45,4 @@ import { NzHighlightModule } from './highlight/highlight.module';
     DragDropModule
   ]
 })
-export class ShareModule {}
+export class ShareModule { }

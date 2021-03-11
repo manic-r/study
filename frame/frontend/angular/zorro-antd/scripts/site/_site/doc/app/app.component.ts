@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectorRef, Component, Inject, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import { NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzMessageRef, NzMessageService } from 'ng-zorro-antd/message';
 import { VERSION } from 'ng-zorro-antd/version';
 import { fromEvent } from 'rxjs';
@@ -53,15 +53,8 @@ export class AppComponent implements OnInit {
 
   theme: SiteTheme = 'default';
 
-  language: 'zh' | 'en' = 'en';
   direction: 'ltr' | 'rtl' = 'ltr';
   currentVersion = VERSION.full;
-
-  switchLanguage(language: string): void {
-    const url = this.router.url.split('/');
-    url.splice(-1);
-    this.router.navigateByUrl(`${url.join('/')}/${language}`).then();
-  }
 
   switchDirection(direction: 'ltr' | 'rtl'): void {
     this.direction = direction;
@@ -87,7 +80,7 @@ export class AppComponent implements OnInit {
     }
     let loading: NzMessageRef | null = null;
     if (notification) {
-      loading = this.nzMessageService.loading(this.language === 'en' ? `Switching theme...` : `切换主题中...`, { nzDuration: 0 });
+      loading = this.nzMessageService.loading(`切换主题中...`, { nzDuration: 0 });
     }
     this.renderer.addClass(this.document.activeElement, 'preload');
     const successLoaded = () => {
@@ -107,7 +100,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => this.renderer.removeClass(this.document.activeElement, 'preload'));
       if (notification) {
         this.nzMessageService.remove(loading?.messageId);
-        this.nzMessageService.success(this.language === 'en' ? `Switching theme successfully` : `切换主题成功`);
+        this.nzMessageService.success(`切换主题成功`);
       }
     };
     if (theme !== 'default') {
@@ -165,14 +158,6 @@ export class AppComponent implements OnInit {
     this.currentVersion = version;
   }
 
-  private getLanguageFromURL(url: string): 'en' | 'zh' | null {
-    const language = url.split('/')[url.split('/').length - 1].split('#')[0].split('?')[0];
-    if (['zh', 'en'].indexOf(language) !== -1) {
-      return language as 'en' | 'zh';
-    }
-    return null;
-  }
-
   ngOnInit(): void {
     if (this.platform.isBrowser) {
       this.renderer.removeClass(this.document.activeElement, 'preload');
@@ -185,26 +170,16 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        const language = this.getLanguageFromURL(event.url);
-        if (language) {
-          this.language = language;
-          this.setPage(event.url);
-        }
+        this.setPage(event.url);
       }
       if (event instanceof NavigationEnd) {
-        this.language = this.getLanguageFromURL(this.router.url)!;
-
-        this.appService.language$.next(this.language);
-        this.nzI18nService.setLocale(this.language === 'en' ? en_US : zh_CN);
+        this.appService.language$.next('zh');
+        this.nzI18nService.setLocale(zh_CN);
         const currentDemoComponent = this.componentList.find(component => `/${component.path}` === this.router.url);
 
         if (currentDemoComponent) {
-          const path = currentDemoComponent.path.replace(/\/(en|zh)/, '');
-          if (this.language === 'en') {
-            this.updateMateTitle(`${currentDemoComponent.label} | NG-ZORRO`);
-          } else {
-            this.updateMateTitle(`${currentDemoComponent.zh}(${currentDemoComponent.label}) | NG-ZORRO`);
-          }
+          const path = currentDemoComponent.path.replace(/\/(zh)/, '');
+          this.updateMateTitle(`${currentDemoComponent.zh}(${currentDemoComponent.label}) | NG-ZORRO`);
           this.updateDocMetaAndLocale(currentDemoComponent.description, `${currentDemoComponent.label}, ${currentDemoComponent.zh}`, path);
         }
 
@@ -212,11 +187,7 @@ export class AppComponent implements OnInit {
         if (currentIntroComponent) {
           const path = currentIntroComponent.path.replace(/\/(en|zh)/, '');
           if (/docs\/introduce/.test(this.router.url)) {
-            if (this.language === 'en') {
-              this.updateMateTitle(`NG-ZORRO - Angular UI component library`);
-            } else {
-              this.updateMateTitle(`NG-ZORRO - 企业级 UI 设计语言和 Angular 组件库`);
-            }
+            this.updateMateTitle(`NG-ZORRO - 企业级 UI 设计语言和 Angular 组件库`);
           } else {
             this.updateMateTitle(`${currentIntroComponent.label} | NG-ZORRO`);
           }
@@ -225,21 +196,12 @@ export class AppComponent implements OnInit {
 
         if (!currentIntroComponent && !currentDemoComponent) {
           if (/components\/overview/.test(this.router.url)) {
-            if (this.language === 'en') {
-              this.updateMateTitle('Components | NG-ZORRO');
-              this.updateDocMetaAndLocale(
-                'NG-ZORRO provides plenty of UI components to enrich your web applications, and we will improve components experience consistently.',
-                'overview',
-                'components/overview'
-              );
-            } else {
-              this.updateMateTitle('组件(Components) | NG-ZORRO');
-              this.updateDocMetaAndLocale(
-                'NG-ZORRO 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践。',
-                'overview, 预览',
-                'components/overview'
-              );
-            }
+            this.updateMateTitle('组件(Components) | NG-ZORRO');
+            this.updateDocMetaAndLocale(
+              'NG-ZORRO 为 Web 应用提供了丰富的基础 UI 组件，我们还将持续探索企业级应用的最佳 UI 实践。',
+              'overview, 预览',
+              'components/overview'
+            );
           } else {
             this.updateMateTitle(`NG-ZORRO - Angular UI component library`);
             this.updateDocMetaAndLocale();
@@ -283,11 +245,8 @@ export class AppComponent implements OnInit {
   }
 
   updateDocMetaAndLocale(description?: string, keywords?: string, path?: string): void {
-    const isEn = this.language === 'en';
-    const enDescription =
-      'An enterprise-class UI design language and Angular-based implementation with a set of high-quality Angular components, one of best Angular UI library for enterprises';
     const zhDescription = 'Ant Design 的 Angular 实现，开发和服务于企业级后台产品，开箱即用的高质量 Angular UI 组件库。';
-    let descriptionContent = isEn ? enDescription : zhDescription;
+    let descriptionContent = zhDescription;
     if (description) {
       descriptionContent = description;
     }
@@ -315,23 +274,15 @@ export class AppComponent implements OnInit {
     });
     this.meta.updateTag({
       property: 'og:locale',
-      content: isEn ? 'en_US' : 'zh_CN'
+      content: 'zh_CN'
     });
     const doc = this.document as Document;
-    this.renderer.setAttribute(doc.documentElement, 'lang', isEn ? 'en' : 'zh-Hans');
+    this.renderer.setAttribute(doc.documentElement, 'lang', 'zh-Hans');
   }
 
   private addHreflang(href: string): void {
     if (!this.platform.isBrowser) {
       const hreflangs = [
-        {
-          hreflang: 'en',
-          suffix: 'en'
-        },
-        {
-          hreflang: 'x-default',
-          suffix: 'en'
-        },
         {
           hreflang: 'zh',
           suffix: 'zh'
@@ -367,7 +318,7 @@ export class AppComponent implements OnInit {
     if (!this.platform.isBrowser) {
       return;
     }
-    const loading = this.nzMessageService.loading(this.language === 'en' ? `Switching color...` : `切换主题中...`, { nzDuration: 0 });
+    const loading = this.nzMessageService.loading(`切换主题中...`, { nzDuration: 0 });
     const changeColor = () => {
       (window as any).less
         .modifyVars({
@@ -375,7 +326,7 @@ export class AppComponent implements OnInit {
         })
         .then(() => {
           this.nzMessageService.remove(loading.messageId);
-          this.nzMessageService.success(this.language === 'en' ? `Switching color successfully` : `应用成功`);
+          this.nzMessageService.success(`应用成功`);
           this.color = res.color.hex;
           window.scrollTo(0, 0);
         });
@@ -425,7 +376,7 @@ export class AppComponent implements OnInit {
     }
     const language = navigator.language.toLowerCase();
     const pathname = location.pathname;
-    const hasLanguage = pathname.match(/(en|zh)(\/?)$/);
+    const hasLanguage = pathname.match(/(zh)(\/?)$/);
     if (language === 'zh-cn' && !hasLanguage) {
       this.nzI18nService.setLocale(zh_CN);
       this.router.navigate(['docs', 'introduce', 'zh']);
