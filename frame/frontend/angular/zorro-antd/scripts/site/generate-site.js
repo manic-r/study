@@ -27,7 +27,6 @@ function generate(target) {
     fs.removeSync(`${showCasePath}/doc/app/${target}`);
   }
   const showCaseTargetPath = `${showCasePath}/doc/app/`;
-  const iframeTargetPath = `${showCasePath}/iframe/app/`;
   // read components folder
   const rootPath = path.resolve(__dirname, '../../components');
   const rootDir = fs.readdirSync(rootPath);
@@ -47,7 +46,7 @@ function generate(target) {
       // create site/doc/app->${component} folder
       const showCaseComponentPath = path.join(showCaseTargetPath, componentName);
       // TODO: 自己添加的过滤 ↓
-      if (!componentDirPath.endsWith('table')) {
+      if (/* !componentDirPath.endsWith('button') && */ !componentDirPath.endsWith('table')) {
         return;
       }
       // TODO: 自己添加的过滤 ↑
@@ -63,8 +62,14 @@ function generate(target) {
             const nameKey = nameWithoutSuffixUtil(demo);
             const demoMarkDownFile = fs.readFileSync(path.join(demoDirPath, demo));
             demoMap[nameKey] = parseDemoMdUtil(demoMarkDownFile);
-            demoMap[nameKey]['name'] = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
-            demoMap[nameKey]['zhCode'] = generateCodeBox(componentName, demoMap[nameKey]['name'], nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
+            demoMap[nameKey].i18n = Object.keys(demoMap[nameKey].meta.title);
+            demoMap[nameKey].name = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
+            demoMap[nameKey].zhCode = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
+            // TODO: 如果当前成功了 上方一行代码要删除 ↓
+            demoMap[nameKey].i18n.forEach(i18n => {
+              demoMap[nameKey][i18n] = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title[i18n], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
+            });
+            // TODO: 如果当前成功了 上方一行代码要删除 ↑
           }
           if (/.ts$/.test(demo)) {
             const nameKey = nameWithoutSuffixUtil(demo);
@@ -82,6 +87,7 @@ function generate(target) {
       // handle components->${component}->page folder, parent component of demo page
       let pageDemo = '';
       const pageDirPath = path.join(componentDirPath, 'page');
+      console.log('pageDirPath=============================================', pageDirPath)
       if (fs.existsSync(pageDirPath)) {
         const pageDir = fs.readdirSync(pageDirPath);
         let zhLocale = '';
@@ -104,6 +110,10 @@ function generate(target) {
       };
       componentsDocMap[componentName] = { zh: result.docZh.meta };
       componentsMap[componentName] = demoMap;
+      // TODO: 新加的
+      fs.writeFileSync('c:/MyCore/demo/Study/componentsMap.json', JSON.stringify(componentsMap, null, 2));
+      fs.writeFileSync('c:/MyCore/demo/Study/componentsDocMap.json', JSON.stringify(componentsDocMap, null, 2));
+      // TODO:
       generateDemo(showCaseComponentPath, result);
       generateDemoCodeFiles(result, showCasePath)
     }

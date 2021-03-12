@@ -1,5 +1,7 @@
 ---
 order: 9
+iframe:
+  height: 360
 title:
   zh-CN: 远程加载数据
 ---
