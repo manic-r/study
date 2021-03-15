@@ -4,12 +4,11 @@ const capitalizeFirstLetter = require('./capitalize-first-letter');
 const camelCase = require('./camelcase');
 
 module.exports = function (showCaseComponentPath, result) {
-  if (result.pageDemo) {
-    const pageDemoComponent = generatePageDemoComponent(result);
-    fs.writeFileSync(path.join(showCaseComponentPath, `zh.page.component.ts`), pageDemoComponent.zh);
-  }
-  const demoTemplate = generateTemplate(result);
-  fs.writeFileSync(path.join(showCaseComponentPath, `zh.html`), demoTemplate.zh);
+  result.i18n.forEach(i18n => {
+    const demoTemplate = generateTemplate(result);
+    console.log(showCaseComponentPath, '----', i18n)
+    fs.writeFileSync(path.join(showCaseComponentPath, `${i18n}.html`), demoTemplate.zh);
+  })
   const demoComponent = generateDemoComponent(result);
   fs.writeFileSync(path.join(showCaseComponentPath, `zh.component.ts`), demoComponent.zh);
   const demoModule = generateDemoModule(result);
@@ -86,6 +85,10 @@ function generateTemplate(result) {
   const titleMap = {
     zh: generateTitle(result.docZh.meta, result.docZh.path)
   };
+  result.i18n.forEach(i18n => {
+    // titleMap[i18n] = generateTitle(result.docZh.meta, result.docZh.path)
+    console.log('............', i18n)
+  })
   const name = result.name;
   const hasPageDemo = !!result.pageDemo;
   return {

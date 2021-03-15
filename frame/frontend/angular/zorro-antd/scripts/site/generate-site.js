@@ -46,10 +46,11 @@ function generate(target) {
       // create site/doc/app->${component} folder
       const showCaseComponentPath = path.join(showCaseTargetPath, componentName);
       // TODO: 自己添加的过滤 ↓
-      if (/* !componentDirPath.endsWith('button') && */ !componentDirPath.endsWith('table')) {
-        return;
-      }
+      // if (!componentDirPath.endsWith('button') && !componentDirPath.endsWith('table')) {
+      //   return;
+      // }
       // TODO: 自己添加的过滤 ↑
+      componentsDocMap[componentName] = {};
       fs.mkdirSync(showCaseComponentPath);
       // handle components->${component}->demo folder
       const demoDirPath = path.join(componentDirPath, 'demo');
@@ -62,11 +63,11 @@ function generate(target) {
             const nameKey = nameWithoutSuffixUtil(demo);
             const demoMarkDownFile = fs.readFileSync(path.join(demoDirPath, demo));
             demoMap[nameKey] = parseDemoMdUtil(demoMarkDownFile);
-            demoMap[nameKey].i18n = Object.keys(demoMap[nameKey].meta.title);
+            componentsDocMap[componentName].i18n = Object.keys(demoMap[nameKey].meta.title);
             demoMap[nameKey].name = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
             demoMap[nameKey].zhCode = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
             // TODO: 如果当前成功了 上方一行代码要删除 ↓
-            demoMap[nameKey].i18n.forEach(i18n => {
+            componentsDocMap[componentName].i18n.forEach(i18n => {
               demoMap[nameKey][i18n] = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title[i18n], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
             });
             // TODO: 如果当前成功了 上方一行代码要删除 ↑
@@ -84,38 +85,25 @@ function generate(target) {
         });
       }
 
-      // handle components->${component}->page folder, parent component of demo page
-      let pageDemo = '';
-      const pageDirPath = path.join(componentDirPath, 'page');
-      console.log('pageDirPath=============================================', pageDirPath)
-      if (fs.existsSync(pageDirPath)) {
-        const pageDir = fs.readdirSync(pageDirPath);
-        let zhLocale = '';
-        pageDemo = {};
-        pageDir.forEach(file => {
-          if (/.ts$/.test(file)) {
-            pageDemo.raw = String(fs.readFileSync(path.join(pageDirPath, file)));
-          }
-          if (/^zh-CN.txt$/.test(file)) {
-            zhLocale = String(fs.readFileSync(path.join(pageDirPath, file)));
-          }
-        });
-        pageDemo.zhCode = pageDemo.raw.replace(/locale;/g, zhLocale);
-      }
       const result = {
         name: componentName,
         docZh: parseDocMdUtil(fs.readFileSync(path.join(componentDirPath, 'doc/index.zh-CN.md')), `components/${componentName}/doc/index.zh-CN.md`),
+        docs: {},
         demoMap,
-        pageDemo
+        i18n: componentsDocMap[componentName].i18n
       };
-      componentsDocMap[componentName] = { zh: result.docZh.meta };
+
+      result.i18n.forEach(i18n => result.docs[i18n] = parseDocMdUtil(fs.readFileSync(path.join(componentDirPath, `doc/index.${i18n}.md`)), `components/${componentName}/doc/index.${i18n}.md`));
+
+      componentsDocMap[componentName].zh = result.docs['zh-CN'].meta;
       componentsMap[componentName] = demoMap;
       // TODO: 新加的
-      fs.writeFileSync('c:/MyCore/demo/Study/componentsMap.json', JSON.stringify(componentsMap, null, 2));
-      fs.writeFileSync('c:/MyCore/demo/Study/componentsDocMap.json', JSON.stringify(componentsDocMap, null, 2));
+      fs.writeFileSync(`${__dirname}\\json\\result.json`, JSON.stringify(result, null, 2));
+      fs.writeFileSync(`${__dirname}\\json\\componentsMap.json`, JSON.stringify(componentsMap, null, 2));
+      fs.writeFileSync(`${__dirname}\\json\\componentsDocMap.json`, JSON.stringify(componentsDocMap, null, 2));
       // TODO:
       generateDemo(showCaseComponentPath, result);
-      generateDemoCodeFiles(result, showCasePath)
+      // generateDemoCodeFiles(result, showCasePath)
     }
   });
 
@@ -134,9 +122,13 @@ function generate(target) {
         zh: getMeta(docsMap[name].zh)
       };
     });
-
+    // TODO:
+    fs.writeFileSync(`${__dirname}\\json\\docsMeta.json`, JSON.stringify(docsMeta, null, 2));
+    // TODO:
+    // TODO:
     generateDocs(showCaseTargetPath, docsMap);
     generateRoutes(showCaseTargetPath, componentsDocMap, docsMeta);
+    // TODO:
   }
 }
 
