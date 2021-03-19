@@ -46,9 +46,9 @@ function generate(target) {
       // create site/doc/app->${component} folder
       const showCaseComponentPath = path.join(showCaseTargetPath, componentName);
       // TODO: 自己添加的过滤 ↓
-      // if (!componentDirPath.endsWith('button') && !componentDirPath.endsWith('table')) {
-      //   return;
-      // }
+      if (/* !componentDirPath.endsWith('button') && */ !componentDirPath.endsWith('table')) {
+        return;
+      }
       // TODO: 自己添加的过滤 ↑
       componentsDocMap[componentName] = {};
       fs.mkdirSync(showCaseComponentPath);
@@ -66,11 +66,6 @@ function generate(target) {
             componentsDocMap[componentName].i18n = Object.keys(demoMap[nameKey].meta.title);
             demoMap[nameKey].name = `NzDemo${camelCase(capitalizeFirstLetter(componentName))}${camelCase(capitalizeFirstLetter(nameKey))}Component`;
             demoMap[nameKey].zhCode = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title['zh-CN'], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
-            // TODO: 如果当前成功了 上方一行代码要删除 ↓
-            componentsDocMap[componentName].i18n.forEach(i18n => {
-              demoMap[nameKey][i18n] = generateCodeBox(componentName, demoMap[nameKey].name, nameKey, demoMap[nameKey].meta.title[i18n], demoMap[nameKey].zh, demoMap[nameKey].meta.iframe);
-            });
-            // TODO: 如果当前成功了 上方一行代码要删除 ↑
           }
           if (/.ts$/.test(demo)) {
             const nameKey = nameWithoutSuffixUtil(demo);
@@ -97,13 +92,8 @@ function generate(target) {
 
       componentsDocMap[componentName].zh = result.docs['zh-CN'].meta;
       componentsMap[componentName] = demoMap;
-      // TODO: 新加的
-      fs.writeFileSync(`${__dirname}\\json\\result.json`, JSON.stringify(result, null, 2));
-      fs.writeFileSync(`${__dirname}\\json\\componentsMap.json`, JSON.stringify(componentsMap, null, 2));
-      fs.writeFileSync(`${__dirname}\\json\\componentsDocMap.json`, JSON.stringify(componentsDocMap, null, 2));
-      // TODO:
       generateDemo(showCaseComponentPath, result);
-      // generateDemoCodeFiles(result, showCasePath)
+      generateDemoCodeFiles(result, showCasePath);
     }
   });
 
@@ -122,13 +112,8 @@ function generate(target) {
         zh: getMeta(docsMap[name].zh)
       };
     });
-    // TODO:
-    fs.writeFileSync(`${__dirname}\\json\\docsMeta.json`, JSON.stringify(docsMeta, null, 2));
-    // TODO:
-    // TODO:
     generateDocs(showCaseTargetPath, docsMap);
     generateRoutes(showCaseTargetPath, componentsDocMap, docsMeta);
-    // TODO:
   }
 }
 

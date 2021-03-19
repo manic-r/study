@@ -4,11 +4,13 @@ const capitalizeFirstLetter = require('./capitalize-first-letter');
 const camelCase = require('./camelcase');
 
 module.exports = function (showCaseComponentPath, result) {
-  result.i18n.forEach(i18n => {
-    const demoTemplate = generateTemplate(result);
-    console.log(showCaseComponentPath, '----', i18n)
-    fs.writeFileSync(path.join(showCaseComponentPath, `${i18n}.html`), demoTemplate.zh);
-  })
+  // result.i18n.forEach(i18n => {
+  //   const demoTemplate = generateTemplate(result);
+  //   console.log(showCaseComponentPath, '----', i18n)
+  //   fs.writeFileSync(path.join(showCaseComponentPath, `${i18n}.html`), demoTemplate.zh);
+  // })
+  const demoTemplate = generateTemplate(result);
+  fs.writeFileSync(path.join(showCaseComponentPath, `zh.html`), demoTemplate.zh);
   const demoComponent = generateDemoComponent(result);
   fs.writeFileSync(path.join(showCaseComponentPath, `zh.component.ts`), demoComponent.zh);
   const demoModule = generateDemoModule(result);
