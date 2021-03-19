@@ -12,7 +12,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gulp": "gulp",
+    "gulp:task": "gulp --tasks"
   },
   "private": true,
   "dependencies": {},
@@ -32,6 +34,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "gulp": "^4.0.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "js-yaml": "^4.0.0",
@@ -50,8 +53,14 @@
   },
   "contributors": [
     {
-      "name": "国际化解决方案`@ngx-translate/core`",
+      "name": "国际化解决方案",
+      "component": "@ngx-translate/core",
       "url": "https://www.npmjs.com/package/@ngx-translate/core"
+    },
+    {
+      "name": "自动化构建工具",
+      "component": "gulp",
+      "url": "https://www.gulpjs.com.cn/"
     }
   ]
 }
