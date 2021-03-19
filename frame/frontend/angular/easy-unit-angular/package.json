@@ -1,6 +1,11 @@
 {
   "name": "easy-unit-angular",
   "version": "0.0.0",
+  "engines": {
+    "node": ">= 11.0.0",
+    "npm": ">= 6.9.0",
+    "angular": ">= 10"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -42,5 +47,11 @@
     "tslint": "~6.1.0",
     "typescript": "~4.1.5",
     "zone.js": "~0.11.3"
-  }
+  },
+  "contributors": [
+    {
+      "name": "国际化解决方案`@ngx-translate/core`",
+      "url": "https://www.npmjs.com/package/@ngx-translate/core"
+    }
+  ]
 }
