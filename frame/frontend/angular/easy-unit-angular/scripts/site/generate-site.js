@@ -1,12 +1,13 @@
 /**
  * 解析文件，定义模块组件层级，得到相应数据
  */
+require('./script.fun.inject');
 const path = require('path');
 const fs = require('fs-extra');
 const angularJson = require('../../angular.json');
 const handleDemoMd = require('./utils/parse-demo-md');
 // const handleDemoTS = require('./utils/parse-demo-ts');
-// const mapMerge = require('deepmerge');
+const mapMerge = require('deepmerge');
 const nameWithoutSuffix = require('./utils/name-without-suffix');
 const { collapseTextChangeRangesAcrossMultipleVersions } = require('typescript');
 // 输出文件的路径地址, `site`为输出文件名
@@ -56,25 +57,27 @@ function generate(target) {
       let demoMap = {};
       demoDir.forEach(demoName => {
         const primaryKey = nameWithoutSuffix(demoName);
-        demoMap[primaryKey] = {};
+        demoMap[primaryKey] = demoMap[primaryKey] || {};
         console.log('输出内容：', demoName)
         // .MD文件处理
-        // demoMap = mapMerge(demoMap, handleDemoMD(demoDirPath, demoName));
         if (/.md$/.test(demoName)) {
           function handleDemoMdLocal() {
             const resultMap = {};
             // 读取MD文件内容
             const demoMarkDownFile = fs.readFileSync(path.join(demoDirPath, demoName));
-            handleDemoMd(demoMarkDownFile);
+            resultMap[primaryKey] = handleDemoMd(demoMarkDownFile);
             return resultMap;
           }
-          console.log(handleDemoMdLocal())
+          demoMap = mapMerge(demoMap, handleDemoMdLocal());
         } else if (/.ts$/.test(demoName)) {
 
         }
         // .TS文件处理
         // demoMap = mapMerge(demoMap, handleDemoTS(demoName));
       });
+      console.log('--------------------------------------')
+      console.log(demoMap)
+      console.log('--------------------------------------')
     }
   })
 }
