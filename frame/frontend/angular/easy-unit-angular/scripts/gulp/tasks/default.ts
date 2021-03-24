@@ -36,51 +36,5 @@ task('help', (done: Function) => {
 
 task('default', parallel('help'));
 
-const date: Date = new Date('2021-03-22');
-import * as moment from 'moment';
-console.log(date, moment(date).add('31', 'days').format('YYYY-MM-DD'))
-
-
-// /front/deposit/account-transaction/retrieve-list
-// accountId: "11111"
-// categories: []
-// endDateTime: ""
-// fetchCount: 50
-// fetchScheduledTransaction: true
-// fetchStartKey: null
-// keyWord: ""
-// retrieveTime: null
-// startDateTime: ""
-
-// /front/saving-box/auto-inner-transfer-reservation/retrieve-list
-// accountDiv: "2"
-// categoryList: null
-// inquiryPeriodEndDate: "2021-04-22"
-// inquiryPeriodStartDate: "2021-03-22"
-// keyWord: ""
-// purposeDepositId: ""
-
-// /front/saving-box/purpose-deposit-transaction/retrieve-list
-// accountDiv: "2"
-// categoryList: null
-// inquiryPeriodEndDate: "2021-03-22"
-// inquiryPeriodStartDate: "2019-09-21"
-// keyWord: ""
-// purposeDepositId: ""
-// retrieveTime: "2021-03-22T06:00:02.740Z"
-
-
-// endDate: now -> startDate: 548 前
-// retrieveTime -> now   预金调用Grpc
-// startDate: now -> endDate: 31 后
-
-// 预约
-///  /front/saving-box/auto-inner-transfer-reservation/retrieve-list
-// AutoInnerTransferReservationController
-// retrieveList  131
-
-// 履历
-///  /front/saving-box/purpose-deposit-transaction/retrieve-list
-// PurposeDepositTransactionController
-// retrieveList 159
-// PurposeDepositTransactionServiceImpl 295
+const date: Date = new Date();
+console.log(date, date)

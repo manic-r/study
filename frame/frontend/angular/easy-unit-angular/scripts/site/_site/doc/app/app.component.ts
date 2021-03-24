@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'easy-unit-angular';
+  lang: string;
+
+  constructor(
+    private translate: TranslateService
+  ) {
+    this.lang = this.translate.getBrowserLang();
+  }
+
+  selectChange() {
+    this.translate.use(this.lang);
+  }
 }

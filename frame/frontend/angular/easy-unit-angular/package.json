@@ -16,7 +16,7 @@
     "gulp": "gulp",
     "gulp:task": "gulp --tasks",
     "gulp:v": "gulp --version",
-    "init": "node gulpfile.js"
+    "init": "node scripts/site/generate-site.js"
   },
   "scriptsDes": {
     "gulp:task": "展示gulp任务队列"
@@ -41,6 +41,7 @@
     "@types/node": "^12.11.1",
     "chalk": "^4.1.0",
     "codelyzer": "^6.0.0",
+    "deepmerge": "^4.2.2",
     "fs-extra": "^9.1.0",
     "gulp": "^4.0.2",
     "jasmine-core": "~3.6.0",
@@ -58,6 +59,7 @@
     "tslib": "^2.0.0",
     "tslint": "~6.1.0",
     "typescript": "~4.1.5",
+    "yaml-front-matter": "^4.1.1",
     "zone.js": "~0.11.3"
   },
   "contributors": [
