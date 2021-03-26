@@ -1,36 +1,52 @@
 {
   "table": {
-    "basic": {
-      "zh-CN": {
-        "demo": "包含标题、内容、操作区域。\n"
+    "module": "import { NzButtonModule } from 'ng-zorro-antd/button';\nimport { NzDropDownModule } from 'ng-zorro-antd/dropdown';\nimport { NzRadioModule } from 'ng-zorro-antd/radio';\nimport { NzIconModule } from 'ng-zorro-antd/icon';\n\nexport const moduleList = [ NzButtonModule, NzDropDownModule, NzRadioModule, NzIconModule ];\n",
+    "components": {
+      "basic": {
+        "zh-CN": {
+          "demo": "包含标题、内容、操作区域。\n"
+        },
+        "en-US": {
+          "demo": "A basic card containing a title, content and an extra corner content.\n"
+        },
+        "meta": {
+          "order": 0,
+          "title": {
+            "zh-CN": "典型卡片",
+            "en-US": "Basic card"
+          }
+        },
+        "ts": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'nz-demo-card-basic',\n  template: `\n    <nz-card style=\"width:300px;\" nzTitle=\"Card title\" [nzExtra]=\"extraTemplate\">\n      <p>Card content</p>\n      <p>Card content</p>\n      <p>Card content</p>\n    </nz-card>\n    <ng-template #extraTemplate>\n      <a>More</a>\n    </ng-template>\n  `,\n  styles: [\n    `\n      p {\n        margin: 0;\n      }\n    `\n  ]\n})\nexport class NzDemoCardBasicComponent {}\n"
       },
-      "en-US": {
-        "demo": "A basic card containing a title, content and an extra corner content.\n"
-      },
-      "meta": {
-        "order": 0,
-        "title": {
-          "zh-CN": "典型卡片",
-          "en-US": "Basic card"
-        }
-      },
-      "ts": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'nz-demo-card-basic',\n  template: `\n    <nz-card style=\"width:300px;\" nzTitle=\"Card title\" [nzExtra]=\"extraTemplate\">\n      <p>Card content</p>\n      <p>Card content</p>\n      <p>Card content</p>\n    </nz-card>\n    <ng-template #extraTemplate>\n      <a>More</a>\n    </ng-template>\n  `,\n  styles: [\n    `\n      p {\n        margin: 0;\n      }\n    `\n  ]\n})\nexport class NzDemoCardBasicComponent {}\n"
+      "test1": {
+        "zh-CN": {
+          "demo": "按钮有五种类型：主按钮、次按钮、虚线按钮、文本按钮和链接按钮。主按钮在同一个操作区域最多出现一次。\n"
+        },
+        "en-US": {
+          "demo": "asdjsaldj\nThere are `primary` button, `default` button, `dashed` button, `text` button and `link` button in `antd`.\n"
+        },
+        "meta": {
+          "order": 0,
+          "title": {
+            "zh-CN": "按钮类型",
+            "en-US": "Type"
+          }
+        },
+        "ts": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'nz-demo-button-basic',\r\n  template: `\r\n    <button nz-button nzType=\"primary\">Primary Button</button>\r\n    <button nz-button nzType=\"default\">Default Button</button>\r\n    <button nz-button nzType=\"dashed\">Dashed Button</button>\r\n    <button nz-button nzType=\"text\">Text Button</button>\r\n    <a nz-button nzType=\"link\">Link Button</a>\r\n  `,\r\n  styles: [\r\n    `\r\n      [nz-button] {\r\n        margin-right: 8px;\r\n        margin-bottom: 12px;\r\n      }\r\n    `\r\n  ]\r\n})\r\nexport class NzDemoButtonBasicComponent { }\r\n"
+      }
     },
-    "test1": {
+    "docs": {
       "zh-CN": {
-        "demo": "按钮有五种类型：主按钮、次按钮、虚线按钮、文本按钮和链接按钮。主按钮在同一个操作区域最多出现一次。\n"
-      },
-      "en-US": {
-        "demo": "asdjsaldj\nThere are `primary` button, `default` button, `dashed` button, `text` button and `link` button in `antd`.\n"
-      },
-      "meta": {
-        "order": 0,
-        "title": {
-          "zh-CN": "按钮类型",
-          "en-US": "Type"
-        }
-      },
-      "ts": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'nz-demo-button-basic',\r\n  template: `\r\n    <button nz-button nzType=\"primary\">Primary Button</button>\r\n    <button nz-button nzType=\"default\">Default Button</button>\r\n    <button nz-button nzType=\"dashed\">Dashed Button</button>\r\n    <button nz-button nzType=\"text\">Text Button</button>\r\n    <a nz-button nzType=\"link\">Link Button</a>\r\n  `,\r\n  styles: [\r\n    `\r\n      [nz-button] {\r\n        margin-right: 8px;\r\n        margin-bottom: 12px;\r\n      }\r\n    `\r\n  ]\r\n})\r\nexport class NzDemoButtonBasicComponent { }\r\n"
+        "meta": {
+          "category": "Components",
+          "type": "通用",
+          "title": "Button",
+          "subtitle": "按钮",
+          "cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg"
+        },
+        "howToUse": "按钮用于开始一个即时操作。\n## 何时使用\n标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。\n在 Ant Design 中，我们有四种按钮。\n*   主按钮：用于主行动点，一个操作区域只能有一个主按钮。\n*   默认按钮：用于没有主次之分的一组行动点。\n*   虚线按钮：常用于添加操作。\n*   文本按钮：用于最次级的行动点。\n*   链接按钮：用于次要或外链的行动点。\n以及四种状态属性与上面配合使用。\n*   危险：删除/移动/修改权限等危险操作，一般需要二次确认。\n*   幽灵：用于背景色比较复杂的地方，常用在首页/产品页等展示场景。\n*   禁用：行动点不可用的时候，一般需要文案解释。\n*   加载中：用于异步操作等待反馈的时候，也可以避免多次提交。\n```ts\nimport { NzButtonModule } from 'ng-zorro-antd/button';\n```\n",
+        "api": "## API\n### \\[nz-button]\n> 注意：nz-button 是一个 Directive，除以下表格之外还支持例如 disabled 等原生 button 的[所有属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button)。\n通过设置 Button 的属性来产生不同的按钮样式，推荐顺序为：`nzType` -> `nzShape` -> `nzSize` -> `nzLoading` -> `disabled`\n按钮的属性说明如下：\n| 属性 | 说明 | 类型 | 默认值 | 支持全局配置 |\n| --- | --- | --- | --- | --- |\n| `[disabled]` | 禁止与button交互 | `boolean` | `false` |\n| `[nzGhost]` | 幽灵属性，使按钮背景透明 | `boolean` | `false` |\n| `[nzLoading]` | 设置按钮载入状态 | `boolean` | `false` |\n| `[nzShape]` | 设置按钮形状，可选值为 `circle` `round` 或者不设 | `'circle'\\|'round'` | - | |\n| `[nzSize]` | 设置按钮大小，可选值为 `small` `large` 或者不设 | `'large'\\|'small'\\|'default'` | `'default'` | ✅ |\n| `[nzType]` | 设置按钮类型，可选值为 `primary` `dashed` `text` `link` 或者不设 | `'primary'\\|'dashed'\\|'link'\\|'text'` | - |\n| `[nzBlock]` | 将按钮宽度调整为其父宽度的选项 | `boolean` | `false` |\n| `[nzDanger]` | 设置危险按钮 | boolean | `false` |  |\n### nz-button-group\n| 属性 | 说明 | 类型 | 默认值 | 支持全局配置 |\n| --- | --- | --- | --- | --- |\n| `[nzSize]` | 设置按钮大小，可选值为 `small` `large` 或者不设 | `'large'\\|'small'\\|'default'` | `'default'` | - |\n"
+      }
     }
   }
 }

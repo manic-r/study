@@ -4,6 +4,7 @@ type: 通用
 title: Button
 subtitle: 按钮
 cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
+language: zh-CN
 ---
 按钮用于开始一个即时操作。
 
@@ -29,6 +30,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 ```ts
 import { NzButtonModule } from 'ng-zorro-antd/button';
 ```
+
+!==========divider==========!
 
 ## API
 

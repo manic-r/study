@@ -7,14 +7,13 @@ const path = require('path');
 const fs = require('fs-extra');
 const angularJson = require('../../angular.json');
 const handleDemoMd = require('./utils/parse-demo-md');
-// const handleDemoTS = require('./utils/parse-demo-ts');
+const handleDocMd = require('./utils/parse-doc-md');
 const merge = require('deepmerge');
 const { $$readFileSync } = require('./utils/file-create');
 const nameWithoutSuffix = require('./utils/name-without-suffix');
 // 输出文件的路径地址, `site`为输出文件名
 const sourceRoot = angularJson.projects['easy-unit-angular-doc'].sourceRoot;
 const showCasePath = path.resolve(__dirname, `../../${sourceRoot}`);
-console.log('showCasePath', showCasePath, angularJson.projects['easy-unit-angular-doc'].sourceRoot)
 
 function generate(target) {
   // 复制组件发布工程
@@ -37,7 +36,6 @@ function generate(target) {
    */
   const rootPath = path.resolve(__dirname, `../../components`);
   const rootDir = fs.existsSync(rootPath) ? fs.readdirSync(rootPath) : [];
-  console.log('rootDir', rootDir);
   /**
    * 存储每一个components对应的组件。
    * 即：每当components下有一个子集文件夹${name}则会有一个对应的Key: name
@@ -46,25 +44,22 @@ function generate(target) {
   rootDir.forEach(componentName => {
     // 获取每一行的组件文件夹路径
     const componentDirPath = path.join(rootPath, `./${componentName}`);
-    console.log('componentDirPath', componentDirPath)
     // 判断组件路径是否是文件夹，如果是进行解析
     if (fs.statSync(componentDirPath).isDirectory()) {
       componentsMap[componentName] = {};
       // ==========================Demo处理================================= //
       // 获取demo路径
       const demoDirPath = path.join(componentDirPath, './demo');
-      console.log('demoDirPath', demoDirPath)
       // 获取demo中的内容
       const demoDir = fs.existsSync(demoDirPath) ? fs.readdirSync(demoDirPath) : [];
       /**
        * 存储每一个组件实例demo中的对象。
        * 即：每当components -> ${组件} -> demo -> ${实例1}则会有一个对应的Key: 实例1
        */
+      // const demoQueue = [];
       let demoMap = {};
       demoDir.forEach(demoName => {
         const primaryKey = nameWithoutSuffix(demoName);
-        // demoMap[primaryKey] = demoMap[primaryKey] || {};
-        console.log('输出内容：', demoName)
         // .MD文件处理
         if (/.md$/.test(demoName)) {
           function handleDemoMdLocal() {
@@ -87,19 +82,39 @@ function generate(target) {
           }
           // .TS文件处理
           demoMap = merge(demoMap, handleDemoTsLocal());
+        } else if (demoName === 'module') {
+          function handleModuleLocal() {
+            // 读取Module文件内容
+            const moduleContext = fs.readFileSync(path.join(demoDirPath, demoName), { encoding: 'utf8' });
+            const resultMap = { module: moduleContext };
+            // 写入文件地址
+            $$readFileSync(path.join(showCasePath, `./app/${componentName}/module.ts`), resultMap.module);
+            return resultMap;
+          }
+          // .module.ts文件处理
+          componentsMap[componentName] = merge(componentsMap[componentName], handleModuleLocal());
         }
       });
-      componentsMap[componentName] = demoMap;
+      componentsMap[componentName] = merge(componentsMap[componentName], { components: demoMap });
+
       // ==========================doc处理================================= //
       // 获取doc路径
-      const demoDirPath = path.join(componentDirPath, './doc');
-
-      console.log('--------------------------------------')
-      console.log(componentsMap)
+      const docDirPath = path.join(componentDirPath, './doc');
+      // 获取demo中的内容
+      const docDir = fs.existsSync(docDirPath) ? fs.readdirSync(docDirPath) : [];
+      let docMap = {};
+      docDir.forEach(docName => {
+        docMap
+        if (/.md$/.test(docName)) {
+          // 读取MD文件内容
+          const docMarkDownFile = fs.readFileSync(path.join(docDirPath, docName));
+          docMap = merge(docMap, handleDocMd(docMarkDownFile));
+        }
+      })
+      componentsMap[componentName] = merge(componentsMap[componentName], { docs: docMap });
       // TODO:
       $$readFileSync(path.join(process.cwd(), './consoles/componentsMap.json'), JSON.stringify(componentsMap, null, 2))
       // TODO:
-      console.log('--------------------------------------')
     }
   })
 }
