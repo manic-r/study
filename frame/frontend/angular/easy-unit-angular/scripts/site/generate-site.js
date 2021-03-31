@@ -81,7 +81,7 @@ function generate(target) {
             const demoTsContext = fs.readFileSync(path.join(demoDirPath, demoName), { encoding: 'utf8' });
             resultMap[primaryKey] = { ts: demoTsContext };
             // 写入文件地址
-            $$readFileSync(path.join(showCasePath, `./app/${componentName}/${primaryKey}.ts`), resultMap[primaryKey].ts);
+            // $$readFileSync(path.join(showCasePath, `./app/${componentName}/${primaryKey}.ts`), resultMap[primaryKey].ts);
             return resultMap;
           }
           // .TS文件处理
@@ -92,7 +92,7 @@ function generate(target) {
             const moduleContext = fs.readFileSync(path.join(demoDirPath, demoName), { encoding: 'utf8' });
             const resultMap = { module: moduleContext };
             // 写入文件地址
-            $$readFileSync(path.join(showCasePath, `./app/${componentName}/module.ts`), resultMap.module);
+            // $$readFileSync(path.join(showCasePath, `./app/${componentName}/module.ts`), resultMap.module);
             return resultMap;
           }
           // .module.ts文件处理
@@ -117,10 +117,9 @@ function generate(target) {
       })
       componentsMap[componentName] = merge(componentsMap[componentName], { docs: docMap });
     }
-
-    generateDemo(componentDirPath, componentsMap['table']);
   })
-
+  
+  generateDemo(showCasePath, componentsMap);
   // TODO:
   logger.write('componentsMap.json', JSON.stringify(componentsMap, null, 2));
   logger.write('componentsMap.ts', componentsMap.table.components.basic.ts);

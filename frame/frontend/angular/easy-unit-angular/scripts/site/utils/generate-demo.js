@@ -1,12 +1,27 @@
 const path = require('path');
+const {root} = require('../project.config');
 const { $$readFileSync } = require('./file-create');
 
-module.exports = function (showCaseComponentPath, components) {
-  for (let filename in components) {
-    generateComponent(showCaseComponentPath, filename, components[filename]);
+module.exports = function (showCasePath, componentsMap) {
+  console.log(componentsMap)
+  for (let dir in componentsMap) {
+    const output = path.join(showCasePath, `./${root}/${dir}`)
+    const { module, components, docs } = componentsMap[dir];
+    // demo component.
+    for (let name in components) {
+      console.log(name, output)
+      generateComponent(output, name, components[name]);
+    }
+    // Module.
+    generateModule(output, module);
+    // 
   }
 }
 
-function generateComponent(showCaseComponentPath, filename, component) {
-  $$readFileSync(path.join(showCaseComponentPath, `./${filename}.ts`), component.ts);
+function generateComponent(showCasePath, filename, component) {
+  $$readFileSync(path.join(showCasePath, `./${filename}.ts`), component.ts);
+}
+
+function generateModule(showCasePath, module) {
+  $$readFileSync(path.join(showCasePath, `./module.ts`), module);
 }
