@@ -11,6 +11,7 @@
  * ${正文.......}
  */
 const YFM = require('yaml-front-matter');
+const MD = require('./marked');
 
 module.exports = function (file) {
   const resultMap = {};
@@ -34,9 +35,9 @@ module.exports = function (file) {
       if (!!resultMap[rowLanguage]) {
         const demo = resultMap[rowLanguage].demo;
         if (Object.isNullMap(demo)) {
-          resultMap[rowLanguage].demo = remark.stringify(child);
+          resultMap[rowLanguage].demo = MD(remark.stringify(child));
         } else {
-          resultMap[rowLanguage].demo = demo + remark.stringify(child);
+          resultMap[rowLanguage].demo = demo + MD(remark.stringify(child));
         }
       }
     }

@@ -5,15 +5,19 @@
 require('./script.fun.inject');
 const path = require('path');
 const fs = require('fs-extra');
-const angularJson = require('../../angular.json');
 const handleDemoMd = require('./utils/parse-demo-md');
 const handleDocMd = require('./utils/parse-doc-md');
 const merge = require('deepmerge');
 const { $$readFileSync } = require('./utils/file-create');
 const nameWithoutSuffix = require('./utils/name-without-suffix');
+const projectConfig = require('./project.config');
+const generateDemo = require('./utils/generate-demo');
 // 输出文件的路径地址, `site`为输出文件名
-const sourceRoot = angularJson.projects['easy-unit-angular-doc'].sourceRoot;
-const showCasePath = path.resolve(__dirname, `../../${sourceRoot}`);
+const showCasePath = path.resolve(__dirname, `../../${projectConfig.output}`);
+
+// TODO:
+const logger = require('./debugger/console-write');
+// TODO:
 
 function generate(target) {
   // 复制组件发布工程
@@ -112,11 +116,15 @@ function generate(target) {
         }
       })
       componentsMap[componentName] = merge(componentsMap[componentName], { docs: docMap });
-      // TODO:
-      $$readFileSync(path.join(process.cwd(), './consoles/componentsMap.json'), JSON.stringify(componentsMap, null, 2))
-      // TODO:
     }
+
+    generateDemo(componentDirPath, componentsMap['table']);
   })
+
+  // TODO:
+  logger.write('componentsMap.json', JSON.stringify(componentsMap, null, 2));
+  logger.write('componentsMap.ts', componentsMap.table.components.basic.ts);
+  // TODO:
 }
 
 generate()

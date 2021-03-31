@@ -26,6 +26,7 @@
  *                         在`## API`下方，均显示在页面下方位置
  */
 const YFM = require('yaml-front-matter');
+const MD = require('./marked');
 
 module.exports = function (file) {
   // 解析MD文件内容
@@ -46,7 +47,7 @@ module.exports = function (file) {
       isTop = !meta.waterfall;
       return true;
     }
-    const rowStr = remark.stringify(child);
+    const rowStr = MD(remark.stringify(child));
     isTop ? (topStr += rowStr) : (bottomStr += rowStr);
   })
   const resultMap = {};
