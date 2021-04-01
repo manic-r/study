@@ -9,3 +9,13 @@ require('ts-node').register({
 });
 
 require(`${prefix}/gulpfile.ts`);
+
+
+///////////////////////..
+// const { src } = require('gulp');
+// const gulpClean = require('gulp-clean');
+
+// function copy() {
+//   return src('site', { read: false, allowEmpty: true }).pipe(gulpClean());
+// }
+// copy()

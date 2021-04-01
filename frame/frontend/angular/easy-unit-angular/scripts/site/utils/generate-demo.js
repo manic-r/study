@@ -1,5 +1,5 @@
 const path = require('path');
-const {root} = require('../project.config');
+const {root} = require('../../project.config');
 const { $$readFileSync } = require('./file-create');
 
 module.exports = function (showCasePath, componentsMap) {

@@ -1,4 +1,4 @@
-const angularJson = require('../../angular.json');
+const angularJson = require('../angular.json');
 const easyUnitDocProject = angularJson.projects['easy-unit-doc'];
 
 module.exports = {
