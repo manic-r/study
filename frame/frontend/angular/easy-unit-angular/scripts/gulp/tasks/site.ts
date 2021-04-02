@@ -2,6 +2,7 @@ import { parallel, series, task, watch } from "gulp";
 import { execNodeTask } from '../util/task-handle';
 import { join } from 'path';
 import { debounce } from 'lodash';
+import { green, yellow } from "chalk";
 
 const detectPort = require('detect-port');
 const siteGenerate = require('../../site/generate-site');
@@ -15,20 +16,23 @@ task('watch:site', () => {
   watch(globs).on(
     'change',
     debounce(path => {
-      // const p = path.replace(/\\/g, '/');
-      // const execArray = /components\/(.+)\/(doc|demo)/.exec(p);
-      // if (execArray && execArray[1]) {
-      //   const component = execArray[1];
-      //   console.log(`重新加载 '${component}'`);
-      //   siteGenerate(component);
-      // }
-      console.log(path)
+      const p = path.replace(/\\/g, '/');
+      const execArray = new RegExp(`/${projectConfig.component.dir}/(.+)/(doc|demo)/`).exec(p);
+      if (execArray && execArray[1]) {
+        const component = execArray[1];
+        console.log(yellow('检测到组件 '), green(component), yellow(' 变更, 已重新编译.'))
+        siteGenerate(component);
+      }
     }, 3000)
   )
 });
 
 task('init:site', done => {
-  siteGenerate();
+  try {
+    siteGenerate();
+  } catch (error) {
+    console.log('捕捉异常：进行重新编译', error.code, error.message)
+  }
   done();
 });
 

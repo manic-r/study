@@ -2,6 +2,7 @@
  * 解析文件，定义模块组件层级，得到相应数据。
  * 优先获取组件中的doc，加载doc名称当作语言类型，一切以其为主。（以doc的配置创建左侧菜单）
  */
+// require('../script.fun.inject')
 const path = require('path');
 const fs = require('fs-extra');
 const handleDemoMd = require('./utils/parse-demo-md');
@@ -19,9 +20,16 @@ const logger = require('./debugger/console-write');
 // TODO:
 
 function generate(target) {
-  // 复制组件发布工程
-  console.log('showCasePath', showCasePath)
-  fs.copySync(path.resolve(__dirname, `./_site/doc`), showCasePath);
+  if (!target) {
+    // 未传入组件名称情况
+    // 复制组件发布工程
+    fs.copySync(path.resolve(__dirname, `./_site/doc`), showCasePath);
+  } else {
+    // 传入指定组件情况
+    // 删除对应组件生成的包
+    const targetBuildPath = path.join(showCasePath, projectConfig.root, target);
+    fs.removeSync(targetBuildPath);
+  }
   /**
    * 解析组件库, `components`为组件库
    * 解析目录结构：
@@ -45,7 +53,7 @@ function generate(target) {
    * 即：每当components下有一个子集文件夹${name}则会有一个对应的Key: name
    */
   const componentsMap = {};
-  rootDir.forEach(componentName => {
+  rootDir.filter(name => !target || target === name).forEach(componentName => {
     // 获取每一行的组件文件夹路径
     const componentDirPath = path.join(rootPath, `./${componentName}`);
     // 判断组件路径是否是文件夹，如果是进行解析
@@ -80,8 +88,6 @@ function generate(target) {
             // 读取TS文件内容
             const demoTsContext = fs.readFileSync(path.join(demoDirPath, demoName), { encoding: 'utf8' });
             resultMap[primaryKey] = { ts: demoTsContext };
-            // 写入文件地址
-            // $$readFileSync(path.join(showCasePath, `./app/${componentName}/${primaryKey}.ts`), resultMap[primaryKey].ts);
             return resultMap;
           }
           // .TS文件处理
@@ -91,8 +97,6 @@ function generate(target) {
             // 读取Module文件内容
             const moduleContext = fs.readFileSync(path.join(demoDirPath, demoName), { encoding: 'utf8' });
             const resultMap = { module: moduleContext };
-            // 写入文件地址
-            // $$readFileSync(path.join(showCasePath, `./app/${componentName}/module.ts`), resultMap.module);
             return resultMap;
           }
           // .module.ts文件处理
@@ -119,11 +123,9 @@ function generate(target) {
     }
   })
 
+  logger.write('componentsMap.json', componentsMap)
+
   generateDemo(showCasePath, componentsMap);
-  // TODO:
-  logger.write('componentsMap.json', JSON.stringify(componentsMap, null, 2));
-  logger.write('componentsMap.ts', componentsMap.table.components.basic.ts);
-  // TODO:
 }
 
 module.exports = generate;

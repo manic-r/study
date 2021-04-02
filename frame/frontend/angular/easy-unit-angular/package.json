@@ -8,21 +8,12 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 0 --open",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
     "gulp": "gulp",
-    "gulp:task": "gulp --tasks",
-    "gulp:start": "gulp start:dev",
-    "gulp:clean": "gulp clean:logs",
-    "gulp:v": "gulp --version",
+    "start": "gulp start:dev",
     "init": "node scripts/site/generate-site.js"
   },
   "scriptsDes": {
-    "gulp:task": "展示gulp任务队列",
-    "gulp:start": "启动doc项目"
+    "start": "启动doc项目"
   },
   "private": true,
   "dependencies": {},
