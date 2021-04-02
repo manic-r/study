@@ -35,6 +35,3 @@ task('help', (done: Function) => {
 });
 
 task('default', parallel('help'));
-
-const date: Date = new Date();
-console.log(date, date)

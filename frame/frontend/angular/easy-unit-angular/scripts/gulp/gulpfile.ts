@@ -1,7 +1,7 @@
-import './tasks/default';
-import { task } from 'gulp';
+import { series, task } from 'gulp';
 
-task('start:dev', (fun: Function) => {
-  console.log(fun.toString())
-  fun();
-})
+import './tasks/default';
+import './tasks/clean';
+import './tasks/site';
+
+task('start:dev', series('clean', series('start:dev')))

@@ -2,13 +2,12 @@
  * 解析文件，定义模块组件层级，得到相应数据。
  * 优先获取组件中的doc，加载doc名称当作语言类型，一切以其为主。（以doc的配置创建左侧菜单）
  */
-require('./script.fun.inject');
 const path = require('path');
 const fs = require('fs-extra');
 const handleDemoMd = require('./utils/parse-demo-md');
 const handleDocMd = require('./utils/parse-doc-md');
 const merge = require('deepmerge');
-const { $$readFileSync } = require('./utils/file-create');
+// const { $$readFileSync } = require('./utils/file-create');
 const nameWithoutSuffix = require('./utils/name-without-suffix');
 const projectConfig = require('./project.config');
 const generateDemo = require('./utils/generate-demo');
@@ -21,6 +20,7 @@ const logger = require('./debugger/console-write');
 
 function generate(target) {
   // 复制组件发布工程
+  console.log('showCasePath', showCasePath)
   fs.copySync(path.resolve(__dirname, `./_site/doc`), showCasePath);
   /**
    * 解析组件库, `components`为组件库
@@ -38,7 +38,7 @@ function generate(target) {
    *       - ${语言Code2}.md
    *     - style   ->    组件样式
    */
-  const rootPath = path.resolve(__dirname, `../../components`);
+  const rootPath = projectConfig.component.base;
   const rootDir = fs.existsSync(rootPath) ? fs.readdirSync(rootPath) : [];
   /**
    * 存储每一个components对应的组件。
@@ -118,14 +118,12 @@ function generate(target) {
       componentsMap[componentName] = merge(componentsMap[componentName], { docs: docMap });
     }
   })
-  
+
   generateDemo(showCasePath, componentsMap);
   // TODO:
   logger.write('componentsMap.json', JSON.stringify(componentsMap, null, 2));
   logger.write('componentsMap.ts', componentsMap.table.components.basic.ts);
   // TODO:
 }
-
-generate()
 
 module.exports = generate;

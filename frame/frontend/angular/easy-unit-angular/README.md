@@ -31,3 +31,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 [常用工具插件地址](https://segmentfault.com/a/1190000037656240)
+
+## 说明
+操作建议使用管理员身份进行操作
+命令会操作本地文件的读写，使用普通模式时文件被占用会出现`Error: EPERM: operation not permitted, stat`异常，重试即可。
