@@ -52,6 +52,8 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "marked": "^2.0.1",
     "moment": "^2.29.1",
+    "ng-devui": "^11.0.0",
+    "ng-zorro-antd": "^11.3.0",
     "node-prismjs": "^0.1.2",
     "parse5": "^6.0.1",
     "protractor": "~7.0.0",
