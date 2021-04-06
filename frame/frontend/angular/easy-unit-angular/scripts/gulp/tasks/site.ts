@@ -1,15 +1,17 @@
 import { parallel, series, task, watch } from "gulp";
 import { execNodeTask } from '../util/task-handle';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { debounce } from 'lodash';
 import { green, yellow } from "chalk";
 
 const detectPort = require('detect-port');
+const fs = require('fs-extra');
 const siteGenerate = require('../../site/generate-site');
 const projectConfig = require('../../site/project.config');
 
 const docsGlob = join(projectConfig.component.base, `**/doc/*.+(md|txt)`);
 const demoGlob = join(projectConfig.component.base, `**/demo/*.+(md|ts)`);
+const siteGlob = resolve(__dirname, `../../site/_site/doc`);
 
 task('watch:site', () => {
   const globs = [docsGlob, demoGlob].map(p => p.replace(/\\/g, '/'));
@@ -27,6 +29,19 @@ task('watch:site', () => {
   )
 });
 
+task('watch:doc-web', () => {
+  const globs = (siteGlob + '/**').replace(/\\/g, '/');
+  watch(globs).on(
+    'change',
+    debounce(path => {
+      const place = path.replace(siteGlob, '').replace(/\\/g, '/').replace('/', '');
+      const output = join(process.cwd(), projectConfig.output);
+      console.log(yellow('检测到模板代码 '), green(place), yellow(' 变更, 已同步.'))
+      fs.copySync(path, join(output, place));
+    }, 3000)
+  )
+})
+
 task('init:site', done => {
   try {
     siteGenerate();
@@ -42,4 +57,4 @@ task('serve:site', done => {
   })
 })
 
-task('start:dev', series('init:site', parallel('watch:site', 'serve:site')));
+task('start:dev', series('init:site', parallel('watch:site', 'watch:doc-web', 'serve:site')));
