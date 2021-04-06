@@ -31,7 +31,8 @@
               "site/assets"
             ],
             "styles": [
-              "site/styles.scss"
+              "site/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.css"
             ],
             "scripts": []
           },
