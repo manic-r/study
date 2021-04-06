@@ -6,6 +6,7 @@ import { HttpType, TranslateYamlLoader } from '../loaders/translate-yaml-loader'
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 export function TranslateYamlFactory(http: HttpType) {
   return new TranslateYamlLoader(http, './assets/i18n', 'language.', 'yaml');
@@ -20,6 +21,7 @@ export function TranslateYamlFactory(http: HttpType) {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

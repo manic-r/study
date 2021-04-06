@@ -37,8 +37,8 @@ task('init:site', done => {
 });
 
 task('serve:site', done => {
-  detectPort(4200).then((port: number) => {
-    execNodeTask('@angular/cli', 'ng', ['serve', '--port', port === 4200 ? '4200' : '0', '--open'])(done);
+  detectPort(4201).then((port: number) => {
+    execNodeTask('@angular/cli', 'ng', ['serve', '--port', port === 4201 ? '4201' : '0', '--open'])(done);
   })
 })
 
