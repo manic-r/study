@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-@CrossOrigin(origins = {"http://172.28.3.19:4201", "null"})
+//https://www.cnblogs.com/mmzs/p/9167743.html
+//https://blog.csdn.net/zhangpower1993/article/details/89016503
 @RestController
 @RequestMapping("/file")
 public class FileUploadController {
@@ -16,9 +17,14 @@ public class FileUploadController {
     private String fileRootPath;
 
     @PostMapping("/upload")
-    public void fileUpload(@RequestParam("files") MultipartFile[] files) {
+    public void fileUpload(@RequestParam("files") MultipartFile[] files) throws IOException {
+        File dir = new File(fileRootPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         String filePath = "";
         // 多文件上传
+        File row = null;
         for (MultipartFile file : files){
             // 上传简单文件名
             String originalFilename = file.getOriginalFilename();
@@ -27,13 +33,12 @@ public class FileUploadController {
                     .append(System.currentTimeMillis())
                     .append(originalFilename)
                     .toString();
-            System.err.println(filePath);
-            try {
-                // 保存文件
-                file.transferTo(new File(filePath));
-            } catch (IOException e) {
-                e.printStackTrace();
+            row = new File(filePath);
+            // https://www.jianshu.com/p/d8666f2e698f
+            if (!row.exists()) {
+                row.mkdirs();
             }
+            file.transferTo(row);
         }
     }
 }

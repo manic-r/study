@@ -1,5 +1,5 @@
 <div class="clearfix">
-  <nz-upload nzName="files" nzAction="http://172.28.3.19:8080/file/upload" nzListType="picture-card"
+  <nz-upload nzName="files" nzAction="/file/upload" nzListType="picture-card" nzDirectory
     [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview">
     <div>
       <i nz-icon nzType="plus"></i>

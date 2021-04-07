@@ -8,6 +8,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "build": "ng build",
     "gulp": "gulp",
     "start": "gulp start:dev",
     "init": "node scripts/site/generate-site.js"
