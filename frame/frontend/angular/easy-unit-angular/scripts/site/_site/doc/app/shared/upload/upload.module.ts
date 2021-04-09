@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { NzComponentModules } from '../component.module';
+import { NGComponentModules, NzComponentModules } from '../component.module';
 import { UploadComponent } from './upload.component';
 
 @NgModule({
   declarations: [UploadComponent],
   exports: [UploadComponent],
-  imports: [...NzComponentModules],
+  imports: [...NzComponentModules, ...NGComponentModules],
   providers: [],
 })
 export class UploadModule { }

@@ -1,11 +1,16 @@
 package com.study.cn.rest;
 
+import com.study.cn.entity.response.FileSaveResponse;
+import com.study.cn.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.thymeleaf.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 //https://www.cnblogs.com/mmzs/p/9167743.html
 //https://blog.csdn.net/zhangpower1993/article/details/89016503
@@ -40,5 +45,14 @@ public class FileUploadController {
             }
             file.transferTo(row);
         }
+    }
+
+    @PostMapping("/test/upload")
+    public List<FileSaveResponse> fileUploadTest(MultipartHttpServletRequest request) {
+        List<MultipartFile> files = request.getFiles("files");
+        String fileDir = request.getParameter("fileDir");
+        StringBuilder fileOutput = new StringBuilder(fileRootPath)
+                .append("\\").append(StringUtils.isEmpty(fileDir) ? "": (fileDir + "\\"));
+        return FileUtils.save(files, fileOutput.toString());
     }
 }

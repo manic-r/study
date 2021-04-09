@@ -1,3 +1,5 @@
+server:
+  port: 8081
 
 spring:
   servlet:
@@ -8,4 +10,4 @@ spring:
 
 file:
   root:
-    path: "C:\\MyCore\\images\\"
+    path: "C:\\MyCore\\images"

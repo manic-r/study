@@ -1,14 +1,7 @@
 import { Component } from "@angular/core";
 import { NzUploadFile } from "ng-zorro-antd/upload";
-
-function getBase64(file: File): Promise<string | ArrayBuffer | null> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'demo-eu-upload',
@@ -17,16 +10,39 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
 })
 export class UploadComponent {
 
-  fileList: NzUploadFile[] = [
-  ];
-  previewImage: string | undefined = '';
-  previewVisible = false;
+  URL: string = 'http://localhost:8081/file/test/upload';
+  autoUpload: boolean = false;
+  fileList: NzUploadFile[] = [];
+  uploading: boolean = false;
+  fileDir: string = '';
+  splitStr: string = 'EU-SUPER-SPLIT-OF-FILE';
 
-  handlePreview = async (file: NzUploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj!);
+  constructor(private http: HttpClient) {
+
+  }
+
+  beforeUpload = (file: NzUploadFile | NzUploadFile[]) => {
+    if (!this.autoUpload) {
+      this.fileList = this.fileList.concat(file);
     }
-    this.previewImage = file.url || file.preview;
-    this.previewVisible = true;
-  };
+    return this.autoUpload;
+  }
+
+  handleUpload() {
+    const formData = new FormData();
+    formData.append('fileDir', this.fileDir);
+    this.fileList.filter(file => !file.status || file.status === 'error').forEach((file: any) => {
+      formData.append('files', file);
+    });
+    console.log(formData.getAll('files'))
+    const req = new HttpRequest('POST', this.URL, formData);
+    this.http.request(req).pipe(filter(e => e instanceof HttpResponse))
+      .toPromise()
+      .then((res: any) => res.body)
+      .then(res => console.log(res));
+  }
+
+  watch = () => {
+    console.log(this.fileList)
+  }
 }
