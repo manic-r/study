@@ -1,8 +1,7 @@
+import { SideModule } from './side/side.module';
 import { NgModule } from "@angular/core";
 import { DComponentModules, NzComponentModules } from "./component.module";
 import { HeaderModule } from "./header/header.module";
-import { MoreUploadModule } from "./more-file-upload/more-upload.module";
-import { UploadModule } from "./upload/upload.module";
 
 @NgModule({
   declarations: [],
@@ -12,8 +11,7 @@ import { UploadModule } from "./upload/upload.module";
   ],
   exports: [
     HeaderModule,
-    UploadModule,
-    MoreUploadModule,
+    SideModule,
     ...NzComponentModules,
     ...DComponentModules
   ],

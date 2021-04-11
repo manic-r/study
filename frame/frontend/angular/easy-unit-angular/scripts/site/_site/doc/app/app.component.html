@@ -1,9 +1,18 @@
 <nz-layout>
-  <!-- <demo-eu-header></demo-eu-header> -->
-  <router-outlet></router-outlet>
-  文件夹上传：
-  <demo-eu-upload></demo-eu-upload>
-  <br/><br/>
-  多文件统一提交：
-  <demo-eu-more-upload></demo-eu-more-upload>
+  <demo-eu-header></demo-eu-header>
+  <nz-layout style="margin-top: 74px;">
+    <nz-sider>
+      <demo-eu-side></demo-eu-side>
+    </nz-sider>
+    <nz-layout>
+      <!-- <nz-breadcrumb>
+        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      </nz-breadcrumb> -->
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
 </nz-layout>
