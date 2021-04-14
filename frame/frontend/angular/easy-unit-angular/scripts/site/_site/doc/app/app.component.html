@@ -1,18 +1,6 @@
-<nz-layout>
+<div class="layout-parent">
   <demo-eu-header></demo-eu-header>
-  <nz-layout style="margin-top: 74px;">
-    <nz-sider>
-      <demo-eu-side></demo-eu-side>
-    </nz-sider>
-    <nz-layout>
-      <!-- <nz-breadcrumb>
-        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-        <nz-breadcrumb-item>List</nz-breadcrumb-item>
-        <nz-breadcrumb-item>App</nz-breadcrumb-item>
-      </nz-breadcrumb> -->
-      <nz-content>
-        <router-outlet></router-outlet>
-      </nz-content>
-    </nz-layout>
-  </nz-layout>
-</nz-layout>
+  <div class="layout-body" nz-row>
+    <demo-eu-side style="width: 280px;" nz-col nzXs="0" nzSm="4"></demo-eu-side>
+  </div>
+</div>

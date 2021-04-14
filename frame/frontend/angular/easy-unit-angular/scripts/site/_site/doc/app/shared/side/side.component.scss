@@ -1,0 +1,39 @@
+@import '../../site-var';
+
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+  height: 8px;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #adb0b8;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.sidebar-wrapper {
+  top: calc( #{$header-height} + #{$header-body-span});
+  bottom: 0;
+  max-width: 280px;
+  min-height: 100%;
+  position: fixed;
+  z-index: 10;
+  overflow-y: hidden;
+  border-right: 1px solid #dfe1e6;
+
+  &:hover {
+    overflow-y: auto;
+  }
+  transition: all 0.3s;
+}
+
+.menu {
+  width: 280px - $scrollbar-width;
+}
