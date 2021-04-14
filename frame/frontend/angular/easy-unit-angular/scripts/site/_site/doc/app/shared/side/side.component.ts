@@ -9,7 +9,7 @@ export class SideComponent {
 
   restrictOneOpen = false;
   accordionTypeEmbed = false;
-  menu = [{
+  sideMenuList = [{
     title: 'Content 1',
     children: [
       { title: 'Child Content 1' },

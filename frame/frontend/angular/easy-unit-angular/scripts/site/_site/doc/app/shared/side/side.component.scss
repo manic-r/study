@@ -19,10 +19,10 @@
 }
 
 .sidebar-wrapper {
-  top: calc( #{$header-height} + #{$header-body-span});
+  top: calc(#{$header-height} + #{$header-body-span});
   bottom: 0;
-  max-width: 280px;
-  min-height: 100%;
+  width: 280px + $scrollbar-width;
+  min-height: calc(100% - #{$header-height} - #{$header-body-span});
   position: fixed;
   z-index: 10;
   overflow-y: hidden;
@@ -35,5 +35,5 @@
 }
 
 .menu {
-  width: 280px - $scrollbar-width;
+  width: 260px;
 }
