@@ -1,15 +1,3 @@
 <div class="sidebar-wrapper">
-  <d-accordion [data]="sideMenuList" class="menu" [restrictOneOpen]="restrictOneOpen" (itemClick)="itemClick($event)"
-    (menuToggle)="menuToggle($event)" (activeItemChange)="log($event)"
-    [accordionType]="accordionTypeEmbed ? 'embed' : 'normal'"></d-accordion>
-  <!-- <ul class="sidebar-menu">
-    <li *ngFor="let item of sideMenuList" class="sidebar-menu-item" routerLinkActive="sidebar-menu-item-selected">
-      <a *ngIf="item.linkType === 'routerLink'" [routerLink]="item.path">
-        {{ item.name }}
-      </a>
-      <a *ngIf="item.linkType === 'href'" [href]="item.path">
-        {{ item.name }}
-      </a>
-    </li>
-  </ul> -->
+  <d-accordion id="menu" [data]="sideMenuList" class="menu"></d-accordion>
 </div>
