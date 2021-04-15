@@ -33,9 +33,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const menu: HTMLElement = <HTMLElement>document.getElementById('menu') || {};
     // 设置插件宽度，防止滚动条出现占用位置
-    // menu?.parentElement?.clientWidth
-    // menu.parentElement
+    const parentWidth: number = menu?.parentElement?.clientWidth || 0;
+    menu?.setAttribute('style', `width: ${parentWidth}px`);
     // 去掉插件外边框
-    // (menu.firstChild as HTMLElement)?.setAttribute('style', 'box-shadow: none');
+    (menu.firstChild as HTMLElement)?.setAttribute('style', 'box-shadow: none');
   }
 }
