@@ -9,10 +9,6 @@ body {
   min-height: 100vh;
 }
 
-.layout-side {
-  // width: 280px;
-}
-
 .layout-body {
   margin-top: $header-body-span;
   min-height: calc(100vh - #{$header-body-span} - #{$header-height});
