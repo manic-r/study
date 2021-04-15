@@ -1,7 +1,9 @@
 <div class="layout-parent">
   <demo-eu-header></demo-eu-header>
-  <demo-eu-side></demo-eu-side>
   <div class="layout-body" nz-row>
-    11
+    <div class="layout-side" nz-col [nzSpan]="5">
+      <d-accordion #menu id="menu" class="menu" [data]="sideMenuList"></d-accordion>
+    </div>
+    <div class="layout-context" nz-col [nzSpan]="19"></div>
   </div>
 </div>
