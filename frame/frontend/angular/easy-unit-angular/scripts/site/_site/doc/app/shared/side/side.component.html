@@ -1,3 +1,5 @@
-<div class="sidebar-wrapper">
-  <d-accordion id="menu" [data]="sideMenuList" class="menu"></d-accordion>
+<div nz-row>
+  <div nz-col [nzSpan]="span || 0" class="sidebar-wrapper">
+    <d-accordion id="menu" [data]="sideMenuList"></d-accordion>
+  </div>
 </div>

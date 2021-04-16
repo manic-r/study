@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./side.component.scss']
 })
 export class SideComponent implements OnInit, AfterViewInit {
+
+  @Input('nzSpan')
+  span: number = 4;
 
   sideMenuList: any = [];
 
@@ -19,7 +22,12 @@ export class SideComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const firstChild = document.getElementById('menu')?.children[0];
-    firstChild?.setAttribute('style', 'box-shadow: none');
+    const menu: HTMLElement = <HTMLElement>document.getElementById('menu') || {};
+    // 设置插件宽度，防止滚动条出现占用位置
+    // const parentElement: HTMLElement = <HTMLElement>document.getElementsByTagName('demo-eu-side')[0] || {};
+    // const parentWidth: number = parentElement?.scrollWidth || 0;
+    // menu?.setAttribute('style', `width: ${parentWidth - 9}px`);
+    // 去掉插件外边框
+    (menu.firstChild as HTMLElement)?.setAttribute('style', 'box-shadow: none');
   }
 }

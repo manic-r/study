@@ -21,7 +21,6 @@
 .sidebar-wrapper {
   top: calc(#{$header-height} + #{$header-body-span});
   bottom: 0;
-  width: $menu-width + $scrollbar-width;
   min-height: calc(100% - #{$header-height} - #{$header-body-span});
   position: fixed;
   z-index: 10;
@@ -32,8 +31,4 @@
     overflow-y: auto;
   }
   transition: all 0.3s;
-}
-
-.menu {
-  width: $menu-width - 1px;
 }
