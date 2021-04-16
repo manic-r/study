@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 import { AccordionModule } from 'ng-devui/accordion';
 
@@ -21,7 +22,8 @@ export const NzComponentModules = [
   NzSwitchModule,
   NzInputModule,
   NzGridModule,
-  NzCardModule
+  NzCardModule,
+  NzSpaceModule
 ];
 
 export const DComponentModules = [
