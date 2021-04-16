@@ -3,11 +3,11 @@
 body {
   width: 100%;
   height: 100vh;
-  background-color: #f0f2f5;
 }
 
 .layout-parent {
   min-height: 100vh;
+  background-color: $background-color;
 }
 
 .layout-breadcrumb {
@@ -15,7 +15,8 @@ body {
   top: calc(#{$header-height} + #{$header-body-span});
   width: 100%;
   height: $breadcrumb-height;
-  background: #f0f2f5;
+  background: $background-color;
+  z-index: 9;
 
   div:nth-child(2) {
     padding: 0 20px;
@@ -24,23 +25,15 @@ body {
 
 .layout-content {
   width: 100%;
-  height: 40px;
-  background-color: aqua;
+  min-height: 100%;
+  background-color: $background-color;
+
+  div:nth-child(2) {
+    margin-top: calc(#{$header-height} + #{$header-body-span} + #{$breadcrumb-height});
+    padding: 0 20px;
+    // div:nth-child(1) {
+    //   border-radius: 2px;
+    //   background: #fff;
+    // }
+  }
 }
-
-// .layout-body {
-//   // padding: 20px;
-//   // height: calc(100vh - #{$header-body-span} - #{$header-height} - #{$breadcrumb-height});
-//   top: calc(#{$header-height} + #{$header-body-span} + #{$breadcrumb-height});
-//   bottom: 0;
-//   right: 0;
-//   width: 100%;
-//   position: fixed;
-//   // overflow-y: hidden;
-//   // border-right: 1px solid #dfe1e6;
-
-//   // &:hover {
-//   //   overflow-y: auto;
-//   // }
-//   // transition: all 0.3s;
-// }

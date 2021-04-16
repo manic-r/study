@@ -1,18 +1,23 @@
 <div nz-row class="layout-parent">
+  <div nz-row class="layout-content">
+    <div nz-col [nzSpan]="4"></div>
+    <div nz-col [nzSpan]="20">
+      <nz-card [nzBordered]="false" nzTitle="Card title" [nzExtra]="extraTemplate">
+        <div *ngFor="let item of list">{{item}} <br></div>
+      </nz-card>
+      <div style="margin-top: 50px; width: 100%">
+        <!-- 脚步👣 -->
+      </div>
+    </div>
+  </div>
   <demo-eu-header></demo-eu-header>
   <demo-eu-side nz-col [nzSpan]="4"></demo-eu-side>
   <div class="layout-breadcrumb" nz-row>
     <div nz-col [nzSpan]="4"></div>
     <div nz-col [nzSpan]="20">11111111111</div>
   </div>
-  <!-- <div class="layout-content">
-
-  </div> -->
-  <!-- <div class="layout-content" nz-col [nzSpan]="20">
-    <nz-layout nz-col [nzSpan]="20" class="layout-body">
-      <nz-content nz-col [nzSpan]="24">
-        <router-outlet></router-outlet>
-      </nz-content>
-    </nz-layout>
-  </div> -->
 </div>
+
+<ng-template #extraTemplate>
+  <a>More</a>
+</ng-template>

@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'easy-unit-angular';
   lang: string;
+  // TODO:
+  list: string[] = [...new Array(1000)];
 
   constructor(
     private translate: TranslateService
