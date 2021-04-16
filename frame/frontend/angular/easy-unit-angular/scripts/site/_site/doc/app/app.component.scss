@@ -10,6 +10,7 @@ body {
 }
 
 .layout-body {
-  margin-top: $header-body-span;
+  margin-top: $header-body-span + $header-height;
+  padding: 20px;
   min-height: calc(100vh - #{$header-body-span} - #{$header-height});
 }
