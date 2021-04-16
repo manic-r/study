@@ -8,7 +8,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { CommonModule } from '@angular/common';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAffixModule } from 'ng-zorro-antd/affix';
 
 import { AccordionModule } from 'ng-devui/accordion';
 
@@ -21,7 +22,8 @@ export const NzComponentModules = [
   NzSwitchModule,
   NzInputModule,
   NzGridModule,
-  NzMenuModule
+  NzCardModule,
+  NzAffixModule
 ];
 
 export const DComponentModules = [
