@@ -5,7 +5,7 @@
   <div class="layout-breadcrumb" nz-row>
     <div nz-col [nzSpan]="sideSpan"></div>
     <div nz-col [nzSpan]="24 - sideSpan" nz-space nzAlign="center">
-      <button *nzSpaceItem nz-button nzType="primary">Button</button>
+      <!-- TODO: 面包屑位置 -->
     </div>
   </div>
   <!--左侧菜单-->
@@ -18,10 +18,7 @@
     <div nz-row>
       <div nz-col nzFlex="20px"></div>
       <nz-card nz-col nzFlex="auto" [nzBordered]="false" class="layout-content">
-        12313asd <input type="checkbox" [(ngModel)]="showList">
-        <div *ngIf="showList">
-          <div *ngFor="let item of list">{{item}} <br></div>
-        </div>
+        <router-outlet></router-outlet>
       </nz-card>
       <div nz-col nzFlex="20px"></div>
     </div>

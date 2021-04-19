@@ -11,7 +11,8 @@
     "build": "ng build",
     "gulp": "gulp",
     "start": "gulp start:dev",
-    "init": "node scripts/site/generate-site.js"
+    "init": "node scripts/site/generate-site.js",
+    "test": "node test.js"
   },
   "scriptsDes": {
     "start": "启动doc项目"

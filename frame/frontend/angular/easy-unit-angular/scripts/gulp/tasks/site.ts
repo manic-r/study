@@ -52,8 +52,19 @@ task('init:site', done => {
 });
 
 task('serve:site', done => {
-  detectPort(4201).then((port: number) => {
-    execNodeTask('@angular/cli', 'ng', ['serve', /* '--host', '172.28.3.19', */ '--port', port === 4201 ? '4201' : '0', '--open'])(done);
+  const argv = process.argv.splice(3);
+  const portIndex = argv.lastIndexOf('--port');
+  const port = portIndex === -1 ? 4200 : argv[portIndex + 1];
+  detectPort(port).then((p: number) => {
+    if (port != p) {
+      if (portIndex === -1) {
+        argv.push(...['--port', '0']);
+      } else {
+        argv[portIndex + 1] = '0';
+      }
+    }
+    argv.unshift('serve');
+    execNodeTask('@angular/cli', 'ng', argv)(done);
   })
 })
 
