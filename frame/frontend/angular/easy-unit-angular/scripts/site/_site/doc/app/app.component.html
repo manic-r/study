@@ -1,4 +1,4 @@
-<div nz-row style="height: 100vh;">
+<div nz-row class="layout-parent">
   <!--头部-->
   <demo-eu-header></demo-eu-header>
   <!--面包屑-->
@@ -9,24 +9,29 @@
     </div>
   </div>
   <!--左侧菜单-->
-  <div nz-col [nzSpan]="sideSpan" style="width: 100%; min-height: 100%; background-color: darkgoldenrod;">
-    <demo-eu-side nz-col [nzSpan]="4"></demo-eu-side>
+  <div nz-col [nzSpan]="sideSpan" class="layout-side">
+    <demo-eu-side nz-col [nzSpan]="sideSpan"></demo-eu-side>
   </div>
   <!--内容-->
-  <div nz-col [nzSpan]="24 - sideSpan"
-    style="width: 100%; min-height: 100%; background-color: blueviolet; position: relative;">
+  <div nz-col [nzSpan]="24 - sideSpan" class="layout-body">
     <div class="body-margin"></div>
-    <div style="width: 100%; padding: 0 20px;">
-      <nz-card [nzBordered]="false" class="layout-content">
+    <div nz-row>
+      <div nz-col nzFlex="20px"></div>
+      <nz-card nz-col nzFlex="auto" [nzBordered]="false" class="layout-content">
         12313asd <input type="checkbox" [(ngModel)]="showList">
         <div *ngIf="showList">
           <div *ngFor="let item of list">{{item}} <br></div>
         </div>
       </nz-card>
+      <div nz-col nzFlex="20px"></div>
     </div>
     <!--页脚-内容间隔-->
-    <div style="height: 82px;"></div>
+    <div class="footer-span"></div>
     <!--页脚-->
-    <div style="background-color: deepskyblue; width: 100%; height: 60px; position: absolute; bottom: 0;"></div>
+    <div nz-col [nzSpan]="24" class="layout-footer">
+      <div *ngIf="showList">
+        <div *ngFor="let item of list">{{item}} <br></div>
+      </div>
+    </div>
   </div>
 </div>

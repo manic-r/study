@@ -23,23 +23,20 @@ body {
   }
 }
 
-.layout-body {
-  width: 100%;
+.layout-side {
+  // width: 100%;
   min-height: 100%;
-  background-color: $background-color;
-
-  .content {
-    // margin-top: 20px;
-    div:nth-child(1) {
-      padding: 0 $padding-px;
-
-    }
-  }
 }
 
-.body-margin{
-  width: 100%;
+.body-margin {
+  // width: 100%;
   height: $breadcrumb-height + $header-height;
+}
+
+.layout-body {
+  // width: 100%;
+  // min-height: 100%;
+  position: relative;
 }
 
 .layout-content {
@@ -48,24 +45,19 @@ body {
 
 .layout-footer {
   width: 100%;
-  padding: 0 $padding-px;
-  min-height: $footer-height;
+  height: $footer-height;
+  position:absolute;
+  bottom: 0;
   background-color: #114d80;
   font-size: 12px;
   font-family: auto;
   color: #fff;
   font-weight: 400;
+  padding: 0 20px;
 }
 
 .footer-span {
   width: 100%;
-  height: $footer-span;
+  height: $footer-span + $footer-height;
 }
 
-.complement-footer{
-  @extend .layout-footer;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
