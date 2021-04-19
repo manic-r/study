@@ -26,12 +26,9 @@
       <div nz-col nzFlex="20px"></div>
     </div>
     <!--页脚-内容间隔-->
-    <div class="footer-span"></div>
+    <div #footerSpan class="footer-span"></div>
     <!--页脚-->
-    <div nz-col [nzSpan]="24" class="layout-footer">
-      <div *ngIf="showList">
-        <div *ngFor="let item of list">{{item}} <br></div>
-      </div>
+    <div #footer nz-col [nzSpan]="24" class="layout-footer">
     </div>
   </div>
 </div>

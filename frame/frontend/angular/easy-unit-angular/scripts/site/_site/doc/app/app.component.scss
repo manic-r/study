@@ -24,18 +24,14 @@ body {
 }
 
 .layout-side {
-  // width: 100%;
   min-height: 100%;
 }
 
 .body-margin {
-  // width: 100%;
   height: $breadcrumb-height + $header-height;
 }
 
 .layout-body {
-  // width: 100%;
-  // min-height: 100%;
   position: relative;
 }
 
@@ -45,7 +41,7 @@ body {
 
 .layout-footer {
   width: 100%;
-  height: $footer-height;
+  min-height: $footer-height;
   position:absolute;
   bottom: 0;
   background-color: #114d80;
@@ -53,11 +49,10 @@ body {
   font-family: auto;
   color: #fff;
   font-weight: 400;
-  padding: 0 20px;
+  padding: 5px 20px;
 }
 
 .footer-span {
-  width: 100%;
   height: $footer-span + $footer-height;
 }
 
