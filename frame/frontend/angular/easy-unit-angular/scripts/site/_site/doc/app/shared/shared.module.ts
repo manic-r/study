@@ -1,6 +1,6 @@
 import { SideModule } from './side/side.module';
 import { NgModule } from "@angular/core";
-import { DComponentModules, NzComponentModules } from "./component.module";
+import { DComponentModules, NzComponentModules, NGComponentModules } from './component.module';
 import { HeaderModule } from "./header/header.module";
 
 @NgModule({
@@ -13,7 +13,8 @@ import { HeaderModule } from "./header/header.module";
     HeaderModule,
     SideModule,
     ...NzComponentModules,
-    ...DComponentModules
+    ...DComponentModules,
+    ...NGComponentModules
   ],
   providers: [],
 })

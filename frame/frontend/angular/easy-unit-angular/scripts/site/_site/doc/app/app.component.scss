@@ -32,12 +32,18 @@ body {
     // margin-top: 20px;
     div:nth-child(1) {
       padding: 0 $padding-px;
+
     }
   }
 }
 
+.body-margin{
+  width: 100%;
+  height: $breadcrumb-height + $header-height;
+}
+
 .layout-content {
-  min-height: calc(100vh - #{$footer-span} - #{$footer-height} - 6px);
+  min-height: calc(100vh - #{$footer-span} - #{$footer-height} - 6px - #{$breadcrumb-height} - #{$header-height});
 }
 
 .layout-footer {
@@ -49,10 +55,17 @@ body {
   font-family: auto;
   color: #fff;
   font-weight: 400;
-  bottom: 0;
 }
 
 .footer-span {
   width: 100%;
   height: $footer-span;
+}
+
+.complement-footer{
+  @extend .layout-footer;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
