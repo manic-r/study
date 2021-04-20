@@ -10,6 +10,7 @@ module.exports = {
   output: easyUnitDocProject.sourceRoot,
   root: easyUnitDocProject.root,
   logOutput: path.join(baseUrl, 'logs'),
+  base: baseUrl,
   component: {
     dir: component,
     // 组件基本位置

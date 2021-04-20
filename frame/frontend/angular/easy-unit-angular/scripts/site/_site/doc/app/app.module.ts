@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImportModules } from './import.module';
 
 export function TranslateYamlFactory(http: HttpType) {
   return new TranslateYamlLoader(http, './assets/i18n', 'language.', 'yaml');
@@ -22,6 +23,7 @@ export function TranslateYamlFactory(http: HttpType) {
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    ...ImportModules,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

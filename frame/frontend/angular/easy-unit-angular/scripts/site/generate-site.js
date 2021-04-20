@@ -2,7 +2,7 @@
  * 解析文件，定义模块组件层级，得到相应数据。
  * 优先获取组件中的doc，加载doc名称当作语言类型，一切以其为主。（以doc的配置创建左侧菜单）
  */
-// require('../script.fun.inject')
+require('../script.fun.inject');
 const path = require('path');
 const fs = require('fs-extra');
 const handleDemoMd = require('./utils/parse-demo-md');
@@ -126,6 +126,10 @@ function generate(target) {
   logger.write('componentsMap.json', componentsMap)
 
   generateDemo(showCasePath, componentsMap);
+}
+
+if (require.main === module) {
+  generate();
 }
 
 module.exports = generate;

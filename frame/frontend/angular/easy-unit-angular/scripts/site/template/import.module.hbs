@@ -1,0 +1,9 @@
+{{#each info}}
+import { {{this.name}}IndexModule } from './{{this.basename}}/index.module';
+{{/each}}
+
+export const ImportModules = [
+  {{#each info}}
+  {{this.name}}IndexModule,
+  {{/each}}
+];

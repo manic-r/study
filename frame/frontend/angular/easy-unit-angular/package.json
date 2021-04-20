@@ -10,7 +10,7 @@
     "ng": "ng",
     "build": "ng build",
     "gulp": "gulp",
-    "start": "gulp start:dev",
+    "start": "gulp start:dev --open",
     "init": "node scripts/site/generate-site.js",
     "test": "node test.js"
   },
