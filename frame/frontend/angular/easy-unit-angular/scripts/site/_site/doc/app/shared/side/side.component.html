@@ -1,5 +1,16 @@
 <div nz-row>
   <div nz-col [nzSpan]="span || 0" class="sidebar-wrapper">
-    <d-accordion id="menu" [data]="sideMenuList"></d-accordion>
+    <d-accordion id="menu"
+      [data]="sideMenuList"
+      [menuItemTemplate]="menuTemplate"
+      [itemTemplate]="itemTemplate"
+    ></d-accordion>
   </div>
 </div>
+
+<ng-template #menuTemplate let-item="item">
+  {{ item.title | translate }}
+</ng-template>
+<ng-template #itemTemplate let-item="item">
+  {{ item.title | translate }}
+</ng-template>

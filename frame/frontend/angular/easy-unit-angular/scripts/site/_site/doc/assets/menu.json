@@ -1,10 +1,10 @@
 [
   {
-    "title": "Content 1",
+    "title": "table",
     "open": true,
     "children": [
       {
-        "title": "Child Content 1"
+        "title": "a.b.c.d"
       },
       {
         "title": "Child Content 2"

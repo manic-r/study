@@ -13,7 +13,9 @@ export class SideComponent implements OnInit, AfterViewInit {
 
   sideMenuList: any = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient
+  ) {
 
   }
 
