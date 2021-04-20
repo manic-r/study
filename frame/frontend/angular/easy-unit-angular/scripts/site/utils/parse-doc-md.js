@@ -8,7 +8,7 @@
  * subtitle: ${副标题（可以不设置）}
  * language: ${语言种类（与demo中的语言类型对应）} *
  * cover: ${首页列表中展示时显示的图片}
- * divider: ${自定义分割线} -> false 时为不设定 （默认： `~~~~~~~~~~divider~~~~~~~~~~`）
+ * divider: ${自定义分割线} -> false 时为不设定 （默认： `!==========divider==========!`）
  * waterfall: ${boolean}  ({ true: 由上到下, false: 由下到上 }, 默认true)
  * ---
  * ${组件描述}

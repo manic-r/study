@@ -1,13 +1,13 @@
 [
   {
-    "title": "table",
+    "title": "table.title",
     "open": true,
     "children": [
       {
-        "title": "a.b.c.d"
+        "title": "table.title"
       },
       {
-        "title": "Child Content 2"
+        "title": "fuck.title"
       },
       {
         "title": "Child Content "

@@ -8,10 +8,11 @@ const fs = require('fs-extra');
 const handleDemoMd = require('./utils/parse-demo-md');
 const handleDocMd = require('./utils/parse-doc-md');
 const merge = require('deepmerge');
-// const { $$readFileSync } = require('./utils/file-create');
 const nameWithoutSuffix = require('./utils/name-without-suffix');
 const projectConfig = require('./project.config');
 const generateDemo = require('./utils/generate-demo');
+const generateRouter = require('./utils/generate-router');
+const generateLanguage = require('./utils/generate-language');
 // 输出文件的路径地址, `site`为输出文件名
 const showCasePath = path.resolve(__dirname, `../../${projectConfig.output}`);
 
@@ -126,6 +127,8 @@ function generate(target) {
   logger.write('componentsMap.json', componentsMap)
 
   generateDemo(showCasePath, componentsMap);
+  generateRouter(showCasePath, componentsMap);
+  generateLanguage(showCasePath, componentsMap);
 }
 
 if (require.main === module) {

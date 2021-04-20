@@ -1,14 +1,15 @@
 ---
 order: 0
 title:
-  zh-CN: 典型卡片
-  en-US: Basic card
+  en-US: Basic Usage
+  zh-CN: 基本用法
 ---
 
 ## zh-CN
 
-包含标题、内容、操作区域。
+简单的表格，最后一列是各种操作。
 
 ## en-US
 
-A basic card containing a title, content and an extra corner content.
+Simple table with actions.
+

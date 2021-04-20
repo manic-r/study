@@ -1,6 +1,9 @@
-title: 你好
-table: 第一菜单
-a:
-  b:
-    c:
-      d: 123
+---
+  fuck:
+    meta:
+      title: "Button"
+      subtitle: "按钮"
+  table:
+    meta:
+      title: "Fuck"
+      subtitle: "サ"
