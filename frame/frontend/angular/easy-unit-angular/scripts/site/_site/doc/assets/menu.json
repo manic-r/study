@@ -1,5 +1,8 @@
 [
   {
+    "title": "table.component.break-word.title"
+  },
+  {
     "title": "table.title",
     "open": true,
     "children": [

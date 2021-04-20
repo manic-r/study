@@ -31,7 +31,7 @@ export function TranslateYamlFactory(http: HttpType) {
         deps: [HttpBackend]
       },
       useDefaultLang: true,
-      defaultLanguage: 'zh'
+      defaultLanguage: 'zh-CN'
     })
   ],
   providers: [],
