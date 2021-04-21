@@ -12,6 +12,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 import { AccordionModule } from 'ng-devui/accordion';
+
 import { TranslateModule } from '@ngx-translate/core';
 
 export const NzComponentModules = [

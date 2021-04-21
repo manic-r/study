@@ -17,8 +17,8 @@ module.exports = function (showCasePath, componentsMap) {
       data[dir].title = meta.title || '';
       data[dir].subtitle = meta.subtitle || '';
       data[dir].type = meta.type || '未定义';
-      data[dir].howToUse = docsInfo.howToUse || '';
-      data[dir].api = docsInfo.api || '';
+      // data[dir].howToUse = docsInfo.howToUse || '';
+      // data[dir].api = docsInfo.api || '';
     })
     const langTypes = Object.keys(language);
     const components = Object.keys(row.components);

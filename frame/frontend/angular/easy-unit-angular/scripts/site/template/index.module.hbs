@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { moduleList } from './module';
 import { RouterModule } from '@angular/router';
 import { {{name}}IndexComponent } from './index.component';
+import { TranslateModule } from '@ngx-translate/core';
 {{#each components}}
 import { {{this.component}} } from './{{this.filename}}';
 {{/each}}
@@ -13,6 +14,7 @@ import { {{this.component}} } from './{{this.filename}}';
     {{/each}}
   ],
   imports: [
+    TranslateModule,
     ...moduleList,
     RouterModule.forChild([
       { path: '{{path}}', component: {{name}}IndexComponent }

@@ -54,9 +54,10 @@ function generateComponent(showCasePath, context) {
 }
 
 function generateHtml(showCasePath, context) {
-  // const url = path.join(__dirname, `../template/index.component.hbs`);
+  const url = path.join(__dirname, `../template/index.html.hbs`);
   const output = path.join(showCasePath, `index.component.html`);
-  $$readFileSync(output, /* handleTemplate(url, context) */context.name);
+  context = { prefix: '{{', suffix: '}}' };
+  $$readFileSync(output, handleTemplate(url, context));
 }
 
 function importModule(showCasePath, context) {
