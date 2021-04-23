@@ -56,3 +56,11 @@ body {
   height: $footer-span + $footer-height;
 }
 
+.breadcrumb-main {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  * {
+    width: 100%;
+  }
+}

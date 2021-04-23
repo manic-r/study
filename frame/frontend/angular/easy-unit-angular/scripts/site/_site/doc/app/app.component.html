@@ -3,18 +3,30 @@
   <demo-eu-header></demo-eu-header>
   <!--面包屑-->
   <div class="layout-breadcrumb" nz-row>
-    <div nz-col [nzSpan]="sideSpan"></div>
-    <div nz-col [nzSpan]="24 - sideSpan" nz-space nzAlign="center">
+    <div nz-col [nzXl]="sideSpan" [nzSm]="0" [nzXs]="0"></div>
+    <!-- <div nz-col [nzSpan]="24 - sideSpan" nz-space nzAlign="center"> -->
+    <!-- {{ '首页 > 面包屑' | translate }} -->
+    <div class="breadcrumb-main" nz-col [nzXl]="24 - sideSpan" [nzSm]="24" [nzXs]="24">
       <!-- TODO: 面包屑位置 -->
-      {{ '首页 > 面包屑' | translate }}
+      <nz-breadcrumb nzSeparator=">" class="">
+        <nz-breadcrumb-item>
+          Home
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          <a>Application List</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+          An Application
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
     </div>
   </div>
   <!--左侧菜单-->
-  <div nz-col [nzSpan]="sideSpan" class="layout-side">
+  <div nz-col [nzXl]="sideSpan" [nzSm]="0" [nzXs]="0" class="layout-side">
     <demo-eu-side nz-col [nzSpan]="sideSpan"></demo-eu-side>
   </div>
   <!--内容-->
-  <div nz-col [nzSpan]="24 - sideSpan" class="layout-body">
+  <div nz-col [nzXl]="24 - sideSpan" [nzSm]="24" [nzXs]="24" class="layout-body">
     <div class="body-margin"></div>
     <div nz-row>
       <div nz-col nzFlex="20px"></div>
