@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { moduleList } from './module';
 import { RouterModule } from '@angular/router';
-import { {{name}}IndexComponent } from './index.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { {{name}}IndexComponent } from './index.component';
 {{#each components}}
 import { {{this.component}} } from './{{this.filename}}';
 {{/each}}
 
 @NgModule({
   declarations: [
+    {{name}}IndexComponent,
     {{#each components}}
     {{this.component}},
     {{/each}}
   ],
+  exports: [ ],
   imports: [
     TranslateModule,
-    ...moduleList,
+    ...moduleList ,
     RouterModule.forChild([
       { path: '{{path}}', component: {{name}}IndexComponent }
     ])
