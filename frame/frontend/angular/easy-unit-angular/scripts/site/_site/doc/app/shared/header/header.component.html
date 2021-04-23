@@ -1,10 +1,12 @@
 <div nz-row class="demo-eu-header">
-  <div nz-space nzAlign="center" nz-col [nzSpan]="leftSpan || 0" class="logo-body">
-    <nz-space-item>
-      <img class="logo" src="assets/imgs/logo.png" />
-    </nz-space-item>
-    <nz-space-item>
-      <span>简易组件</span>
-    </nz-space-item>
+  <div nz-space nzAlign="center" nz-col [nzXs]="0" [nzSpan]="leftSpan || 0" class="logo-body">
+    <div nz-row>
+      <nz-space-item nz-col [nzSpan]="10">
+        <img class="logo" src="assets/imgs/logo.png" />
+      </nz-space-item>
+      <div nz-col nz-space nzAlign="center">
+        <nz-space-item>简易组件</nz-space-item>
+      </div>
+    </div>
   </div>
 </div>
