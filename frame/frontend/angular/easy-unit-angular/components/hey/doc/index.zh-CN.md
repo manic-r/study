@@ -1,9 +1,9 @@
 ---
 category: Components
 cols: 1
-type: 数据展示
-title: Hello
-subtitle: 你好! 哈喽
+type: 布局
+title: Hey
+subtitle: 你好! 嘿
 cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 language: zh-CN
 ---

@@ -127,7 +127,7 @@ function generate(target) {
   logger.write('componentsMap.json', componentsMap)
 
   generateDemo(showCasePath, componentsMap);
-  generateRouter(showCasePath, componentsMap);
+  generateRouter.component(showCasePath, componentsMap);
   generateLanguage(showCasePath, componentsMap);
 }
 

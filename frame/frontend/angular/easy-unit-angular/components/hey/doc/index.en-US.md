@@ -1,8 +1,8 @@
 ---
 category: Components
 cols: 1
-type: Data Display
-title: Hello
+type: Layout
+title: Hey
 cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 language: en-US
 ---

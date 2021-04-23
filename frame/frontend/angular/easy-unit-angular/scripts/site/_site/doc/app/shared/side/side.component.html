@@ -12,5 +12,6 @@
   {{ item.title | translate }}
 </ng-template>
 <ng-template #itemTemplate let-item="item">
-  {{ item.title | translate }}
+  <span>{{ item.title | translate }}</span>
+  <span class="chinese">{{ item.subtitle | translate }}</span>
 </ng-template>
