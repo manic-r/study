@@ -47,6 +47,14 @@ public class FileUploadController {
         }
     }
 
+    /**
+     *
+     * @param request: {
+     *    files: "文件流",
+     *    fileDir: "自定义存放的位置",
+     * }
+     * @return
+     */
     @PostMapping("/test/upload")
     public List<FileSaveResponse> fileUploadTest(MultipartHttpServletRequest request) {
         List<MultipartFile> files = request.getFiles("files");

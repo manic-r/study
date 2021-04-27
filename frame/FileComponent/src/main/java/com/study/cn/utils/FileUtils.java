@@ -18,7 +18,8 @@ public class FileUtils {
             File file = new File(output + input.getOriginalFilename());
             fileSaveResponse.setFilename(file.getName());
             try {
-                if (!new File(output).exists()) file.mkdirs();
+                File dir = new File(output);
+                if (!dir.exists()) dir.mkdirs();
                 if (file.exists()) {
                     file = new File(output + new Date().getTime() + input.getOriginalFilename());
                 }
