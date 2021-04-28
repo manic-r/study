@@ -1,5 +1,6 @@
 package com.study.cn.rest;
 
+import com.study.cn.entity.request.FileSaveRequest;
 import com.study.cn.entity.response.FileSaveResponse;
 import com.study.cn.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,7 @@ public class FileUploadController {
     @Value("${file.root.path}")
     private String fileRootPath;
 
-    @PostMapping("/upload")
+    @PostMapping("/test/upload")
     public void fileUpload(@RequestParam("files") MultipartFile[] files) throws IOException {
         File dir = new File(fileRootPath);
         if (!dir.exists()) {
@@ -52,15 +53,23 @@ public class FileUploadController {
      * @param request: {
      *    files: "文件流",
      *    fileDir: "自定义存放的位置",
+     *    deleteAll: "删除文件夹中已存在的所有文件",
+     *    backupAll: “备份历史文件，统一存入一个文件夹（按照当天日期）”
+     *    lastBackup: "备份文件夹内非文件夹的文件到新的文件夹（按照时间戳备份）"
      * }
      * @return
      */
-    @PostMapping("/test/upload")
+    @PostMapping("/upload")
     public List<FileSaveResponse> fileUploadTest(MultipartHttpServletRequest request) {
-        List<MultipartFile> files = request.getFiles("files");
-        String fileDir = request.getParameter("fileDir");
-        StringBuilder fileOutput = new StringBuilder(fileRootPath)
-                .append("\\").append(StringUtils.isEmpty(fileDir) ? "": (fileDir + "\\"));
-        return FileUtils.save(files, fileOutput.toString());
+        FileSaveRequest param = new FileSaveRequest(request, fileRootPath);
+        // 删除全部
+        if (param.getDeleteAll()) {
+            FileUtils.deleteOfDir(fileRootPath);
+        } else if (param.getBackupAll()) {
+            FileUtils.backup(fileRootPath, true);
+        } else if (param.getLastBackup()) {
+            FileUtils.backup(fileRootPath, false);
+        }
+        return FileUtils.save(param.getFiles(), param.getOutput());
     }
 }

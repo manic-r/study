@@ -1,22 +1,77 @@
+<ng-template #configTitle>
+  <nz-badge nzStatus="processing" [nzText]="processShow"></nz-badge>
+  <ng-template #processShow>
+    <span style="font-size: 12px;">配置区</span>
+  </ng-template>
+</ng-template>
+
+<ng-template #descTitle>
+  <nz-badge nzStatus="processing" [nzText]="processShow"></nz-badge>
+  <ng-template #processShow>
+    <span style="font-size: 12px;">配置详情说明</span>
+  </ng-template>
+</ng-template>
+
+
+<nz-collapse nzAccordion>
+  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="descTitle">
+
+  </nz-collapse-panel>
+  <!--=================================================-->
+  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="configTitle" nzActive>
+    <nz-card>
+      <div nz-row>
+        <div nz-col>
+          <div nz-col [nzSpan]="12">
+            自动提交
+            <nz-switch [(ngModel)]="autoUpload" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+          </div>
+          <div nz-col [nzSpan]="12">
+            批量上传 <nz-switch [(ngModel)]="uploadDirectory" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+          </div>
+          <div nz-col [nzSpan]="12">
+            文件夹名 <input nz-input [(ngModel)]="fileDir" style="width: 200px;">
+          </div>
+        </div>
+        <div nz-col>
+          <div nz-col [nzSpan]="12">
+            删除全部 <nz-switch [(ngModel)]="deleteAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+              (ngModelChange)="deleteAllFunc($event)"></nz-switch>
+          </div>
+          <div nz-col [nzSpan]="12">
+            历史归类 <nz-switch [(ngModel)]="backupAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+              (ngModelChange)="backupAllFunc($event)"></nz-switch>
+          </div>
+        </div>
+        <div nz-col>
+          <div nz-col [nzSpan]="12">
+            备份文件 <nz-switch [(ngModel)]="lastBackup" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+              (ngModelChange)="lastBackupFunc($event)"></nz-switch>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </nz-collapse-panel>
+</nz-collapse>
+<nz-divider></nz-divider>
 <section>
-  <nz-switch [(ngModel)]="autoUpload" nzCheckedChildren="已启动自动提交" nzUnCheckedChildren="已关闭自动提交">
-  </nz-switch>
-  <br>
-  <br>
-  <input nz-input [(ngModel)]="fileDir" style="width: 200px;">
-  <br><br>
-  <nz-upload nzName="files" [nzAction]="URL" nzListType="picture-card" [nzBeforeUpload]="beforeUpload"
-    [(nzFileList)]="fileList">
-    <div class="upload-selected">
-      <i nz-icon nzType="plus"></i>
-      <div style="margin-top: 8px">选择图片</div>
-    </div>
-  </nz-upload>
+  <nz-card>
+    <button nz-button nzType="primary" style="margin-top: 16px" [nzLoading]="uploading" (click)="handleUpload()"
+      *ngIf="!autoUpload" [disabled]="fileList.length == 0">
+      上传
+    </button>
+    <nz-divider *ngIf="!autoUpload" nzType="vertical"></nz-divider>
+    <nz-upload nzName="files" [nzAction]="URL"
+      [(nzFileList)]="fileList"
+      nzListType="picture"
+      [nzBeforeUpload]="beforeUpload"
+      [nzCustomRequest]="handleUpload"
+      [nzDirectory]="uploadDirectory">
+      <div class="upload-selected">
+      </div>
+      <button nz-button>
+        <div><i nz-icon nzType="plus"></i> 选择文件</div>
+      </button>
+    </nz-upload>
+  </nz-card>
 </section>
-<button nz-button nzType="primary" style="margin-top: 16px" [nzLoading]="uploading" (click)="handleUpload()"
-  *ngIf="!autoUpload" [disabled]="fileList.length == 0">
-  上传
-</button>
-<button nz-button nzType="primary" style="margin-top: 16px" (click)="watch">
-  Console
-</button>

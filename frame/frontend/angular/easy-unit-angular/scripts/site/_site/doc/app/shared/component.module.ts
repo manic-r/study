@@ -11,6 +11,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 import { AccordionModule } from 'ng-devui/accordion';
 
@@ -27,7 +30,10 @@ export const NzComponentModules = [
   NzGridModule,
   NzCardModule,
   NzSpaceModule,
-  NzBreadCrumbModule
+  NzBreadCrumbModule,
+  NzBadgeModule,
+  NzCollapseModule,
+  NzDividerModule
 ];
 
 export const DComponentModules = [
