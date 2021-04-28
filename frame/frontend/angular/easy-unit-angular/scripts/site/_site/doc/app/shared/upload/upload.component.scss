@@ -1,4 +1,19 @@
-.upload-selected {
+.font {
   font-size: 12px;
-  font-weight: 600;
+}
+
+.context {
+  &::before {
+    content: '：';
+  }
+}
+
+.hight {
+  font-weight: bold;
+  color: red;
+}
+
+.title {
+  font-weight: bold;
+  text-decoration: underline;
 }

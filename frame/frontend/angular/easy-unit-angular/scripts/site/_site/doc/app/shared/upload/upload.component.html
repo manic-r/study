@@ -1,21 +1,29 @@
 <ng-template #configTitle>
   <nz-badge nzStatus="processing" [nzText]="processShow"></nz-badge>
   <ng-template #processShow>
-    <span style="font-size: 12px;">配置区</span>
+    <span class="font">配置区</span>
   </ng-template>
 </ng-template>
 
 <ng-template #descTitle>
   <nz-badge nzStatus="processing" [nzText]="processShow"></nz-badge>
   <ng-template #processShow>
-    <span style="font-size: 12px;">配置详情说明</span>
+    <span class="font">配置详情说明</span>
   </ng-template>
 </ng-template>
 
-
 <nz-collapse nzAccordion>
-  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="descTitle">
-
+  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="descTitle" nzActive>
+    <nz-card>
+      <div *ngFor="let item of configInfo" style="padding: 8px 0;">
+        <nz-badge [nzText]="show" [nzColor]="item.color"></nz-badge>
+        <ng-template #show>
+          <span class="font title">{{ item.title }}</span>
+          <span class="font context">{{ item.text }}</span>
+          <span class="font hight">{{ item.hightText }}</span>
+        </ng-template>
+      </div>
+    </nz-card>
   </nz-collapse-panel>
   <!--=================================================-->
   <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="configTitle" nzActive>
@@ -48,6 +56,9 @@
             备份文件 <nz-switch [(ngModel)]="lastBackup" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
               (ngModelChange)="lastBackupFunc($event)"></nz-switch>
           </div>
+          <div nz-col [nzSpan]="12">
+            保留失败 <nz-switch [(ngModel)]="liveError" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+          </div>
         </div>
       </div>
     </nz-card>
@@ -55,23 +66,36 @@
 </nz-collapse>
 <nz-divider></nz-divider>
 <section>
-  <nz-card>
-    <button nz-button nzType="primary" style="margin-top: 16px" [nzLoading]="uploading" (click)="handleUpload()"
-      *ngIf="!autoUpload" [disabled]="fileList.length == 0">
-      上传
-    </button>
-    <nz-divider *ngIf="!autoUpload" nzType="vertical"></nz-divider>
-    <nz-upload nzName="files" [nzAction]="URL"
-      [(nzFileList)]="fileList"
-      nzListType="picture"
-      [nzBeforeUpload]="beforeUpload"
-      [nzCustomRequest]="handleUpload"
-      [nzDirectory]="uploadDirectory">
-      <div class="upload-selected">
-      </div>
-      <button nz-button>
-        <div><i nz-icon nzType="plus"></i> 选择文件</div>
+  <nz-ribbon nzColor="green" [nzText]="ribbonTitle">
+    <nz-card style="padding-top: 16px;">
+      <button nz-button nzType="primary" (click)="fileList=[]" [disabled]="uploading">
+        清空
       </button>
-    </nz-upload>
-  </nz-card>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button nz-button nzType="primary" [nzLoading]="uploading" (click)="handleUpload()"
+        *ngIf="!autoUpload" [disabled]="fileList.length == 0">
+        上传
+      </button>
+      <nz-divider *ngIf="!autoUpload" nzType="vertical"></nz-divider>
+      <nz-upload nzName="files" [nzAction]="URL"
+        [(nzFileList)]="fileList"
+        nzListType="picture"
+        [nzBeforeUpload]="beforeUpload"
+        [nzCustomRequest]="handleUpload"
+        [nzDirectory]="uploadDirectory">
+        <div class="upload-selected">
+        </div>
+        <button nz-button>
+          <div>
+            <!-- <i nz-icon nzType="plus"></i> -->
+            选择文件
+          </div>
+        </button>
+      </nz-upload>
+    </nz-card>
+  </nz-ribbon>
 </section>
+
+<ng-template #ribbonTitle>
+  <span class="font" style="color: aliceblue;">服务器根路径：{{ system.rootPath || '加载失败..' }}</span>
+</ng-template>

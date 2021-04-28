@@ -24,12 +24,12 @@ public class FileUtils {
         files.stream().forEach(input -> {
             FileSaveResponse fileSaveResponse = new FileSaveResponse();
             File file = new File(output + input.getOriginalFilename());
-            fileSaveResponse.setFilename(file.getName());
+            fileSaveResponse.setFilename(input.getOriginalFilename());
             try {
                 // 创建文件夹
                 String newPath = FileUtils.filePathHandle(output, input);
                 if (file.exists()) {
-                    file = new File(newPath + new Date().getTime() + input.getOriginalFilename().substring(input.getOriginalFilename().lastIndexOf("/") + 1));
+                    file = new File(newPath + System.currentTimeMillis() + input.getOriginalFilename().substring(input.getOriginalFilename().lastIndexOf("/") + 1));
                 }
                 input.transferTo(file);
                 fileSaveResponse.setStatus(FileSaveResponse.Status.SUCCESS);
@@ -102,7 +102,7 @@ public class FileUtils {
                 .forEach(file -> {
                     File newFile = new File(output + file.getName());
                     if (newFile.exists()) {
-                        newFile = new File(output + "(" + new Date().getTime() + ")" + file.getName());
+                        newFile = new File(output + "(" + System.currentTimeMillis() + ")" + file.getName());
                     }
                     file.renameTo(newFile);
                 });

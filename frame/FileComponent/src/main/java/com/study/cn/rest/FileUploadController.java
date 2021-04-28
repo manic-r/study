@@ -2,6 +2,7 @@ package com.study.cn.rest;
 
 import com.study.cn.entity.request.FileSaveRequest;
 import com.study.cn.entity.response.FileSaveResponse;
+import com.study.cn.entity.response.SystemResponse;
 import com.study.cn.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,11 @@ import org.thymeleaf.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Map;
 
 //https://www.cnblogs.com/mmzs/p/9167743.html
 //https://blog.csdn.net/zhangpower1993/article/details/89016503
@@ -22,30 +27,27 @@ public class FileUploadController {
     @Value("${file.root.path}")
     private String fileRootPath;
 
-    @PostMapping("/test/upload")
-    public void fileUpload(@RequestParam("files") MultipartFile[] files) throws IOException {
-        File dir = new File(fileRootPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
+    @GetMapping("/system")
+    public SystemResponse rootPath() {
+        SystemResponse response = new SystemResponse();
+        response.setRootPath(this.fileRootPath);
+        Map<String,String> map = System.getenv();
+        // 获取计算机名
+        response.setComputerName(map.get("COMPUTERNAME"));
+        // 获取用户名
+        response.setUserName(map.get("USERNAME"));
+        // 获取计算机域名
+        response.setUserDomain(map.get("USERDOMAIN"));
+        InetAddress ip4 = null;
+        try {
+            ip4 = Inet4Address.getLocalHost();
+            response.setIp4(ip4.getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
-        String filePath = "";
-        // 多文件上传
-        File row = null;
-        for (MultipartFile file : files){
-            // 上传简单文件名
-            String originalFilename = file.getOriginalFilename();
-            // 存储路径
-            filePath = new StringBuilder(fileRootPath)
-                    .append(System.currentTimeMillis())
-                    .append(originalFilename)
-                    .toString();
-            row = new File(filePath);
-            // https://www.jianshu.com/p/d8666f2e698f
-            if (!row.exists()) {
-                row.mkdirs();
-            }
-            file.transferTo(row);
-        }
+        System.err.println(response);
+        System.err.println(ip4);
+        return response;
     }
 
     /**

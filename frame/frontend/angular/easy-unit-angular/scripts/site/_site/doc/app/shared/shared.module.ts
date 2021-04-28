@@ -1,3 +1,4 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { SideModule } from './side/side.module';
 import { NgModule } from "@angular/core";
 import { DComponentModules, NzComponentModules, NGComponentModules } from './component.module';
@@ -16,7 +17,9 @@ import { HeaderModule } from "./header/header.module";
     ...DComponentModules,
     ...NGComponentModules
   ],
-  providers: [],
+  providers: [
+    NzMessageService
+  ],
 })
 export class SharedModule {
 
