@@ -40,7 +40,7 @@ function component (showCasePath, componentsMap) {
     const menu = { open: true, children: [] };
     routes.forEach(name => {
       menu.title = `${name}.type`;
-      menu.children.push({ title: `${name}.title`, subtitle: `${name}.subtitle`, link: `/${name}` });
+      menu.children.push({ title: `${name}.title`, subtitle: `${name}.subtitle`, link: `/component/${name}` });
     });
     menus.push(menu);
   });
