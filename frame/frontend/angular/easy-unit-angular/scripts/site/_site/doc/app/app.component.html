@@ -28,12 +28,10 @@
   <!--内容-->
   <div nz-col [nzXl]="24 - sideSpan" [nzSm]="24" [nzXs]="24" class="layout-body">
     <div class="body-margin"></div>
-    <div nz-row>
-      <div nz-col nzFlex="20px"></div>
-      <nz-card nz-col nzFlex="auto" [nzBordered]="false" class="layout-content">
+    <div nz-row style="padding: 0 2%;">
+      <nz-card nz-col nzSpan="24" [nzBordered]="false" class="layout-content">
         <router-outlet></router-outlet>
       </nz-card>
-      <div nz-col nzFlex="20px"></div>
     </div>
     <!--页脚-内容间隔-->
     <div #footerSpan class="footer-span"></div>
