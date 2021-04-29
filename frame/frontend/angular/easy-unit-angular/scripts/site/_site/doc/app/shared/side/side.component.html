@@ -2,6 +2,7 @@
   <div nz-col [nzSpan]="span || 0" class="sidebar-wrapper" >
     <d-accordion id="menu"
       [data]="sideMenuList"
+      linkType="routerLink"
       [menuItemTemplate]="menuTemplate"
       [itemTemplate]="itemTemplate"
     ></d-accordion>
