@@ -45,8 +45,6 @@ public class FileUploadController {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        System.err.println(response);
-        System.err.println(ip4);
         return response;
     }
 
