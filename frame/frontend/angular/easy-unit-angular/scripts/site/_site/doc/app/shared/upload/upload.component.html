@@ -13,7 +13,8 @@
 </ng-template>
 
 <nz-collapse nzAccordion>
-  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="descTitle" nzActive>
+  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="descTitle" [nzActive]="descActive"
+    (nzActiveChange)="descActiveChange()">
     <nz-card>
       <div *ngFor="let item of configInfo" style="padding: 8px 0;">
         <nz-badge [nzText]="show" [nzColor]="item.color"></nz-badge>
@@ -26,45 +27,57 @@
     </nz-card>
   </nz-collapse-panel>
   <!--=================================================-->
-  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="configTitle" nzActive>
+  <nz-collapse-panel [nzShowArrow]="false" [nzHeader]="configTitle">
     <nz-card>
       <div nz-row>
-        <div nz-col>
-          <div nz-col [nzSpan]="12">
-            自动提交
-            <nz-switch [(ngModel)]="autoUpload" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
-          </div>
-          <div nz-col [nzSpan]="12">
-            批量上传 <nz-switch [(ngModel)]="uploadDirectory" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
-          </div>
-          <div nz-col [nzSpan]="12">
-            文件夹名 <input nz-input [(ngModel)]="fileDir" style="width: 200px;">
-          </div>
+        <!-- 自动提交 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>自动提交</span>
+          <nz-switch [(ngModel)]="autoUpload" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="setLocalConfig('autoUpload', $event)"></nz-switch>
         </div>
-        <div nz-col>
-          <div nz-col [nzSpan]="12">
-            删除全部 <nz-switch [(ngModel)]="deleteAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
-              (ngModelChange)="deleteAllFunc($event)"></nz-switch>
-          </div>
-          <div nz-col [nzSpan]="12">
-            历史归类 <nz-switch [(ngModel)]="backupAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
-              (ngModelChange)="backupAllFunc($event)"></nz-switch>
-          </div>
+        <!-- 批量上传 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>批量上传</span>
+          <nz-switch [(ngModel)]="uploadDirectory" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="setLocalConfig('uploadDirectory', $event)"></nz-switch>
         </div>
-        <div nz-col>
-          <div nz-col [nzSpan]="12">
-            备份文件 <nz-switch [(ngModel)]="lastBackup" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
-              (ngModelChange)="lastBackupFunc($event)"></nz-switch>
-          </div>
-          <div nz-col [nzSpan]="12">
-            保留失败 <nz-switch [(ngModel)]="liveError" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
-          </div>
+        <!-- 服务器-删除 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>删除全部</span>
+          <nz-switch [(ngModel)]="deleteAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="deleteAllFunc($event)"></nz-switch>
+        </div>
+        <!-- 服务器-历史归类 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>历史归类</span>
+          <nz-switch [(ngModel)]="backupAll" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="backupAllFunc($event)"></nz-switch>
+        </div>
+        <!-- 服务器-备份文件 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>备份文件</span>
+          <nz-switch [(ngModel)]="lastBackup" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="lastBackupFunc($event)"></nz-switch>
+        </div>
+        <!-- 保留失败 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>保留失败</span>
+          <nz-switch [(ngModel)]="liveError" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+            (ngModelChange)="setLocalConfig('liveError', $event)"></nz-switch>
+        </div>
+        <!-- 文件夹名 -->
+        <div class="setting-item" nz-col nzXs="24" nzSm="12" nzMd="6">
+          <span>文件夹名</span>
+          <input nz-input [(ngModel)]="fileDir">
         </div>
       </div>
     </nz-card>
   </nz-collapse-panel>
 </nz-collapse>
+
 <nz-divider></nz-divider>
+
 <section>
   <nz-ribbon nzColor="green" [nzText]="ribbonTitle">
     <nz-card style="padding-top: 16px;">

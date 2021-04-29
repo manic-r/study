@@ -24,43 +24,43 @@ export const ConfigInfo: {
   title: string,
   hightText?: string
 }[] = [
-  { 
+  {
     color: 'red',
     title: '批量上传',
     text: '开启后可以选择文件夹，将文件夹下所有文件进行提交，提交的保存数据结构与选中文件夹结构一致。',
-    hightText: '大部分手机浏览器不支持h5，无法选择文件夹，建议手机访问关闭此功能。'
+    hightText: '大部分手机浏览器不支持H5，无法选择文件夹，建议手机访问关闭此功能。'
   },
-  { 
+  {
     color: '#2db7f5',
     title: '自动提交',
     text: '开启后无需点击上传按钮，选中文件后自动上传。'
   },
-  { 
+  {
     color: 'orange',
     title: '全部删除',
     text: '开启后会将服务器中根目录内容全部删除。',
     hightText: '【服务器配置】'
   },
-  { 
+  {
     color: 'orange',
     title: '历史归类',
     text: '开启后会将服务器中根目录内容全部备份，统一存入一个文件夹（按照当天日期）【包括文件夹】。',
     hightText: '【服务器配置】'
   },
-  { 
+  {
     color: 'orange',
     title: '备份文件',
     text: '开启后会将服务器中根目录内容部分备份，文件夹内非文件夹的文件到新的文件夹（按照时间戳备份）【不包括文件夹】。',
     hightText: '【服务器配置】'
   },
-  { 
+  {
     color: 'orange',
     title: '文件夹名',
     text: '输入文件夹名称后会在服务器根目录中额外创建一个文件夹存储，你的文件将存在改文件夹下。',
     hightText: '【服务器配置】'
   },
-  { 
-    color: 'orange',
+  {
+    color: '#2db7f5',
     title: '保留失败',
     text: '默认情况下提交后会清空当前上传列表，开启该功能会保留失败的文件在列表中不消除。'
   }
@@ -73,8 +73,7 @@ export const ConfigInfo: {
 })
 export class UploadComponent implements OnInit {
 
-  URL: string = 'http://localhost:42001/file/upload';
-  splitStr: string = 'EU-SUPER-SPLIT-OF-FILE';
+  URL: string = 'http://localhost:42000/file/upload';
 
   autoUpload: boolean = false;
   uploadDirectory: boolean = false;
@@ -83,8 +82,9 @@ export class UploadComponent implements OnInit {
   fileList: NzUploadFile[] = [];
   uploading: boolean = false;
 
-  system: SystemInfo = {};
+  system: SystemInfo = { 'rootPath': '连接中...' };
   configInfo: any[] = ConfigInfo;
+  descActive: boolean = true;
 
   // 服务器相关
   fileDir: string = '';
@@ -98,9 +98,13 @@ export class UploadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.http.get<SystemInfo>('http://localhost:42000/file/system')
-      .toPromise()
-      .then(res => this.system = res);
+    this.localConfig();
+    setTimeout(() => {
+      this.http.get<SystemInfo>('http://localhost:42000/file/system')
+        .toPromise()
+        .then(res => this.system = res)
+        .catch(() => this.system = {});
+    })
   }
 
   beforeUpload = (file: NzUploadFile) => {
@@ -149,26 +153,38 @@ export class UploadComponent implements OnInit {
   }
 
   deleteAllFunc = (event: boolean) => {
+    this.setLocalConfig('deleteAll', event);
     if (event) {
       this.autoUpload = false;
+      this.setLocalConfig('autoUpload', this.autoUpload);
       this.backupAll = false;
+      this.setLocalConfig('backupAll', this.backupAll);
       this.lastBackup = false;
+      this.setLocalConfig('lastBackup', this.lastBackup);
     }
   }
 
   backupAllFunc = (event: boolean) => {
+    this.setLocalConfig('backupAll', event);
     if (event) {
       this.autoUpload = false;
+      this.setLocalConfig('autoUpload', this.autoUpload);
       this.deleteAll = false;
+      this.setLocalConfig('deleteAll', this.deleteAll);
       this.lastBackup = false;
+      this.setLocalConfig('lastBackup', this.lastBackup);
     }
   }
 
   lastBackupFunc = (event: boolean) => {
+    this.setLocalConfig('lastBackup', event);
     if (event) {
       this.autoUpload = false;
+      this.setLocalConfig('autoUpload', this.autoUpload);
       this.deleteAll = false;
+      this.setLocalConfig('deleteAll', this.deleteAll);
       this.backupAll = false;
+      this.setLocalConfig('backupAll', this.backupAll);
     }
   }
 
@@ -183,5 +199,23 @@ export class UploadComponent implements OnInit {
         row.status = 'error';
         return row;
       });
+  }
+
+  descActiveChange = () => {
+    localStorage.setItem('descActive', '1');
+  }
+
+  private localConfig() {
+    this.autoUpload = localStorage.getItem('autoUpload') === '1';
+    this.uploadDirectory = localStorage.getItem('uploadDirectory') === '1';
+    this.liveError = !localStorage.getItem('liveError') || localStorage.getItem('liveError') === '1';
+    this.deleteAll = localStorage.getItem('deleteAll') === '1';
+    this.backupAll = localStorage.getItem('backupAll') === '1';
+    this.lastBackup = localStorage.getItem('lastBackup') === '1';
+    this.descActive = !!!localStorage.getItem('descActive');
+  }
+
+  public setLocalConfig(item: string, value: boolean) {
+    localStorage.setItem(item, value ? '1' : '0');
   }
 }

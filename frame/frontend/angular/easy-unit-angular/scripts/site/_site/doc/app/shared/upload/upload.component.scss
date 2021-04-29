@@ -17,3 +17,17 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.setting-item {
+  padding: 16px;
+  span {
+    @extend .font;
+  }
+  nz-switch {
+    margin-left: 12px;
+  }
+  input {
+    margin-left: 12px;
+    max-width: 70%;
+  }
+}
