@@ -1,13 +1,29 @@
-<div nz-row class="demo-eu-header">
-  <div nz-space nzAlign="center" nz-col [nzXl]="leftSpan || 0" [nzSm]="0" [nzXs]="24" class="logo-body">
-    1111111111111111111111111111
-    <!-- <div nz-row>
-      <nz-space-item nz-col [nzSpan]="10">
-        <img class="logo" src="assets/imgs/logo.png" />
-      </nz-space-item>
-      <div nz-col nz-space nzAlign="center">
-        <nz-space-item>简易组件</nz-space-item>
+<div nz-row class="demo-eu-header" nzAlign="middle">
+  <div nz-col [nzXl]="leftSpan || 0" nzSm="0" nzXs="24">
+    <div class="logo-body">
+      <img class="logo" src="assets/imgs/logo.png" />
+      <span>简易组件</span>
+    </div>
+  </div>
+  <div nz-col [nzXl]="24 - (leftSpan || 0)" style="padding: 0 20px; background-color: darkcyan;">
+    <div nz-col [nzXl]="userInfoSpan" style="background-color: darkgoldenrod;" [nzOffset]="24 - userInfoSpan">
+      <!-- 国际化 -->
+      <div nz-dropdown [nzDropdownMenu]="menu" class="language-btn body-center">
+        <i>
+          <svg viewBox="0 0 24 24" focusable="false" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z "
+              class="css-c4d79v"></path>
+          </svg>
+        </i>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu [nzSelectable]="false">
+            <li nz-menu-item (click)="languageChange('zh-CN')">简体中文</li>
+            <li nz-menu-item (click)="languageChange('en-US')">英文</li>
+          </ul>
+        </nz-dropdown-menu>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

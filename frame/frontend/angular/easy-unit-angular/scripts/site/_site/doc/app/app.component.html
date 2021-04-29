@@ -1,11 +1,9 @@
 <div nz-row class="layout-parent">
   <!--头部-->
-  <demo-eu-header></demo-eu-header>
+  <demo-eu-header [span]="sideSpan"></demo-eu-header>
   <!--面包屑-->
   <div class="layout-breadcrumb" nz-row>
     <div nz-col [nzXl]="sideSpan" [nzSm]="0" [nzXs]="0"></div>
-    <!-- <div nz-col [nzSpan]="24 - sideSpan" nz-space nzAlign="center"> -->
-    <!-- {{ '首页 > 面包屑' | translate }} -->
     <div class="breadcrumb-main" nz-col [nzXl]="24 - sideSpan" [nzSm]="24" [nzXs]="24">
       <!-- TODO: 面包屑位置 -->
       <nz-breadcrumb nzSeparator=">" class="">

@@ -14,6 +14,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { AccordionModule } from 'ng-devui/accordion';
 
@@ -33,7 +34,8 @@ export const NzComponentModules = [
   NzBreadCrumbModule,
   NzBadgeModule,
   NzCollapseModule,
-  NzDividerModule
+  NzDividerModule,
+  NzDropDownModule
 ];
 
 export const DComponentModules = [

@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +7,16 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnChanges {
-  lang: string;
   sideSpan: number = 4;
   @ViewChild('footer')
   footer!: ElementRef<HTMLElement>;
   @ViewChild('footerSpan')
   footerSpan!: ElementRef<HTMLElement>;
 
-  title = 'easy-unit-angular';
-  // TODO:
-  list: string[] = [...new Array(1000)];
-  showList: boolean = false;
-
   constructor(
-    private translate: TranslateService
   ) {
-    this.lang = this.translate.getBrowserLang();
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes)
   }
@@ -41,9 +33,5 @@ export class AppComponent implements AfterViewInit, OnChanges {
         footerSpanElement.style.height = `${footerSpanElement.offsetHeight - 42}px`;
       }
     }
-  }
-
-  selectChange() {
-    this.translate.use(this.lang);
   }
 }

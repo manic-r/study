@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'demo-eu-header',
@@ -7,10 +8,16 @@ import { Component, Input } from "@angular/core";
 })
 export class HeaderComponent {
 
-  @Input('nzSpan')
+  @Input('span')
   leftSpan: number = 4;
+  userInfoSpan: number = 7;
 
-  constructor() {
-    console.log('---------------------HeaderComponent.html')
+  constructor(
+    private translate: TranslateService
+  ) {
+  }
+
+  public languageChange(language: string) {
+    this.translate.use(language);
   }
 }
