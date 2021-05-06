@@ -25,7 +25,10 @@
   background-color: darkgrey;
 
   &:hover {
-    color: #2e5ea0;
+    * {
+      opacity: .7;
+      transition: all 0.5s;
+    }
   }
 
   .logo{
