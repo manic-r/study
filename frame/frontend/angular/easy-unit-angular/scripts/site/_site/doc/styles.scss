@@ -32,10 +32,22 @@
   font-size: 14px;
   line-height: 2;
 
+  h1 {
+    @extend .base-h;
+    margin-top: 8px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: rgba(0,0,0,.85);
+    .subtitle {
+      cursor: none;
+      margin-left: 12px;
+    }
+  }
+
   h2 {
+    @extend .base-h;
     font-size: 24px;
     line-height: 32px;
-    @extend .base-h;
   }
 
   a {
@@ -68,8 +80,8 @@
   }
 
   h3 {
-    font-size: 18px;
     @extend .base-h;
+    font-size: 18px;
   }
 
   table {
@@ -143,6 +155,14 @@
     }
   }
 
+  ul {
+    li {
+      margin-left: 20px;
+      padding-left: 4px;
+      list-style-type: circle;
+    }
+  }
+
   .token {
     &.cdata, &.comment, &.doctype, &.prolog {
       color: #708090;
@@ -156,7 +176,7 @@
     &.string, &.attr-name, &.builtin, &.char, &.entity, &.inserted, &.operator, &.selector, &.string, &.url {
       color: #0b8235;
     }
-    &.function {
+    &.boolean, &.constant, &.deleted, &.number, &.property, &.symbol, &.tag {
       color: #f81d22;
     }
   }
