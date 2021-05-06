@@ -1,11 +1,11 @@
 const path = require('path');
 const { root, component } = require('../project.config');
-const { $$readFileSync } = require('./file-create');
+const { $$outputFileSync } = require('./file-create');
 const CodeAnalysis = require('./code.analysis');
 const Handlebars = require('handlebars')
 const fs = require('fs');
 
-module.exports = function (showCasePath, componentsMap) {
+module.exports = function (showCasePath, componentsMap, isOne = false) {
   const importModuleData = [];
   for (let dir in componentsMap) {
     // Module data handler.
@@ -20,7 +20,7 @@ module.exports = function (showCasePath, componentsMap) {
         component: CodeAnalysis(components[name].ts),
         filename: name
       });
-      $$readFileSync(path.join(output, `./${name}.ts`), components[name].ts);
+      $$outputFileSync(path.join(output, `./${name}.ts`), components[name].ts);
     }
     // External Module.
     generateImportModule(output, module);
@@ -34,36 +34,39 @@ module.exports = function (showCasePath, componentsMap) {
     importModuleData.push({ name: dir.firstUpperCase(), basename: dir });
   }
   // Module Import.
-  importModule(path.join(showCasePath, `./${root}`), { info: importModuleData });
+  if (!isOne) {
+    importModule(path.join(showCasePath, `./${root}`), { info: importModuleData });
+  }
 }
 
 function generateImportModule(showCasePath, module) {
-  $$readFileSync(path.join(showCasePath, `./module.ts`), module);
+  $$outputFileSync(path.join(showCasePath, `./module.ts`), module);
 }
 
 function generateModule(showCasePath, context) {
   const url = path.join(__dirname, `../template/index.module.hbs`);
   const output = path.join(showCasePath, `index.module.ts`);
-  $$readFileSync(output, handleTemplate(url, context));
+  $$outputFileSync(output, handleTemplate(url, context));
 }
 
 function generateComponent(showCasePath, context) {
   const url = path.join(__dirname, `../template/index.component.hbs`);
   const output = path.join(showCasePath, `index.component.ts`);
-  $$readFileSync(output, handleTemplate(url, context));
+  $$outputFileSync(output, handleTemplate(url, context));
 }
 
 function generateHtml(showCasePath, context) {
   const url = path.join(__dirname, `../template/index.html.hbs`);
   const output = path.join(showCasePath, `index.component.html`);
-  context = { prefix: '{{', suffix: '}}' };
-  $$readFileSync(output, handleTemplate(url, context));
+  context.prefix = '{{';
+  context.suffix = '}}';
+  $$outputFileSync(output, handleTemplate(url, context));
 }
 
 function importModule(showCasePath, context) {
   const url = path.join(__dirname, `../template/import.module.hbs`);
   const output = path.join(showCasePath, `import.module.ts`);
-  $$readFileSync(output, handleTemplate(url, context));
+  $$outputFileSync(output, handleTemplate(url, context));
 }
 
 function handleTemplate(url, context) {

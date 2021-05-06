@@ -1,6 +1,6 @@
 
 const path = require('path');
-const { $$readFileSync } = require('./file-create');
+const { $$outputFileSync } = require('./file-create');
 const logger = require('../debugger/console-write');
 
 module.exports = {
@@ -45,5 +45,5 @@ function component (showCasePath, componentsMap) {
     menus.push(menu);
   });
   const output = path.join(showCasePath, `./assets`);
-  $$readFileSync(path.join(output, `./menu.json`), JSON.stringify(menus, null, false));
+  $$outputFileSync(path.join(output, `./menu.json`), JSON.stringify(menus, null, false));
 }

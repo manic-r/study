@@ -1,9 +1,11 @@
 const logger = require('../debugger/console-write');
 const yaml = require('json2yaml');
 const path = require('path');
-const { $$readFileSync } = require('./file-create');
+const { $$outputFileSync, $$readFileSync } = require('./file-create');
+const jsYaml = require('js-yaml');
+const merge = require('deepmerge');
 
-module.exports = function (showCasePath, componentsMap) {
+module.exports = function (showCasePath, componentsMap, target) {
   const language = {};
   for (const dir in componentsMap) {
     const row = componentsMap[dir];
@@ -37,8 +39,12 @@ module.exports = function (showCasePath, componentsMap) {
   logger.write('language.json', language);
   const output = path.join(`${showCasePath}`, `./assets/i18n`);
   for (const lang in language) {
-    const toYaml = yaml.stringify(language[lang]);
-    $$readFileSync(path.join(output, `./language.${lang}.yaml`), toYaml);
+    // 输出文件
+    const file = path.join(output, `./language.${lang}.yaml`);
+    const oldYamlJson = jsYaml.load($$readFileSync(file)) || {};
+    const context = merge(oldYamlJson, language[lang]);
+    const toYaml = yaml.stringify(context);
+    $$outputFileSync(file, toYaml);
     logger.write(`language.${lang}.yaml`, toYaml, false);
   }
 }

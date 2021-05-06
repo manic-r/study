@@ -126,9 +126,11 @@ function generate(target) {
 
   logger.write('componentsMap.json', componentsMap)
 
-  generateDemo(showCasePath, componentsMap);
-  generateRouter.component(showCasePath, componentsMap);
-  generateLanguage(showCasePath, componentsMap);
+  generateDemo(showCasePath, componentsMap, target);
+  generateLanguage(showCasePath, componentsMap, target);
+  if (!target) {
+    generateRouter.component(showCasePath, componentsMap);
+  }
 }
 
 if (require.main === module) {

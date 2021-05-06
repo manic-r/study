@@ -11,11 +11,21 @@ function mkdir(dir, cb) {
   cb && cb()
 }
 
-function readFileSync(dir, reader) {
+function outputFileSync(dir, reader) {
   mkdir(dir);
   fs.writeFileSync(dir, reader);
 }
+
+function readFileSync(filename) {
+  if (fs.existsSync(filename)) {
+    return fs.readFileSync(filename, { encoding: 'utf8' });
+  } else {
+    return null;
+  }
+}
+
 module.exports = {
   $$mkdir: mkdir,
+  $$outputFileSync: outputFileSync,
   $$readFileSync: readFileSync
 }

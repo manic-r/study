@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Handlebars = require('handlebars');
-const { $$readFileSync } = require('./scripts/site/utils/file-create');
+const { $$outputFileSync } = require('./scripts/site/utils/file-create');
 
 
 const root = 'C:\\Users\\zhichao.ren\\Downloads\\Javascript\\入门';
@@ -12,7 +12,7 @@ dir.forEach(dirName => {
   files.push(...childDir.filter(fileName => fileName.endsWith('.html')).map(file => `${root}\\${dirName}\\${file}`));
 })
 
-// const template = 
+// const template =
 // `import { Component } from "@angular/core";
 
 // @Component({
@@ -54,12 +54,12 @@ dir.forEach(dirName => {
 // const assetsPath = './scripts/site/_site/doc/assets'
 // const declarations = [];
 // const obj = Handlebars.compile(template);
-const template = 
+const template =
 `server {
   listen 808{{index}};
   server_name localhost;
-  
-  location / { 
+
+  location / {
           root html;
           index '{{name}}';
   }
@@ -70,6 +70,6 @@ files.forEach((file, index) => {
   const html = fs.readFileSync(file, 'utf8');
   const name = file.substring(file.lastIndexOf('\\') + 1);
   const map = {index, name};
-  $$readFileSync(`C:/Users/zhichao.ren/Desktop/nginx-1.18.0/html/${file.substring(file.lastIndexOf('\\') + 1)}`, html);
-  $$readFileSync(`C:/Users/zhichao.ren/Desktop/nginx-1.18.0/html/config/conf${index}.conf`, Handlebars.compile(template)(map))
+  $$outputFileSync(`C:/Users/zhichao.ren/Desktop/nginx-1.18.0/html/${file.substring(file.lastIndexOf('\\') + 1)}`, html);
+  $$outputFileSync(`C:/Users/zhichao.ren/Desktop/nginx-1.18.0/html/config/conf${index}.conf`, Handlebars.compile(template)(map))
 })
