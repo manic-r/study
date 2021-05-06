@@ -8,3 +8,208 @@
     width: 100%;
   }
 }
+
+
+// API 样式模板 ↓↓↓↓↓↓↓
+.base-h {
+  clear: both;
+  margin: 1.6em 0 .6em;
+  color: rgba(0,0,0,.85);
+  font-weight: 500;
+  font-family: Avenir,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  span {
+    cursor: pointer;
+  }
+  &:hover {
+    a {
+      opacity: 1;
+    }
+  }
+}
+
+.markdown {
+  color: rgba(0,0,0,.85);
+  font-size: 14px;
+  line-height: 2;
+
+  h2 {
+    font-size: 24px;
+    line-height: 32px;
+    @extend .base-h;
+  }
+
+  a {
+    color: #1890ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color .3s;
+
+  }
+
+  .anchor {
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity .3s;
+    user-select: none;
+  }
+
+  blockquote {
+    margin: 1em 0;
+    padding-left: .8em;
+    color: rgba(0,0,0,.45);
+    font-size: 90%;
+    border-left: 4px solid #f0f0f0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  h3 {
+    font-size: 18px;
+    @extend .base-h;
+  }
+
+  table {
+    width: 100%;
+    margin: 8px 0 16px;
+    empty-cells: show;
+    border: 1px solid #f0f0f0;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  code {
+    margin: 0 1px;
+    padding: .2em .4em;
+    font-size: .9em;
+    background: #f2f4f5;
+    border: 1px solid #f0f0f0;
+    border-radius: 3px;
+  }
+
+  p, pre {
+    margin: 1em 0;
+  }
+
+  pre[class*=language-] {
+    margin: 16px 0;
+    padding: 12px 20px;
+    overflow: auto;
+    background: #f5f5f5;
+    color: #000;
+    line-height: 1.5;
+    direction: ltr;
+    text-align: left;
+    word-wrap: normal;
+    word-break: normal;
+    word-spacing: normal;
+    font-family: Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    white-space: pre;
+    border-radius: 2px;
+
+    code {
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      color: rgba(0,0,0,.85);
+      font-size: 13px;
+      background: #f5f5f5;
+      border: none;
+    }
+  }
+
+  label {
+    cursor: pointer;
+    &.api-type-label {
+      padding: 1px 10px;
+      font-size: 12px;
+      border-radius: 2px;
+      line-height: 18px;
+      display: inline;
+      vertical-align: middle;
+      color: hsla(0,0%,100%,.85);
+      margin-left: 8px;
+      font-weight: 400;
+      text-transform: uppercase;
+      user-select: none;
+
+      &.directive {
+        color: #eb2f96;
+        border: 2px solid #eb2f96;
+      }
+    }
+  }
+
+  .token {
+    &.cdata, &.comment, &.doctype, &.prolog {
+      color: #708090;
+    }
+    &.atrule, &.attr-value, &.keyword {
+      color: #008dff;
+    }
+    &.punctuation {
+      color: #999;
+    }
+    &.string, &.attr-name, &.builtin, &.char, &.entity, &.inserted, &.operator, &.selector, &.string, &.url {
+      color: #0b8235;
+    }
+    &.function {
+      color: #f81d22;
+    }
+  }
+}
+
+.markdown.api-container {
+  overflow-x: auto;
+
+  table {
+    min-width: 720px;
+    margin: 2em 0;
+    font-size: 13px;
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+    line-height: 1.5715;
+    border: 1px solid #f0f0f0;
+
+    th {
+      padding: 12px;
+      padding-top: 14px;
+      border-width: 0 0 2px;
+      border-color: #f0f0f0;color: #5c6b77;
+      font-weight: 500;
+      white-space: nowrap;
+      background: rgba(0,0,0,.04);
+    }
+
+    tbody {
+      tr {
+        transition: all .3s;
+      }
+    }
+
+    td {
+      padding: 12px;
+      border-color: #f0f0f0;
+      border-width: 1px 0;
+      text-align: left;
+      border: 1px solid #f0f0f0;
+
+      &:first-child {
+        width: 20%;
+        color: #595959;
+        font-weight: 600;
+      }
+
+      &:nth-child(3) {
+        width: 22%;
+        color: #c41d7f;
+        font-size: 13px;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+// API 样式模板 ↑↑↑↑↑↑↑

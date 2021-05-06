@@ -63,7 +63,7 @@ Table 组件同时具备了易用性和高度可定制性
 !==========divider==========!
 
 ## API
-
+> 注意：nz-button 是一个 Directive，除以下表格之外还支持例如 disabled 等原生 button 的[所有属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button)。
 ### nz-table
 
 | 参数 | 说明 | 类型 | 默认值 | 全局配置 |
