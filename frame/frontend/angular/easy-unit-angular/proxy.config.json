@@ -1,0 +1,8 @@
+{
+  "/file": {
+    "target": "https://dev-biz-app.minna-no-ginko.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

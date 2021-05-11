@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NzUploadFile } from "ng-zorro-antd/upload";
-import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
-import { filter } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface FileSaveResponse {
@@ -73,7 +72,7 @@ export const ConfigInfo: {
 })
 export class UploadComponent implements OnInit {
 
-  URL: string = 'http://localhost:42000/file/upload';
+  URL: string = '/file/upload';
 
   autoUpload: boolean = false;
   uploadDirectory: boolean = false;
@@ -100,7 +99,7 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
     this.localConfig();
     setTimeout(() => {
-      this.http.get<SystemInfo>('http://localhost:42000/file/system')
+      this.http.get<SystemInfo>('/file/system')
         .toPromise()
         .then(res => this.system = res)
         .catch(() => this.system = {});
@@ -134,16 +133,16 @@ export class UploadComponent implements OnInit {
     this.fileList.filter(file => !file.status || file.status === 'error').forEach((file: any) => {
       formData.append('files', file);
     });
-    const req = new HttpRequest('POST', this.URL, formData);
-    this.http.request(req).pipe(filter(e => e instanceof HttpResponse))
+    this.http.post(this.URL, formData)
       .toPromise()
-      .then((res: any) => res.body)
+      .then((res: any) => res)
       .then((res: FileSaveResponse[]) => {
         this.liveError && this.liveErrorHandle(res);
         this.liveError || (this.fileList = []);
         const type: 'success' | 'info' = this.fileList.length > 0 ? 'info' : 'success';
         this.message[type](`上传完毕`);
-      }).catch(_ => {
+      }).catch(e => {
+        console.log(e)
         this.message.error(`上传失败`);
         this.fileList = this.fileList.map(row => {
           row.status = 'error';

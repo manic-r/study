@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImportModules } from './import.module';
+// import { CommonInterceptor } from './shared/services/common.interceptor';
 
 export function TranslateYamlFactory(http: HttpType) {
   return new TranslateYamlLoader(http, './assets/i18n', 'language.', 'yaml');
@@ -34,7 +35,9 @@ export function TranslateYamlFactory(http: HttpType) {
       defaultLanguage: 'zh-CN'
     })
   ],
-  providers: [],
+  providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: CommonInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

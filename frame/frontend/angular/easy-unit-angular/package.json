@@ -10,7 +10,7 @@
     "ng": "ng",
     "build": "ng build",
     "gulp": "gulp",
-    "start": "gulp start:dev --open",
+    "start": "gulp start:dev --open --port 0 --proxy-config proxy.config.json",
     "init": "node scripts/site/generate-site.js",
     "test": "node test.js"
   },
