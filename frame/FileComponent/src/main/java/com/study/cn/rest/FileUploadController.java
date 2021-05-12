@@ -7,13 +7,9 @@ import com.study.cn.utils.FileUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.thymeleaf.util.StringUtils;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;

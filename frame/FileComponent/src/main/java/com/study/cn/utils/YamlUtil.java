@@ -1,6 +1,6 @@
 package com.study.cn.utils;
 
-import org.thymeleaf.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -27,7 +27,7 @@ public class YamlUtil {
      * @throws IOException
      */
     public static void writer(Object context, String output, String filename) throws IOException {
-        if (StringUtils.isEmptyOrWhitespace(filename)) {
+        if (ObjectUtils.isEmpty(filename)) {
             filename = System.currentTimeMillis() + ".yaml";
         }
         File dir = new File(output);

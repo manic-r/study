@@ -1,10 +1,10 @@
 package com.study.cn.entity.request;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class FileSaveRequest {
         this.backupAll = request.getParameter("backupAll") != null && ofTrue.equals(request.getParameter("backupAll"));
         this.lastBackup = request.getParameter("lastBackup") != null && ofTrue.equals(request.getParameter("lastBackup"));
         StringBuilder fileOutput = new StringBuilder(output)
-                .append("\\").append(StringUtils.isEmpty(fileDir) ? "": (fileDir + "\\"));
+                .append("\\").append(ObjectUtils.isEmpty(fileDir) ? "": (fileDir + "\\"));
         this.output = fileOutput.toString();
     }
 }
