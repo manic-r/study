@@ -12,7 +12,9 @@
 	<artifactId>file</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>FileComponent</name>
-	<description>Demo project for Spring Boot</description>
+	<description>
+		与文件相关的操作
+	</description>
 	<properties>
 		<java.version>11</java.version>
 		<tomcat.version>9.0.35</tomcat.version>
@@ -36,13 +38,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Java解析Yaml -->
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.28</version>
 		</dependency>
 	</dependencies>
 
