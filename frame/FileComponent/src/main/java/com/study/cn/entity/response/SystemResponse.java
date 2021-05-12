@@ -2,8 +2,6 @@ package com.study.cn.entity.response;
 
 import lombok.Data;
 
-import java.net.InetAddress;
-
 @Data
 public class SystemResponse {
 
