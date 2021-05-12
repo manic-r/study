@@ -58,6 +58,7 @@ public class FileUploadController {
                     .append(".txt").toString();
             String filePath = new StringBuilder(fileRootPath)
                     .append("\\").append(filename).toString();
+            FileUtils.filePathHandle(fileRootPath, null);
             File file = new File(filePath);
             fileWriter = new FileWriterWithEncoding(file, "utf-8", true);
             for (String rowLine: inputs) {
@@ -74,6 +75,7 @@ public class FileUploadController {
             response.setStatus(FileSaveResponse.Status.SUCCESS);
         } catch (Exception e) {
             response.setStatus(FileSaveResponse.Status.ERROR);
+            e.printStackTrace();
         } finally {
             try {
                 fileWriter.close();

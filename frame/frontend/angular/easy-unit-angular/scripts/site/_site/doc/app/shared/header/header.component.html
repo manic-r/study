@@ -1,11 +1,11 @@
 <div nz-row class="demo-eu-header" nzAlign="middle">
-  <div nz-col [nzXl]="leftSpan || 0" nzSm="0" nzXs="24">
+  <div nz-col [nzXl]="leftSpan || 0" nzSm="0" nzXs="20">
     <div class="logo-body">
       <img class="logo" src="assets/imgs/logo.png" />
       <span>简易组件</span>
     </div>
   </div>
-  <div nz-col [nzXl]="24 - (leftSpan || 0)" style="padding: 0 20px; background-color: darkcyan;">
+  <div nz-col [nzXl]="24 - (leftSpan || 0)" style="padding: 0 20px; background-color: darkcyan;" nzSm="0" nzXs="4">
     <div nz-col [nzXl]="userInfoSpan" style="background-color: darkgoldenrod;" [nzOffset]="24 - userInfoSpan">
       <!-- 国际化 -->
       <div nz-dropdown [nzDropdownMenu]="menu" class="language-btn body-center">

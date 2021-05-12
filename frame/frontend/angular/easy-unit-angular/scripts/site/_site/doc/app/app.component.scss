@@ -64,3 +64,26 @@ body {
     width: 100%;
   }
 }
+
+.menu-bar {
+  position: fixed;
+  top: 72px;
+  width: 41px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 6px;
+  box-shadow: 2px 0 8px rgb(0 0 0 / 15%);
+  border-radius: 0 4px 4px 0;
+
+  * {
+    height: 100%;
+  }
+}
