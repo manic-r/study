@@ -8,13 +8,10 @@
       <!-- TODO: 面包屑位置 -->
       <nz-breadcrumb nzSeparator=">" class="">
         <nz-breadcrumb-item>
-          Home
+          首页
         </nz-breadcrumb-item>
         <nz-breadcrumb-item>
-          <a [routerLink]="'/upload'">Application List</a>
-        </nz-breadcrumb-item>
-        <nz-breadcrumb-item>
-          An Application
+          <a [routerLink]="'/upload'">文件上传</a>
         </nz-breadcrumb-item>
       </nz-breadcrumb>
     </div>
@@ -35,6 +32,9 @@
     <div #footerSpan class="footer-span"></div>
     <!--页脚-->
     <div #footer nz-col [nzSpan]="24" class="layout-footer">
+      <div class="body-center" style="height: 32px;">
+        <div>©zc-r > 如果有更好的建议，请联系我！</div>
+      </div>
     </div>
   </div>
 </div>
